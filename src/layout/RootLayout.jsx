@@ -1,14 +1,14 @@
 
 // import { Outlet } from "react-router-dom";
 
-import Main from "./MainBox";
+// import Main from "./MainBox";
 import Footer from "./Footer"
 
 
 function RootLayout() {
   return (
     <>
-      <Main/>
+      {/* <Main/> */}
 
       <Footer/>
     </>
