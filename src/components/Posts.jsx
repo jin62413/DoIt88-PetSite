@@ -3,7 +3,7 @@ function PopularPosts() {
     <div className="flex flex-col m-auto items-center py-10">
       <h2 className="text-[28px] font-bold">커뮤니티 인기글</h2>
       <div className="flex flex-col gap-4 mt-8 w-[640px]">
-        <div className="flex justify-between h-20 border-b border-black">
+        <div className="flex justify-between h-20 border-b border-black px-3">
           <a href="/">
             <ul className="max-w-lg">
               <li className="font-bold text-lg">제목입니당</li>
@@ -14,7 +14,7 @@ function PopularPosts() {
             <span>더보기</span>
           </a>
         </div>
-        <div className="flex justify-between h-20 border-b border-black">
+        <div className="flex justify-between h-20 border-b border-black px-3">
           <a href="/">
             <ul className="max-w-lg">
               <li className="font-bold text-lg">제목입니당</li>
@@ -30,7 +30,7 @@ function PopularPosts() {
             <span>더보기</span>
           </a>
         </div>
-        <div className="flex justify-between h-20 border-b border-black">
+        <div className="flex justify-between h-20 border-b border-black px-3">
           <a href="/">
             <ul className="max-w-lg">
               <li className="font-bold text-lg">제목입니당</li>
