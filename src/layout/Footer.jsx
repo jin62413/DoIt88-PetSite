@@ -1,24 +1,29 @@
 
+import instagram from '../assets/icon/instagram.svg'
+import facebook from '../assets/icon/facebook.svg'
+import github from '../assets/icon/github.svg'
+import kakao from '../assets/icon/kakao.svg'
+
 function Footer() {
   // 현재(오늘) 년도를 화면에 출력하는 상태를 설정
   // const [currentYear] = useState(() => new Date().getFullYear());
 
   return (
-    <footer className="bg-[#222223] text-[#868487] px-3 flex flex-col text-[8px] border-t border-t-white font-suit">
-      <strong>
-        위 내용에 대한 저작권 및 법적 책임은 자료제공사 또는
-        글쓴이에 있으며, Kakao의 입장과 다를 수 있습니다.
-      </strong>
-      <small className="text-[#d4cfd3] my-3 text-center">
-        Copyright &copy;
-        <a
-          href="https://www.kakaocorp.com"
-          className="hover:underline decoration-solid font-semibold"
-        >
-          Kakao Corp.
+    <footer className="bg-[#F4F4F4] text-[#1E1E1E] px-3 flex flex-col gap-4 font-suit text-center font-semibold py-12 w-full">
+      <small>
+        &copy;
+        <a href="/" className="hover:underline decoration-solid">
+          GEPPETTO
         </a>
-        &nbsp;All right reserved.
+        &nbsp; | &nbsp;ALL RIGHT RESERVED.
       </small>
+
+      <ul className='flex justify-center gap-5'>
+        <li><a href="/"><img src={instagram} alt="인스타그램" /></a></li>
+        <li><a href="/"><img src={facebook} alt="페이스북" /></a></li>
+        <li><a href="https://github.com/FRONTENDSCHOOL6/finalize-react-6"><img src={github} alt="깃허브" /></a></li>
+        <li><a href="/"><img src={kakao} alt="카카오톡" /></a></li>
+      </ul>
     </footer>
   );
 }
