@@ -1,17 +1,18 @@
+import SearchForm from '@/components/SearchForm';
+import HeaderNav from './HeaderNav';
+import Logo from '@/components/Logo';
+
 function Header() {
   return (
-    <div>
-      <input
-        type="search"
-        name=""
-        id="allSearch"
-        placeholder="통합 검색"
-        className="border border-sky-500 rounded-3xl w-[250px] pl-7"
-      ></input>
+    <div className="flex mx-auto py-10 items-center justify-around w-full font-pre">
+      <Logo/>
+      <HeaderNav />
+
+      <SearchForm/>
 
       <button
         type="button"
-        className="w-[90px] h-[45px] rounded-full text-zinc-700 bg-[#A3D3FF] mr-32"
+        className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3"
       >
         로그인
       </button>
