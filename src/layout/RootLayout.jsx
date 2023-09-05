@@ -1,16 +1,16 @@
-
 // import { Outlet } from "react-router-dom";
 
 // import Main from "./MainBox";
-import Footer from "./Footer"
-
+import Home from '@/pages/Home';
+import Footer from './Footer';
+import MainNav from './MainNav';
 
 function RootLayout() {
   return (
     <>
-      {/* <Main/> */}
-
-      <Footer/>
+      <MainNav />
+      <Home />
+      <Footer />
     </>
   );
 }
