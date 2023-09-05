@@ -1,11 +1,14 @@
 @import 'tailwindcss/base';
+@import './custom-reset.css';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
 @layer components {
   .more::before {
-    content: "";
-    background: url("/src/assets/icon/more.svg") no-repeat;
+    content: '';
+    background: url('/src/assets/icon/more.svg') no-repeat;
     @apply mr-1 inline-block object-cover w-[10px] h-[10px] mb-[2px];
   }
 }
+/* @import './pretendard.css'; */
+/* @import './font.css'; */
