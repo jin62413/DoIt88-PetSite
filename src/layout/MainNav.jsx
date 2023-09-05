@@ -5,6 +5,7 @@ function MainNav() {
     <nav className="flex justify-between gap-10 py-4">
       <ul className="flex gap-10 font-semibold justify-start items-center mx-24 text-gray-500">
         <li>
+          
           <NavLink to="/">로고</NavLink>
         </li>
         <li>

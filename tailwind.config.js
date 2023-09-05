@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'suit': ['SUIT Variable']
-      }
+        suit: ['SUIT Variable'],
+      },
     },
   },
   plugins: [],
