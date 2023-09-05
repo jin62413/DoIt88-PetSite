@@ -9,7 +9,7 @@ function RootLayout() {
   return (
     <>
       {/* <Main/> */}
-      <Header/>
+      <Header />
       <main className="font-pre">
         <Outlet />
       </main>
