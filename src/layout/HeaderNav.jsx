@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function HeaderNav() {
   return (
     <nav className="flex justify-between gap-10">
-      <ul className="flex gap-10 font-semibold justify-start items-center mx-24 text-gray-500">
+      <ul className="flex gap-10 font-semibold justify-start items-center mx-24 text-black">
         {/* <li>
           <NavLink to="/">
             <Logo />
@@ -21,6 +21,9 @@ function HeaderNav() {
         </li>
         <li>
           <NavLink to="/event">이벤트</NavLink>
+        </li>
+        <li>
+          <NavLink to="/signUP">회원가입</NavLink>
         </li>
       </ul>
     </nav>
