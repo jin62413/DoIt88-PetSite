@@ -4,7 +4,7 @@ import Logo from '@/components/Logo';
 
 function Header() {
   return (
-    <div className="flex py-10 font-suit items-center justify-around w-full">
+    <div className="flex mx-auto py-10 items-center justify-around w-full font-pre">
       <Logo/>
       <HeaderNav />
 
@@ -12,7 +12,7 @@ function Header() {
 
       <button
         type="button"
-        className="rounded-xl bg-[#5956E9] text-white font-medium text-base px-11 py-3"
+        className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3"
       >
         로그인
       </button>

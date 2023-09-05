@@ -9,8 +9,8 @@ function RootLayout() {
   return (
     <>
       {/* <Main/> */}
-      <Header />
-      <main className="bg-[#222223] font-suit">
+      <Header/>
+      <main className="font-pre">
         <Outlet />
       </main>
 
