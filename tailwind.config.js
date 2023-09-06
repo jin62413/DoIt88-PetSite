@@ -18,6 +18,12 @@ export default {
       backgroundImage: {
         prev: 'url("src/assets/icon/arrow_back.svg")',
         next: 'url("src/assets/icon/arrow_forward.svg")',
+        bookmark: 'url("src/assets/icon/bookmark.svg")',
+        bookmarkCheck: 'url("src/assets/icon/bookmark.svg")',
+        like: 'url("src/assets/icon/like.svg")',
+        likeCheck: 'url("src/assets/icon/like_check.svg")',
+        comment: 'url("src/assets/icon/comment.svg")',
+        share: 'url("src/assets/icon/share.svg")',
       },
     },
   },
