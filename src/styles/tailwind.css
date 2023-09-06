@@ -2,3 +2,19 @@
 @import './custom-reset.css';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.swiper-button-prev {
+  background: url(@/assets/icon/prev.svg) no-repeat;
+  background-size: 100% auto;
+  background-position: right top;
+}
+.swiper-button-next {
+  background: url(@/assets/icon/next.svg) no-repeat;
+  background-size: 100% auto;
+  background-position: left top;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none;
+}
