@@ -10,7 +10,7 @@ function RootLayout() {
     <>
       {/* <Main/> */}
       <Header />
-      <main className="bg-[#222223] font-suit">
+      <main className="font-pre">
         <Outlet />
       </main>
 
