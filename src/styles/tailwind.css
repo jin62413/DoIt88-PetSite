@@ -9,6 +9,9 @@
     background: url('/src/assets/icon/more.svg') no-repeat;
     @apply mr-1 inline-block object-cover w-[10px] h-[10px] mb-[2px];
   }
+  .pageActive {
+    @apply border-2 text-primary px-[14px] py-2 rounded-full border-primary;
+  }
 }
 /* @import './pretendard.css'; */
 /* @import './font.css'; */

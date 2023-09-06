@@ -15,6 +15,10 @@ export default {
         content: '#747474',
         black: '#1E1E1E',
       },
+      backgroundImage: {
+        prev: 'url("src/assets/icon/arrow_back.svg")',
+        next: 'url("src/assets/icon/arrow_forward.svg")',
+      },
     },
   },
   plugins: [],
