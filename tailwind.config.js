@@ -19,7 +19,7 @@ export default {
         prev: 'url("src/assets/icon/arrow_back.svg")',
         next: 'url("src/assets/icon/arrow_forward.svg")',
         bookmark: 'url("src/assets/icon/bookmark.svg")',
-        bookmarkCheck: 'url("src/assets/icon/bookmark.svg")',
+        bookmarkCheck: 'url("src/assets/icon/bookmark_check.svg")',
         like: 'url("src/assets/icon/like.svg")',
         likeCheck: 'url("src/assets/icon/like_check.svg")',
         comment: 'url("src/assets/icon/comment.svg")',
