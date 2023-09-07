@@ -3,11 +3,26 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.swiper-button-prev {
+  background: url(@/assets/icon/prev.svg) no-repeat;
+  background-size: 100% auto;
+  background-position: right top;
+}
+.swiper-button-next {
+  background: url(@/assets/icon/next.svg) no-repeat;
+  background-size: 100% auto;
+  background-position: left top;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none;
+}
 @layer components {
   .more::before {
     content: '';
     background: url('/src/assets/icon/more.svg') no-repeat;
-    @apply mr-1 inline-block object-cover w-[10px] h-[10px] mb-[2px];
+    @apply mr-1 inline-block object-cover w-[10px] h-[10px] mb-[1px];
   }
   .pageActive {
     @apply border-2 text-primary px-[14px] py-2 rounded-full border-primary;
