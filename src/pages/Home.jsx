@@ -1,5 +1,5 @@
 import MainBanner from '@/components/MainBanner';
-import Recommend from './Recommend';
+import Recommend from '@/components/MainRecommend/Recommend';
 import PopularPosts from '@/components/Posts';
 
 function Home() {
