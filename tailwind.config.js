@@ -15,6 +15,9 @@ export default {
         content: '#747474',
         black: '#1E1E1E',
       },
+      borderRadius: {
+        10: '10px',
+      },
     },
   },
   plugins: [],
