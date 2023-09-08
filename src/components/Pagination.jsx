@@ -1,4 +1,4 @@
-function ContentPagination() {
+function Pagination() {
   return (
     <nav className="flex flex-row gap-5">
       <button
@@ -33,4 +33,4 @@ function ContentPagination() {
     </nav>
   );
 }
-export default ContentPagination;
+export default Pagination;
