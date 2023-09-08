@@ -1,5 +1,5 @@
-import SwiperRecommend from '@/components/SwiperRecommend';
-import BannerRecommend from '@/components/BannerRecommend';
+import SwiperRecommend from '@/components/MainRecommend/SwiperRecommend';
+import BannerRecommend from '@/components/MainRecommend/BannerRecommend';
 
 function Recommend() {
   return (

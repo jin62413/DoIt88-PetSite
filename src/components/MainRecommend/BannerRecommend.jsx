@@ -1,4 +1,4 @@
-import eventBanner from '../assets/recommend/eventBanner.png';
+import eventBanner from '@/assets/recommend/eventBanner.png';
 
 function BannerRecommend() {
   return (
