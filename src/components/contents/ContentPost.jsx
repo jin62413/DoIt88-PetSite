@@ -13,7 +13,7 @@ function ContentPost() {
   }
   return (
     <>
-      {data.items?.map((item) => (
+      {data?.items?.map((item) => (
         <div key={item.id}>
           <Link to={`/contents/detail/${item.id}`}>
             <figure className="flex flex-col gap-4 w-[310px] h-[210px] overflow-hidden relative">
