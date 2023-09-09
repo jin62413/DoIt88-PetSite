@@ -5,15 +5,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        suit: ['SUIT Variable'],
+        // suit: ['SUIT Variable'],
         pre: ['Pretendard'],
       },
       colors: {
         primary: '#5956E9',
+        primaryContainer: '#E2DFFF',
         secondary: '#FFDC60',
         tertiary: '#FFBAC7',
         content: '#747474',
         black: '#1E1E1E',
+        error: '#FF483D',
       },
       backgroundImage: {
         prev: "url('/src/assets/icon/arrow_back.svg')",
@@ -24,6 +26,9 @@ export default {
         likeCheck: "url('/src/assets/icon/like_check.svg')",
         comment: "url('/src/assets/icon/comment.svg')",
         share: "url('/src/assets/icon/share.svg')",
+      },
+      borderRadius: {
+        10: '10px',
       },
     },
   },

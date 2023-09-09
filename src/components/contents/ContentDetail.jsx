@@ -1,19 +1,18 @@
 import anonymous from '@/assets/images/Ellipse.svg';
-import Comment from '@/components/contents/Comment';
 import BookMark from '@/components/button/Bookmark';
 import LikeButton from '@/components/button/likeButton';
-import CommentCount from '@/components/contents/CommentCount';
+import CommentCount from '@/components/button/CommentCount';
 import ShareButton from '@/components/button/ShareButton';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useContentItem from '@/hooks/useContentItem';
 import { getPbImageURL } from '@/utils';
-import Spinner from '../Spinner';
+import ContentComment from './ContentCommentList';
 
 function ContentDetail() {
   const { contentId } = useParams();
 
-  const { isLoading, data } = useContentItem(contentId);
+  const { data } = useContentItem(contentId);
 
   const [date, setDate] = useState();
 
@@ -24,9 +23,6 @@ function ContentDetail() {
     }
   }, [data]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
   // if (data && !Array.isArray(data)) {
   if (data) {
     return (
@@ -35,7 +31,11 @@ function ContentDetail() {
           <h1 className="text-black text-[32px] mb-3">{data.title}</h1>
           <div className="flex justify-between">
             <figure className="flex gap-2 align-middle items-center">
-              <img src={anonymous} alt="익명" />
+              <img
+                src={anonymous}
+                alt="익명"
+                className="rounded-full w-10 h-10"
+              />
               <p>이름 넣는 곳</p>
             </figure>
             <span className="pt-2">{date}</span>
@@ -44,7 +44,6 @@ function ContentDetail() {
             <figure className="mx-auto w-[600px] h-[380px] overflow-hidden relative">
               <img
                 src={getPbImageURL(data, 'image')}
-                // 문제가 되는 부분
                 className="absolute top-1/2 -translate-y-1/2 w-full h-auto"
               />
               <figcaption aria-readonly>{data.imageAlt}</figcaption>
@@ -60,7 +59,7 @@ function ContentDetail() {
             </div>
           </div>
         </div>
-        <Comment />
+        <ContentComment />
       </div>
     );
   }
