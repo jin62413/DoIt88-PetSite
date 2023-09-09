@@ -25,6 +25,9 @@ function HeaderNav() {
         <li>
           <NavLink to="/signUP">회원가입</NavLink>
         </li>
+        <li>
+          <NavLink to="/signIn">로그인</NavLink>
+        </li>
       </ul>
     </nav>
   );

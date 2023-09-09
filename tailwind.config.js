@@ -14,6 +14,7 @@ export default {
         tertiary: '#FFBAC7',
         content: '#747474',
         black: '#1E1E1E',
+        error: '#FF483D',
       },
     },
   },
