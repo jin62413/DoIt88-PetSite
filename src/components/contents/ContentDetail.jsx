@@ -5,30 +5,55 @@ import CommentCount from '@/components/button/CommentCount';
 import ShareButton from '@/components/button/ShareButton';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useContentItem from '@/hooks/useContentItem';
 import { getPbImageURL } from '@/utils';
 import ContentComment from './ContentCommentList';
+import pb from '@/api/pocketbase';
 
 function ContentDetail() {
   const { contentId } = useParams();
 
-  const { data } = useContentItem(contentId);
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [image, setImage] = useState();
+  const [imageAlt, setImageAlt] = useState();
+
+  const [created, setCreated] = useState();
+
+  useEffect(() => {
+    async function getContent() {
+      try {
+        const data = await pb.collection('contents').getOne(contentId);
+        const { title, content, imageAlt, created } = data;
+        setTitle(title);
+        setContent(content);
+        setImage(getPbImageURL(data, 'image'));
+        setImageAlt(imageAlt);
+        setCreated(created);
+      } catch (error) {
+        if (!(error in DOMException)) {
+          console.error();
+        }
+      }
+    }
+
+    getContent();
+  }, [contentId]);
 
   const [date, setDate] = useState();
 
   useEffect(() => {
-    if (data) {
-      let datetime = data.created.split(' ')[0];
+    if (created) {
+      let datetime = created.split(' ')[0];
       setDate(datetime);
     }
-  }, [data]);
+  }, [created]);
 
   // if (data && !Array.isArray(data)) {
-  if (data) {
+  if (title) {
     return (
       <div className="flex flex-col m-auto items-center gap-11 my-10 w-full">
         <div className="w-[988px]">
-          <h1 className="text-black text-[32px] mb-3">{data.title}</h1>
+          <h1 className="text-black text-[32px] mb-3">{title}</h1>
           <div className="flex justify-between">
             <figure className="flex gap-2 align-middle items-center">
               <img
@@ -43,12 +68,12 @@ function ContentDetail() {
           <div className="flex flex-col gap-11 mt-8">
             <figure className="mx-auto w-[600px] h-[380px] overflow-hidden relative">
               <img
-                src={getPbImageURL(data, 'image')}
+                src={image}
                 className="absolute top-1/2 -translate-y-1/2 w-full h-auto"
               />
-              <figcaption aria-readonly>{data.imageAlt}</figcaption>
+              <figcaption aria-readonly>{imageAlt}</figcaption>
             </figure>
-            <div className="px-10">{data.content}</div>
+            <div className="px-10">{content}</div>
             <div className="flex justify-between">
               <div className="flex gap-2 items-center">
                 <BookMark />

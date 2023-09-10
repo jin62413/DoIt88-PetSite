@@ -1,15 +1,29 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
-import Spinner from '../Spinner';
-import useContentsList from '@/hooks/useContentsList';
 import Item from './Item';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import pb from '@/api/pocketbase';
 
 function ContentPost() {
-  useDocumentTitle('컨텐츠 목록');
-  const { isLoading, data } = useContentsList([]);
+  const [data, setData] = useState([]);
 
-  if (isLoading) {
-    return <Spinner size={160} />;
-  }
+  useEffect(() => {
+    async function getContents() {
+      try {
+        await pb
+          .collection('contents')
+          .getList(1, 30, {
+            sort: '-created',
+          })
+          .then((res) => setData(res));
+      } catch (error) {
+        if (!(error in DOMException)) {
+          console.error();
+        }
+      }
+    }
+    getContents();
+  }, []);
+
   return (
     <>
       {data?.items?.map((item) => (
