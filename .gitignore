@@ -1,6 +1,6 @@
 pocketbase
 .git
-
+.env
 # Logs
 logs
 *.log
