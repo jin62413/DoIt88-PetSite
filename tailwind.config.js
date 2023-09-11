@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        suit: ['SUIT Variable'],
+        // suit: ['SUIT Variable'],
         pre: ['Pretendard'],
       },
       colors: {
@@ -18,14 +18,14 @@ export default {
         error: '#FF483D',
       },
       backgroundImage: {
-        prev: 'url("src/assets/icon/arrow_back.svg")',
-        next: 'url("src/assets/icon/arrow_forward.svg")',
-        bookmark: 'url("src/assets/icon/bookmark.svg")',
-        bookmarkCheck: 'url("src/assets/icon/bookmark_check.svg")',
-        like: 'url("src/assets/icon/like.svg")',
-        likeCheck: 'url("src/assets/icon/like_check.svg")',
-        comment: 'url("src/assets/icon/comment.svg")',
-        share: 'url("src/assets/icon/share.svg")',
+        prev: "url('/src/assets/icon/arrow_back.svg')",
+        next: "url('/src/assets/icon/arrow_forward.svg')",
+        bookmark: "url('/src/assets/icon/bookmark.svg')",
+        bookmarkCheck: "url('/src/assets/icon/bookmark_check.svg')",
+        like: "url('/src/assets/icon/like.svg')",
+        likeCheck: "url('/src/assets/icon/like_check.svg')",
+        comment: "url('/src/assets/icon/comment.svg')",
+        share: "url('/src/assets/icon/share.svg')",
         mainBanner1_1: 'url("src/assets/banner/banner@1920w.png")',
         mainBanner1_2: 'url("src/assets/banner/banner@1720w.png")',
         mainBanner1_3: 'url("src/assets/banner/banner@1420w.png")',
