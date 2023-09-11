@@ -1,4 +1,5 @@
 import commentProfile from '@/assets/community/commentProfile.svg';
+import EditDelete from '@/components/button/EditDelete';
 
 function CommunityComment() {
   return (
@@ -19,12 +20,7 @@ function CommunityComment() {
               </div>
             </div>
             <div className="CommunityCommentButtonWrapper">
-              <button className="mr-[8px] text-black text-[16px] font-[500]">
-                수정
-              </button>
-              <button className="text-error text-[16px] font-[500]">
-                삭제
-              </button>
+              <EditDelete />
             </div>
           </div>
           <div className="CommunityComment pb-[8px]">
@@ -49,12 +45,7 @@ function CommunityComment() {
               </div>
             </div>
             <div className="CommunityCommentButtonWrapper">
-              <button className="mr-[8px] text-black text-[16px] font-[500]">
-                수정
-              </button>
-              <button className="text-error text-[16px] font-[500]">
-                삭제
-              </button>
+              <EditDelete />
             </div>
           </div>
           <div className="CommunityComment pb-[8px]">

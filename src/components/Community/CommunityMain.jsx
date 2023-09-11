@@ -4,6 +4,7 @@ import CommunityComment from './CommunityComment';
 import BookMark from '@/components/button/Bookmark';
 import LikeButton from '@/components/button/likeButton';
 import ShareButton from '@/components/button/ShareButton';
+import EditDelete from '@/components/button/EditDelete';
 
 function CommunityMain() {
   return (
@@ -20,12 +21,7 @@ function CommunityMain() {
               <div className="font-medium text-2xl text-[#5956E9]">닉네임</div>
             </div>
             <div className="CommunityButtonWrapper flex items-end">
-              <button className="mr-[8px] text-black text-[16px] font-[500]">
-                수정
-              </button>
-              <button className="text-error text-[16px] font-[500]">
-                삭제
-              </button>
+              <EditDelete />
             </div>
           </div>
           <div className="CommunityTitleWrapper flex justify-between items-end pt-[24px]">
