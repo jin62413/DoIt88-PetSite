@@ -1,20 +1,36 @@
-import { NavLink } from 'react-router-dom';
+import Item from './Item';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import pb from '@/api/pocketbase';
 
 function ContentPost() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function getContents() {
+      try {
+        await pb
+          .collection('contents')
+          .getList(1, 30, {
+            sort: '-created',
+          })
+          .then((res) => setData(res));
+      } catch (error) {
+        if (!(error in DOMException)) {
+          console.error();
+        }
+      }
+    }
+    getContents();
+  }, []);
+
   return (
     <>
-      <NavLink to="/contentsDetail">
-        <figure className="flex flex-col gap-4 max-w-[310px]">
-          <img
-            src="/src/assets/images/dog.jpg"
-            alt=""
-            className="borderRadius"
-          />
-          <figcaption className="text-xl truncate">
-            강아지 상하체 구분, 어떻게 할까?
-          </figcaption>
-        </figure>
-      </NavLink>
+      {data?.items?.map((item) => (
+        <div key={item.id}>
+          <Item key={item.id} item={item} />
+        </div>
+      ))}
     </>
   );
 }

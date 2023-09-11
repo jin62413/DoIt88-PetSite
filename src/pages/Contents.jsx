@@ -1,5 +1,5 @@
 import ContentPost from '@/components/contents/ContentPost';
-import ContentPagination from '@/components/contents/Pagination';
+import Pagination from '@/components/Pagination';
 
 function Contents() {
   return (
@@ -7,13 +7,8 @@ function Contents() {
       <h2 className="text-black text-[28px] font-bold">콘텐츠</h2>
       <div className="flex gap-8 max-w-5xl flex-wrap">
         <ContentPost />
-        <ContentPost />
-        <ContentPost />
-        <ContentPost />
-        <ContentPost />
-        <ContentPost />
       </div>
-      <ContentPagination />
+      <Pagination />
     </div>
   );
 }

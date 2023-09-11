@@ -1,22 +1,32 @@
 import cake from '@/assets/community/cake.svg';
 import yawn from '@/assets/community/yawn.svg';
 import CommunityComment from './CommunityComment';
-import BookMark from './Bookmark';
-import LikeButton from './likeButton';
-import ShareButton from './ShareButton';
+import BookMark from '@/components/button/Bookmark';
+import LikeButton from '@/components/button/likeButton';
+import ShareButton from '@/components/button/ShareButton';
 
 function CommunityMain() {
   return (
     <>
       <div className="flex justify-center  max-w-full">
         <div className="CommunityContainer flex-col max-w-[988px]">
-          <div className="CommunityInfoWrapper flex items-center">
-            <img
-              className="rounded-[50%] w-[60px] h-[60px] mr-[8px] "
-              src={cake}
-              alt="프로필 사진"
-            />
-            <div className=" font-medium text-2xl text-[#5956E9]">닉네임</div>
+          <div className="CommunityContainerTop flex justify-between">
+            <div className="CommunityInfoWrapper flex items-center">
+              <img
+                className="rounded-[50%] w-[60px] h-[60px] mr-[8px] "
+                src={cake}
+                alt="프로필 사진"
+              />
+              <div className="font-medium text-2xl text-[#5956E9]">닉네임</div>
+            </div>
+            <div className="CommunityButtonWrapper flex items-end">
+              <button className="mr-[8px] text-black text-[16px] font-[500]">
+                수정
+              </button>
+              <button className="text-error text-[16px] font-[500]">
+                삭제
+              </button>
+            </div>
           </div>
           <div className="CommunityTitleWrapper flex justify-between items-end pt-[24px]">
             <div className="CommunityTitle text-[#1E1E1E] text-[32px] font-[700]">
@@ -58,9 +68,9 @@ function CommunityMain() {
           </div>
           <div className="CommunityIconsWrapper mb-[44px] flex justify-center">
             <div className="CommunityIcons flex w-[198px] justify-between">
-              <BookMark />
-              <LikeButton />
-              <ShareButton />
+              <BookMark className="bg-[#E6E6E6] no-repeat rounded-full" />
+              <LikeButton className="bg-[#E6E6E6] no-repeat rounded-full" />
+              <ShareButton className="bg-[#E6E6E6] no-repeat rounded-full" />
             </div>
           </div>
           <CommunityComment />

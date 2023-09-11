@@ -5,16 +5,26 @@ function CommunityComment() {
     <>
       <div className="CommunityCommentContainer border-t-2 py-[30px]">
         <div className="CommunityComment border-b-2 py-[16px]">
-          <div className="CommunityCommentInfo pb-[12px] flex items-center">
-            <div className="CommunityCommentProfile">
-              <img
-                className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
-                src={commentProfile}
-                alt="댓글 프로필 사진"
-              />
+          <div className="CommunityCommentTop flex justify-between">
+            <div className="CommunityCommentInfo pb-[12px] flex items-center">
+              <div className="CommunityCommentProfile">
+                <img
+                  className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
+                  src={commentProfile}
+                  alt="댓글 프로필 사진"
+                />
+              </div>
+              <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
+                닉네임입니다
+              </div>
             </div>
-            <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
-              닉네임입니다
+            <div className="CommunityCommentButtonWrapper">
+              <button className="mr-[8px] text-black text-[16px] font-[500]">
+                수정
+              </button>
+              <button className="text-error text-[16px] font-[500]">
+                삭제
+              </button>
             </div>
           </div>
           <div className="CommunityComment pb-[8px]">
@@ -25,16 +35,26 @@ function CommunityComment() {
         </div>
 
         <div className="CommunityComment border-b-2 py-[16px]">
-          <div className="CommunityCommentInfo pb-[12px] flex items-center">
-            <div className="CommunityCommentProfile">
-              <img
-                className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
-                src={commentProfile}
-                alt="댓글 프로필 사진"
-              />
+          <div className="CommunityCommentTop flex justify-between">
+            <div className="CommunityCommentInfo pb-[12px] flex items-center">
+              <div className="CommunityCommentProfile">
+                <img
+                  className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
+                  src={commentProfile}
+                  alt="댓글 프로필 사진"
+                />
+              </div>
+              <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
+                닉네임입니다
+              </div>
             </div>
-            <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
-              닉네임입니다
+            <div className="CommunityCommentButtonWrapper">
+              <button className="mr-[8px] text-black text-[16px] font-[500]">
+                수정
+              </button>
+              <button className="text-error text-[16px] font-[500]">
+                삭제
+              </button>
             </div>
           </div>
           <div className="CommunityComment pb-[8px]">

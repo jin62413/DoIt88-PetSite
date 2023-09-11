@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function BookMark() {
+function BookMark(props) {
   const [click, setClick] = useState(false);
 
   return (
@@ -8,11 +8,11 @@ function BookMark() {
       <button
         type="button"
         aria-label="북마크"
-        className={`${
+        className={
           click
-            ? 'bg-bookmarkCheck bg-[#E6E6E6] rounded-full w-8 h-8'
-            : 'bg-bookmark bg-[#E6E6E6] rounded-full w-8 h-8 '
-        }`}
+            ? 'bg-bookmarkCheck w-8 h-8 ' + `${props.className}`
+            : 'bg-bookmark w-8 h-8 ' + `${props.className}`
+        }
         onClick={() => {
           setClick(!click);
         }}
