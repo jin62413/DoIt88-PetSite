@@ -27,6 +27,12 @@
   .pageActive {
     @apply border-2 text-primary px-[14px] py-2 rounded-full border-primary;
   }
+  .arrow-up::before {
+    content: ' ';
+    border: 20px solid transparent;
+    @apply h-0 w-0 absolute border-t-0 border-b-primaryContainer -top-3 left-[2px];
+  }
 }
+
 /* @import './pretendard.css'; */
 /* @import './font.css'; */

@@ -48,46 +48,43 @@ function ContentDetail() {
     }
   }, [created]);
 
-  // if (data && !Array.isArray(data)) {
-  if (title) {
-    return (
-      <div className="flex flex-col m-auto items-center gap-11 my-10 w-full">
-        <div className="w-[988px]">
-          <h1 className="text-black text-[32px] mb-3">{title}</h1>
+  return (
+    <div className="flex flex-col m-auto items-center gap-11 my-10 w-full ">
+      <div className="w-[988px]">
+        <h1 className="text-black text-[32px] mb-3">{title}</h1>
+        <div className="flex justify-between">
+          <figure className="flex gap-2 align-middle items-center">
+            <img
+              src={anonymous}
+              alt="익명"
+              className="rounded-full w-10 h-10"
+            />
+            <p>이름 넣는 곳</p>
+          </figure>
+          <span className="pt-2">{date}</span>
+        </div>
+        <div className="flex flex-col gap-11 mt-8">
+          <figure className="mx-auto w-[600px] h-[380px] overflow-hidden relative">
+            <img
+              src={image}
+              className="absolute top-1/2 -translate-y-1/2 w-full h-auto"
+            />
+            <figcaption aria-readonly>{imageAlt}</figcaption>
+          </figure>
+          <div className="px-10">{content}</div>
           <div className="flex justify-between">
-            <figure className="flex gap-2 align-middle items-center">
-              <img
-                src={anonymous}
-                alt="익명"
-                className="rounded-full w-10 h-10"
-              />
-              <p>이름 넣는 곳</p>
-            </figure>
-            <span className="pt-2">{date}</span>
-          </div>
-          <div className="flex flex-col gap-11 mt-8">
-            <figure className="mx-auto w-[600px] h-[380px] overflow-hidden relative">
-              <img
-                src={image}
-                className="absolute top-1/2 -translate-y-1/2 w-full h-auto"
-              />
-              <figcaption aria-readonly>{imageAlt}</figcaption>
-            </figure>
-            <div className="px-10">{content}</div>
-            <div className="flex justify-between">
-              <div className="flex gap-2 items-center">
-                <BookMark />
-                <LikeButton />
-                <CommentCount />
-              </div>
-              <ShareButton />
+            <div className="flex gap-2 items-center">
+              <BookMark />
+              <LikeButton />
+              <CommentCount />
             </div>
+            <ShareButton id={contentId} title={title} />
           </div>
         </div>
-        <ContentComment />
       </div>
-    );
-  }
+      <ContentComment />
+    </div>
+  );
 }
 
 export default ContentDetail;
