@@ -1,16 +1,17 @@
 import { useState } from 'react';
 
-
-function ImageUploader({imageName,setImageName}) {
+function ImageUploader({ imageName, setImageName }) {
   const [selectedImage, setSelectedImage] = useState(null);
   // const [imageName,setImageName]=useState(null)
 
+  
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
-    setImageName(file)
-    console.log(e.target)
-    console.log(imageName);
+    setImageName(file);
+
+    console.log(e.target);
+    console.log(URL.createObjectURL(file));                   
   };
 
   const handleEnterPress = (e) => {

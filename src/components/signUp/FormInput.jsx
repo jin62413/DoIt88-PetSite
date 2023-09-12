@@ -33,6 +33,7 @@ function FormInput({
           id={id}
           placeholder={placeholder}
           className="border w-[400px] py-3 outline-none pl-4 border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary"
+          {...(isNecessary && { required: true })}
           {...restProps}
         />
         {isBtn ? (

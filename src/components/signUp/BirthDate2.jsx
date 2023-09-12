@@ -1,13 +1,20 @@
 import debounce from '@/utils/debounce';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
+import useBirthDateStore from '@/store/useBirthDateStore';
 
-function BirthDate() {
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [day, setDay] = useState('');
-
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+function BirthDate2() {
+  const {
+    year,
+    month,
+    day,
+    isValid,
+    errorMessage,
+    setYear,
+    setMonth,
+    setDay,
+    setIsValid,
+    setErrorMessage,
+  } = useBirthDateStore();
 
   const handleInputChange = (e) => {
     let inputVal = e.target.value.replace(/\D/g, ''); // Remove all non-digits
@@ -35,61 +42,59 @@ function BirthDate() {
         break;
     }
   };
-  const validateDate = (input) => {
-    //아무것도 입력 안했을 시 경고창 안뜸
+  const validateDate = useCallback(
+    debounce(() => {
+      const input = `${year}/${month}/${day}`;
 
-    if (input === '//') {
+      // Check if the input is empty or in the format "//"
+      if (input === '//') {
+        setIsValid(true);
+        setErrorMessage('');
+        return;
+      }
+
+      const regex = /^\d{4}\/\d{2}\/\d{2}$/; // YYYY/MM/DD format validation
+
+      // Check if the input matches the required format
+      if (!regex.test(input)) {
+        setIsValid(false);
+        setErrorMessage('YYYY / MM / DD 형식으로 입력해주세요.');
+        return;
+      }
+
+      const inputYear = parseInt(input.substring(0, 4));
+      const inputMonth = parseInt(input.substring(5, 7));
+      const inputDay = parseInt(input.substring(8));
+
+      // Check if the month and day values are within valid ranges
+      if (inputMonth < 1 || inputMonth > 12 || inputDay < 1 || inputDay > 31) {
+        setIsValid(false);
+        setErrorMessage('월은 숫자 1-12까지, 일은 숫자 1~31까지만 가능합니다.');
+        return;
+      }
+
+      let currentDate = new Date();
+
+      // Ignore the time component by setting it to midnight
+      currentDate.setHours(0, 0, 0, 0);
+
+      // Compare the entered date with today's date to check validity
+      if (new Date(inputYear, inputMonth - 1, inputDay) > currentDate) {
+        setIsValid(false);
+        setErrorMessage('로또번호를 가지고 미래에서 온 당신!');
+        return;
+      }
+
+      // Calculate the difference between entered year and current year to check validity
+      if (currentDate.getFullYear() - inputYear > 150) {
+        setIsValid(false);
+        setErrorMessage('연도를 잘못 입력하셨거나 150세 이상이시군요.');
+        return;
+      }
+
       setIsValid(true);
-      setErrorMessage('');
-      return;
-    }
-    const regex = /^\d{4}\/\d{2}\/\d{2}$/; // YYYY/MM/DD 형식 검사
-
-    if (!regex.test(input)) {
-      setIsValid(false);
-      setErrorMessage('YYYY / MM / DD 형식으로 입력해주세요.');
-      return;
-    }
-
-    const inputYear = parseInt(input.substring(0, 4));
-    const inputMonth = parseInt(input.substring(5, 7));
-    const inputDay = parseInt(input.substring(8));
-
-    if (inputMonth < 1 || inputMonth > 12 || inputDay < 1 || inputDay > 31) {
-      setIsValid(false);
-      setErrorMessage('월은 숫자 1-12까지, 일은 숫자 1~31까지만 가능합니다.');
-      return;
-    }
-
-    let currentDate = new Date();
-
-    // 시간을 무시하기 위해 시간을 모두 제거합니다.
-    currentDate.setHours(0, 0, 0, 0);
-
-    // 입력된 날짜와 오늘의 날짜를 비교하여 유효성을 확인합니다.
-    if (new Date(inputYear, inputMonth - 1, inputDay) > currentDate) {
-      setIsValid(false);
-      setErrorMessage('로또번호를 가지고 미래에서 온 당신!');
-      return;
-    }
-
-    // 입력된 년도와 현재 년도의 차이를 확인하여 유효성을 확인합니다.
-    if (currentDate.getFullYear() - inputYear > 150) {
-      setIsValid(false);
-      setErrorMessage('연도를 잘못 입력하셨거나 150세 이상이시군요.');
-      return;
-    }
-
-    setIsValid(true);
-  };
-  // Debounce the validateDate function
-  const debouncedValidateDate = useCallback(() => {
-    const handleDebounce = debounce(() => {
-      validateDate(`${year}/${month}/${day}`);
-    }, 300);
-
-    handleDebounce();
-  }, [year, month, day]);
+    }, [year, month, day]),
+  );
 
   // Refs for the input elements
   const yearInputRef = useRef(null);
@@ -129,8 +134,8 @@ function BirthDate() {
 
   // Validate the date when any of the fields change
   useEffect(() => {
-    debouncedValidateDate();
-  }, [debouncedValidateDate]);
+    validateDate;
+  }, [validateDate]);
 
   return (
     <div className="flex py-6 ">
@@ -148,10 +153,12 @@ function BirthDate() {
           className="border border-[#A6A6A6] p-3 w-[410px] rounded-lg"
           onClick={handleWrapperClick}
         >
-          <label htmlFor="year" className='sr-only'>연도 입력창</label>
+          <label htmlFor="year" className="sr-only">
+            연도 입력창
+          </label>
           <input
             type="text"
-            id='year'
+            id="year"
             name="year"
             maxLength="4"
             value={year}
@@ -162,10 +169,12 @@ function BirthDate() {
             onClick={handleYearInputClick}
           />
           <span className="text-[#A6A6A6] text-lg"> / </span>
-          <label htmlFor="month" className='sr-only'>달 입력창</label>
+          <label htmlFor="month" className="sr-only">
+            달 입력창
+          </label>
           <input
             type="text"
-            id='month'
+            id="month"
             name="month"
             maxLength="2"
             value={month}
@@ -176,10 +185,12 @@ function BirthDate() {
             onClick={handleMonthInputClick}
           />
           <span className="text-[#A6A6A6] text-lg"> / </span>
-          <label htmlFor="day" className='sr-only'>일 입력창</label>
+          <label htmlFor="day" className="sr-only">
+            일 입력창
+          </label>
           <input
             type="text"
-            id='day'
+            id="day"
             name="day"
             maxLength="2"
             value={day}
@@ -198,4 +209,4 @@ function BirthDate() {
   );
 }
 
-export default BirthDate;
+export default BirthDate2;
