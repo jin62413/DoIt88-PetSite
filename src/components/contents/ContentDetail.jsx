@@ -78,7 +78,7 @@ function ContentDetail() {
               <LikeButton />
               <CommentCount />
             </div>
-            <ShareButton id={contentId} title={title} />
+            <ShareButton id={contentId} title={title} image={image} />
           </div>
         </div>
       </div>

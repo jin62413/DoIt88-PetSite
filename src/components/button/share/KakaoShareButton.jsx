@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function KakaoShare({ title }) {
+export default function KakaoShare(props) {
   useEffect(() => {
     kakaoButton();
   }, []);
@@ -15,11 +15,14 @@ export default function KakaoShare({ title }) {
 
       kakao.Share.createDefaultButton({
         container: '#kakaotalk-sharing-btn',
-        objectType: 'text',
-        text: `${title}`,
-        link: {
-          mobileWebUrl: `https://developers.kakao.com`,
-          webUrl: `https://developers.kakao.com`,
+        objectType: 'feed',
+        content: {
+          title: `${props.title}`,
+          imageUrl: `${props.image}`,
+          link: {
+            mobileWebUrl: `https://developers.kakao.com`,
+            webUrl: `https://developers.kakao.com`,
+          },
         },
       });
     }
