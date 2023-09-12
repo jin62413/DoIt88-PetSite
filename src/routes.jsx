@@ -10,7 +10,8 @@ import Contents from './pages/Contents';
 import Community from './pages/Community';
 import Event from './pages/Event';
 import Place from './pages/Place';
-import SignUP from './layout/SignUP';
+import SignUP from './pages/SignUP';
+import SignIn from './pages/SignIn';
 import ContentDetail from './components/contents/ContentDetail';
 import CommunityNew from './pages/CommunityNew';
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="event" element={<Event />} />
       <Route path="place" element={<Place />} />
       <Route path="signUP" element={<SignUP />} />
+      <Route path="signIn" element={<SignIn />} />
     </Route>
   )
 );

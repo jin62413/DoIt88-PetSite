@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import search from '../assets/icon/search.svg';
-import close from '../assets/icon/close.svg';
+import search from '@/assets/icon/search.svg';
+import close from '@/assets/icon/close.svg';
 
 function SearchForm() {
   const [searchText, setSearchText] = useState('');
