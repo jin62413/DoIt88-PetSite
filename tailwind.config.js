@@ -47,6 +47,9 @@ export default {
 
         sm: { max: '1120px' },
       },
+      borderRadius: {
+        10: '10px',
+      },
     },
   },
   plugins: [],

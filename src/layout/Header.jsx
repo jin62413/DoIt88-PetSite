@@ -1,10 +1,10 @@
-import SearchForm from '@/components/SearchForm';
+import SearchForm from '@/components/signUp/SearchForm';
 import HeaderNav from './HeaderNav';
-import Logo from '@/components/Logo';
+import Logo from '@/components/header/Logo';
 
 function Header() {
   return (
-    <div className="flex mx-auto py-10 items-center justify-around w-full font-pre">
+    <div className="flex flex-row mx-auto py-10 items-center justify-around font-pre">
       <Logo/>
       <HeaderNav />
 
