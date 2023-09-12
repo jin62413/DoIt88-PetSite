@@ -12,6 +12,7 @@ import Event from './pages/Event';
 import Place from './pages/Place';
 import SignUP from './layout/SignUP';
 import ContentDetail from './components/contents/ContentDetail';
+import CommunityNew from './pages/CommunityNew';
 
 // 구버전 처럼 사용할 사용자를 위한 최신 방법
 // 배열 → JSX
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="contents" element={<Contents />} />
       <Route path="contents/detail/:contentId" element={<ContentDetail />} />
       <Route path="community" element={<Community />} />
+      <Route path="communitynew" element={<CommunityNew />} />
       <Route path="event" element={<Event />} />
       <Route path="place" element={<Place />} />
       <Route path="signUP" element={<SignUP />} />
