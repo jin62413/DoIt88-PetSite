@@ -1,7 +1,7 @@
 import anonymous from '@/assets/images/Ellipse.svg';
-import CommentInput from '../Input/CommentInput';
+import Comment from '../commentInput/Comment';
 
-function Comment() {
+function ContentComment() {
   return (
     <>
       <div className="flex gap-6 w-[988px]">
@@ -14,8 +14,8 @@ function Comment() {
           <p>댓글 와랄란</p>
         </div>
       </div>
-      <CommentInput />
+      <Comment />
     </>
   );
 }
-export default Comment;
+export default ContentComment;

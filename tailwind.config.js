@@ -26,6 +26,26 @@ export default {
         likeCheck: "url('/src/assets/icon/like_check.svg')",
         comment: "url('/src/assets/icon/comment.svg')",
         share: "url('/src/assets/icon/share.svg')",
+        mainBanner1_1: 'url("src/assets/banner/banner@1920w.png")',
+        mainBanner1_2: 'url("src/assets/banner/banner@1720w.png")',
+        mainBanner1_3: 'url("src/assets/banner/banner@1420w.png")',
+        mainBanner1_4: 'url("src/assets/banner/banner@1120w.png")',
+        mainBanner2_1: 'url("src/assets/banner/banner2@1920w.png")',
+        mainBanner2_2: 'url("src/assets/banner/banner2@1720w.png")',
+        mainBanner2_3: 'url("src/assets/banner/banner2@1420w.png")',
+        mainBanner2_4: 'url("src/assets/banner/banner2@1120w.png")',
+      },
+      borderRadius: {
+        10: '10px',
+      },
+      screens: {
+        xl: { min: '1720px' },
+
+        lg: { min: '1420px', max: '1720px' },
+
+        md: { min: '1120px', max: '1420px' },
+
+        sm: { max: '1120px' },
       },
       borderRadius: {
         10: '10px',

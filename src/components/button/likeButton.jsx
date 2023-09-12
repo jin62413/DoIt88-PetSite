@@ -1,14 +1,18 @@
 import { useState } from 'react';
 
-function LikeButton() {
+function LikeButton(props) {
   const [click, setClick] = useState(false);
 
   return (
     <>
       <button
         type="button"
-        aria-label="좋아요"
-        className={`${click ? 'bg-likeCheck w-8 h-8' : 'bg-like w-8 h-8'}`}
+        aria-label="북마크"
+        className={
+          click
+            ? 'bg-likeCheck w-8 h-8 ' + `${props.className}`
+            : 'bg-like w-8 h-8 ' + `${props.className}`
+        }
         onClick={() => {
           setClick(!click);
         }}
