@@ -10,6 +10,7 @@ function RootLayout() {
     <>
       {/* <Main/> */}
       <Header />
+
       <main className="font-pre">
         <Outlet />
       </main>
