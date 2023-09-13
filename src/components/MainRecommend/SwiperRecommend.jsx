@@ -1,8 +1,8 @@
 import pet1 from '@/assets/recommend/pet1.svg';
 import pet2 from '@/assets/recommend/pet2.svg';
 import pet3 from '@/assets/recommend/pet3.svg';
-import prev from '@/assets/icon/prev.svg';
-import next from '@/assets/icon/next.svg';
+import prevRef from '@/assets/icon/mainbanner-left.svg';
+import nextRef from '@/assets/icon/mainbanner-right.svg';
 
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -122,10 +122,10 @@ function SwiperRecommend() {
 
         <div className="absolute top-1/2 -translate-y-[45px] left-1/2 -translate-x-1/2 z-20 w-[1038px] flex items-center justify-between">
           <button className="w-[54px] h-[54px]" ref={leftRef} type="button">
-            <img src={prev} />
+            <img src={prevRef} />
           </button>
           <button className="w-[54px] h-[54px]" ref={rightRef} type="button">
-            <img src={next} />
+            <img src={nextRef} />
           </button>
         </div>
       </div>
