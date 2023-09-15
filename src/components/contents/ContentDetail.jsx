@@ -6,8 +6,8 @@ import ShareButton from '@/components/button/ShareButton';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
-import ContentComment from './ContentCommentList';
 import pb from '@/api/pocketbase';
+import ContentComment from './comment/ContentComment';
 
 function ContentDetail() {
   const { contentId } = useParams();
@@ -82,7 +82,7 @@ function ContentDetail() {
           </div>
         </div>
       </div>
-      <ContentComment />
+      <ContentComment id={contentId} />
     </div>
   );
 }
