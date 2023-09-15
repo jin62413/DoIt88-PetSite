@@ -1,13 +1,20 @@
+import useDate from '@/store/dateStore';
 import debounce from '@/utils/debounce';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 function BirthDate() {
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [day, setDay] = useState('');
-
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const {
+    year,
+    month,
+    day,
+    isValid,
+    errorMessage,
+    setYear,
+    setMonth,
+    setDay,
+    setIsValid,
+    setErrorMessage,
+  } = useDate();
 
   const handleInputChange = (e) => {
     let inputVal = e.target.value.replace(/\D/g, ''); // Remove all non-digits
@@ -148,10 +155,12 @@ function BirthDate() {
           className="border border-[#A6A6A6] p-3 w-[410px] rounded-lg"
           onClick={handleWrapperClick}
         >
-          <label htmlFor="year" className='sr-only'>연도 입력창</label>
+          <label htmlFor="year" className="sr-only">
+            연도 입력창
+          </label>
           <input
             type="text"
-            id='year'
+            id="year"
             name="year"
             maxLength="4"
             value={year}
@@ -162,10 +171,12 @@ function BirthDate() {
             onClick={handleYearInputClick}
           />
           <span className="text-[#A6A6A6] text-lg"> / </span>
-          <label htmlFor="month" className='sr-only'>달 입력창</label>
+          <label htmlFor="month" className="sr-only">
+            달 입력창
+          </label>
           <input
             type="text"
-            id='month'
+            id="month"
             name="month"
             maxLength="2"
             value={month}
@@ -176,10 +187,12 @@ function BirthDate() {
             onClick={handleMonthInputClick}
           />
           <span className="text-[#A6A6A6] text-lg"> / </span>
-          <label htmlFor="day" className='sr-only'>일 입력창</label>
+          <label htmlFor="day" className="sr-only">
+            일 입력창
+          </label>
           <input
             type="text"
-            id='day'
+            id="day"
             name="day"
             maxLength="2"
             value={day}
