@@ -1,17 +1,20 @@
+import useImage from '@/store/imageUploadStore';
 import { useState } from 'react';
 
-function ImageUploader({ imageName, setImageName }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+function ImageUploader() {
+  const {
+    selectedImageURL,
+    selectedImageFile,
+    setSelectedImageURL,
+    setSelectedImageFile,
+  } = useImage();
+  // const [selectedImageURL, setSelectedImageURL] = useState(null);
   // const [imageName,setImageName]=useState(null)
 
-  
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
-    setImageName(file);
-
-    console.log(e.target);
-    console.log(URL.createObjectURL(file));                   
+    setSelectedImageURL(URL.createObjectURL(file));
+    setSelectedImageFile(file);
   };
 
   const handleEnterPress = (e) => {
@@ -31,9 +34,9 @@ function ImageUploader({ imageName, setImageName }) {
           </span>
         </span>
       </p>
-      {selectedImage ? (
+      {selectedImageURL ? (
         <img
-          src={selectedImage}
+          src={selectedImageURL}
           alt="Selected"
           className="h-[110px] w-[110px]"
         />
@@ -46,14 +49,14 @@ function ImageUploader({ imageName, setImageName }) {
         htmlFor="profile"
         className={`rounded-xl text-primary font-medium text-xl px-14 py-3 border-primary border h-[55px]
         ${
-          selectedImage
+          selectedImageURL
             ? 'hover:bg-primary hover:text-white'
             : 'hover:bg-primary hover:text-white focus:bg-primary focus:text-white'
         }`}
         tabIndex={0}
         onKeyPress={handleEnterPress}
       >
-        {selectedImage ? '사진 변경' : '사진 첨부'}
+        {selectedImageURL ? '사진 변경' : '사진 첨부'}
       </label>
       <input
         type="file"
