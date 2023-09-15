@@ -12,7 +12,6 @@ function CommunityList() {
           </h1>
           <CommunityListProcedure />
           <CommunityListPost />
-          <CommunityListPost />
           <div className="CommunityListButton flex justify-end mt-[12px]">
             <button className="w-[140px] h-[52px] bg-primary text-white text-[16px] font-[500] rounded-10">
               글쓰기
