@@ -1,14 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import uncheckedImage from '@/assets/icon/checkFalse.svg'; // 체크되지 않은 상태의 이미지
 import checkedImage from '@/assets/icon/checkTrue.svg'; // 체크된 상태의 이미지
 import arrow from '@/assets/icon/arrow.svg';
+import useAgreement from '@/store/agreementStore';
+import { AnimatePresence, motion } from 'framer-motion';
+import Dialog from './Dialog';
+import { useState,useRef } from 'react';
 
 const AgreementCheckbox = () => {
-  const [selectAllCheck, setSelectAllCheck] = useState(false);
-  const [serviceAgreementCheck, setServiceAgreementCheck] = useState(false);
-  const [privacyPolicyCheck, setPrivacyPolicyCheck] = useState(false);
-  const [ageVerificationCheck, setAgeVerificationCheck] = useState(false);
-  const [marketingAgreementCheck, setMarketingAgreementCheck] = useState(false);
+  const {
+    selectAllCheck,
+    serviceAgreementCheck,
+    privacyPolicyCheck,
+    ageVerificationCheck,
+    marketingAgreementCheck,
+    setSelectAllCheck,
+    setServiceAgreementCheck,
+    setPrivacyPolicyCheck,
+    setAgeVerificationCheck,
+    setMarketingAgreementCheck,
+  } = useAgreement();
+
+  //모달
+  const opennerRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    opennerRef.current.focus();
+  };
 
   // 전체 동의 체크박스를 눌렀을 때 다른 모든 체크박스도 체크 상태로 변경
   const handleSelectAllChange = () => {
@@ -38,10 +62,11 @@ const AgreementCheckbox = () => {
     privacyPolicyCheck,
     ageVerificationCheck,
     marketingAgreementCheck,
+    setSelectAllCheck,
   ]);
 
   return (
-    <div className="flex">
+    <div className="flex relative">
       <p className="w-[150px] py-3 inline-block">
         <span className="font-semibold text-lg relative">
           이용약관 동의
@@ -79,8 +104,8 @@ const AgreementCheckbox = () => {
         {/* 선택사항인 이용약관 동의 체크박스 */}
 
         {/* 서비스 이용약관 동의 */}
-        <div className="flex justify-between w-[500px] relative my-7 ml-3">
-          <div className="flex items-center">
+        <div className="flex justify-between w-[500px]  my-7 ml-3">
+          <div className="flex items-center relative">
             <img
               src={serviceAgreementCheck ? checkedImage : uncheckedImage}
               alt="체크버튼"
@@ -88,7 +113,10 @@ const AgreementCheckbox = () => {
               className="inline-block absolute top-0.5"
               // className="inline-block absolute top-0.5"
             />
-            <label htmlFor="serviceCheck" className="text-xl font-medium inline-block ml-8">
+            <label
+              htmlFor="serviceCheck"
+              className="text-xl font-medium inline-block ml-8"
+            >
               서비스 이용약관 동의
             </label>
             <input
@@ -100,7 +128,7 @@ const AgreementCheckbox = () => {
               className="hidden"
             />
           </div>
-          <a href="/" className="text-primary flex">
+          {/* <a href="/" className="text-primary flex">
             <span>내용보기</span>
             <span>
               <img
@@ -109,7 +137,39 @@ const AgreementCheckbox = () => {
                 className="inline-block ml-1"
               />
             </span>
-          </a>
+          </a> */}
+          <motion.button
+            type="button"
+            ref={opennerRef}
+            whileHover={{ scale: 1.04 }}
+            
+            onClick={handleOpen}
+            className="text-primary flex"
+          >
+            <span>내용보기</span>
+            <span>
+              <img
+                src={arrow}
+                alt="화살표 이미지"
+                className="inline-block ml-1"
+              />
+            </span>
+          </motion.button>
+          <AnimatePresence>
+            {open && (
+              <Dialog type="rotate" onClose={handleClose}>
+                <Dialog.Head>
+                  <h3 className="DialogHeadline">서비스 이용약관</h3>
+                </Dialog.Head>
+                <Dialog.Body>
+                  <div className='border border-[#C4C4C4] rounded-10 w-[700px] h-[390px] ml-6 mr-6 mt-1 p-5'>
+                    <span>대충 내용 들어가는 곳</span>
+                  </div>
+                </Dialog.Body>
+                <Dialog.CloseButton onClose={handleClose} />
+              </Dialog>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* 개인정보 수집 및 이용동의 */}
