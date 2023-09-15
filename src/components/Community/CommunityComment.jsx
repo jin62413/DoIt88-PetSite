@@ -1,66 +1,38 @@
+import pb from '@/api/pocketbase';
 import commentProfile from '@/assets/community/commentProfile.svg';
 import EditDelete from '@/components/button/EditDelete';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-function CommunityComment() {
+function CommunityComment({ profile, nickname, comment, commentDate }) {
   return (
     <>
-      <div className="CommunityCommentContainer border-t-2 py-[30px]">
-        <div className="CommunityComment border-b-2 py-[16px]">
-          <div className="CommunityCommentTop flex justify-between">
-            <div className="CommunityCommentInfo pb-[12px] flex items-center">
-              <div className="CommunityCommentProfile">
-                <img
-                  className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
-                  src={commentProfile}
-                  alt="댓글 프로필 사진"
-                />
-              </div>
-              <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
-                닉네임입니다
-              </div>
-            </div>
-            <div className="CommunityCommentButtonWrapper">
-              <EditDelete />
-            </div>
-          </div>
-          <div className="CommunityComment pb-[8px]">
-            댓글 내용이 담기는 공간이에요 댓글 구독 좋아요 알림설정 와 정말
-            재밌다~
-          </div>
-          <div className="CommunityDate pb-[16px]">9월 5일</div>
-        </div>
+      <div className="border-t-2 py-[30px]">
+        <div className="border-b-2 py-[16px]">
+          <div className="w-full pb-[12px] flex items-start justify-between">
+            <figure className="flex items-center">
+              <img
+                className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
+                src={profile}
+                alt="댓글 프로필 사진"
+              />
+              <figcaption className="text-[18px] text-black font-bold">
+                {nickname}
+              </figcaption>
+            </figure>
 
-        <div className="CommunityComment border-b-2 py-[16px]">
-          <div className="CommunityCommentTop flex justify-between">
-            <div className="CommunityCommentInfo pb-[12px] flex items-center">
-              <div className="CommunityCommentProfile">
-                <img
-                  className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
-                  src={commentProfile}
-                  alt="댓글 프로필 사진"
-                />
-              </div>
-              <div className="CommunityCommentWriter text-[18px] text-[black] font-[700]">
-                닉네임입니다
-              </div>
-            </div>
-            <div className="CommunityCommentButtonWrapper">
-              <EditDelete />
-            </div>
+            <EditDelete />
           </div>
-          <div className="CommunityComment pb-[8px]">
-            댓글 내용이 담기는 공간이에요 댓글 구독 좋아요 알림설정 와 정말
-            재밌다~
-          </div>
-          <div className="CommunityDate pb-[16px]">9월 5일</div>
+          <p className="pb-[8px]">{comment}</p>
+          <time className="text-sm">{commentDate}</time>
         </div>
       </div>
 
-      <div className="CommunityCommentInputContainer mb-[80px] py-[20px]">
-        <div className="CommunityCommentInputWrapper p-[20px] w-[988px] h-[118px] rounded-[10px] bg-[#F1F1F1]">
+      {/* <div className="mb-[80px] py-[20px]">
+        <div className="p-[20px] w-[988px] h-[118px] rounded-[10px] bg-[#F1F1F1]">
           <textarea
             type="text"
-            className="CommnityCommentInput align-bottom resize-none focus:outline-none w-[847px] h-[78px] bg-[#F1F1F1]"
+            className="align-bottom resize-none focus:outline-none w-[847px] h-[78px] bg-[#F1F1F1]"
             placeholder="댓글을 입력해주세요"
           />
 
@@ -68,7 +40,7 @@ function CommunityComment() {
             등록
           </button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

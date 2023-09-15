@@ -24,7 +24,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="contents" element={<Contents />} />
       <Route path="contents/detail/:contentId" element={<ContentDetail />} />
-      <Route path="community" element={<Community />} />
+      <Route path="community/:contentId" element={<Community />} />
       <Route path="communitynew" element={<CommunityNew />} />
       <Route path="event" element={<Event />} />
       <Route path="place" element={<Place />} />
