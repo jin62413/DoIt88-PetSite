@@ -13,6 +13,7 @@ import Place from './pages/Place';
 import SignUP from './pages/SignUP';
 import SignIn from './pages/SignIn';
 import ContentDetail from './components/contents/ContentDetail';
+import ContentComment from './pages/ContentComment';
 
 // 구버전 처럼 사용할 사용자를 위한 최신 방법
 // 배열 → JSX
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="place" element={<Place />} />
       <Route path="signUP" element={<SignUP />} />
       <Route path="signIn" element={<SignIn />} />
+      <Route path="ccc" element={<ContentComment />} />
     </Route>
   )
 );

@@ -40,6 +40,27 @@ const authStore = (set) => ({
     return authData;
   },
 
+  signInGoogle: async () => {
+    const authData = await pb
+      .collection(USER_COLLECTION)
+      .authWithOAuth2({ provider: 'google' });
+
+    const { isValid, model, token } = pb.authStore;
+
+    set(
+      (state) => ({
+        ...state,
+        isAuth: isValid,
+        user: model,
+        token,
+      }),
+      false,
+      '/singIn'
+    );
+
+    return authData;
+  },
+
   /* Pb SDK를 사용한 로그아웃 */
   signOut: async () => {
     const response = await pb.authStore.clear();
@@ -50,7 +71,7 @@ const authStore = (set) => ({
         ...initialAuthState,
       }),
       false,
-      '/singOut'
+      '/signOut'
     );
 
     return response;
