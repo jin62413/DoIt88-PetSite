@@ -28,9 +28,6 @@ function HeaderNav() {
         <li>
           <NavLink to="/signIn">로그인</NavLink>
         </li>
-        <li>
-          <NavLink to="/ccc">테스트</NavLink>
-        </li>
       </ul>
     </nav>
   );

@@ -22,7 +22,7 @@ function Header() {
         duration: 2000,
       });
 
-      navigate('/signUp');
+      navigate('/');
 
       // const authData = await pb
       //   .collection('users')

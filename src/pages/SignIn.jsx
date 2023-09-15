@@ -147,7 +147,7 @@ function SignIn() {
               type="text"
               name="signInID"
               id="signInID"
-              required
+              // required
               placeholder="아이디를 입력해주세요"
               className="w-[340px] h-[50px] rounded-xl text-lg border border-[#C4C4C4] mx-auto block pl-5 outline-none focus:border-primary"
               defaultValue={loginEmail}
@@ -170,7 +170,7 @@ function SignIn() {
               type="password"
               name="signInPWD"
               id="signInPWD"
-              required
+              // required
               placeholder="비밀번호를 입력해주세요"
               className="w-[340px] h-[50px] rounded-xl text-lg border border-[#C4C4C4] mx-auto block pl-5 outline-none focus:border-primary"
               defaultValue={loginPassword}

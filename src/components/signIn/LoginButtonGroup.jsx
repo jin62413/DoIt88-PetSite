@@ -4,11 +4,13 @@ import useAuthStore from '@/store/auth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import uselogin from '@/store/login';
+import pb from '@/api/pocketbase';
 
 function LoginButtonGroup() {
   const navigate = useNavigate();
   const signInHome = useAuthStore((state) => state.signIn);
   const signInGoogle = useAuthStore((state) => state.signInGoogle);
+  const signInKakao = useAuthStore((state) => state.kakaoLogin);
 
   const {
     loginEmail,
@@ -60,8 +62,7 @@ function LoginButtonGroup() {
       }
     } catch (error) {
       toast.error('로그인 실패하였습니다.');
-
-      console.log('오류', error);
+      throw new Error(error.message);
     }
   };
 
@@ -75,31 +76,62 @@ function LoginButtonGroup() {
       // await pb.collection('users').create(formData);
       // authSignUp(formData);
 
-      toast.success(`환영합니다.`, {
-        icon: '🎉',
-        duration: 2000,
-      });
-
-      navigate('/');
+      if (isAuth) {
+        toast.success(`환영합니다.`, {
+          icon: '🎉',
+          duration: 2000,
+        });
+        navigate('/');
+      }
     } catch (error) {
       toast.error('로그인 실패하였습니다.');
 
-      console.log('오류', error.response);
+      throw new Error(error.message);
+    }
+  };
+
+  const kakaoLogin = async () => {
+    try {
+      const user = await pb.collection('users').authWithOAuth2({
+        provider: 'kakao',
+      });
+
+      // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
+      // const role = await pb.collection('roles').getFirstListItem('name="일반"');
+
+      // Kakao 공급자로부터 전달받은 메타데이터에서 필요한 데이터 추출
+      // const { username: name, email } = user.meta;
+
+      // // 업데이트 할 사용자 정보 취합
+      // const updateUser = {
+      //   name,
+      //   username: email.split('@')[0],
+      //   // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
+      //   // role: role.id,
+      // };
+
+      console.log(user);
+      console.log(user.meta);
+      // 사용자 정보 업데이트 요청
+      // return await pb.collection('users').update(user.record.id, updateUser);
+    } catch (error) {
+      throw new Error(error.message);
     }
   };
 
   return (
     <div className="buttonGroup flex-col justify-center">
       <button
-        type="submit"
+        type="button"
         className="w-[340px] h-[50px] bg-primary text-white text-center font-medium rounded-xl text-lg  my-2"
         onClick={handleLogin}
       >
         로그인
       </button>
       <button
-        type="submit"
+        type="button"
         className="w-[340px] h-[50px] bg-[#FFDC60] text-black text-center font-medium rounded-xl text-lg  my-2 relative"
+        onClick={kakaoLogin}
       >
         <img
           src={kakao}
