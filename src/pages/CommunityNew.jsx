@@ -10,7 +10,6 @@ function CommunityNew() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log('click');
 
     const titleValue = titleRef.current.value;
     const contentValue = contentRef.current.value;
@@ -30,10 +29,11 @@ function CommunityNew() {
       //   user: pb.authStore.model.id,
       // };
       console.log('ok');
-      await pb.collection('community').create({
-        ...formData,
-        user: pb.authStore.model.id,
-      });
+      await pb.collection('community').create(
+        formData
+        // user: pb.authStore.model.id,
+      );
+      handleReset();
       // navigator('/community');
     } catch (error) {
       console.error(error);
@@ -62,8 +62,9 @@ function CommunityNew() {
   };
 
   return (
-    <>
-      <h1>글쓰기</h1>
+    <div className="mx-auto max-w-[750px] flex-col my-10">
+      <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>
+
       <form
         encType="multipart/form-data"
         className="flex flex-col"
@@ -71,43 +72,84 @@ function CommunityNew() {
         onSubmit={handleRegister}
         onReset={handleReset}
       >
-        <input
-          type="text"
-          placeholder="제목을 입력해주세요"
-          name="title"
-          alt="제목 입력"
-          ref={titleRef}
-        />
-        <textarea
-          name="content"
-          alt="본문 입력"
-          ref={contentRef}
-          value={textareaValue}
-          onChange={handleTextarea}
-        >
-          본문 입력
-        </textarea>
-        <input
-          type="file"
-          accept="*.jpg, *.png, *.webp, *.svg, *.gif"
-          name="image"
-          alt="이미지 첨부"
-          ref={imageRef}
-          onChange={handleUpload}
-        />
+        <div className="border-b border-t-2 border-[#E6E6E6]">
+          <div className="my-6 flex flex-row justify-start gap-2 items-start">
+            <label htmlFor="title" className="w-[85px] py-3 inline-block">
+              <span className="font-semibold text-lg relative">제목</span>
+            </label>
+            <input
+              type="text"
+              id="title"
+              placeholder="제목을 입력해주세요"
+              name="title"
+              ref={titleRef}
+              className={`border w-[720px] py-3 outline-none pl-4 border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary`}
+            />
+          </div>
+          <div className="my-6 flex flex-row justify-start gap-2 items-start">
+            <label htmlFor="detail" className="w-[85px] py-3 inline-block">
+              <span className="font-semibold text-lg relative">내용</span>
+            </label>
+            <textarea
+              type="text"
+              id="detail"
+              placeholder="본문을 입력해주세요"
+              name="content"
+              ref={contentRef}
+              value={textareaValue}
+              onChange={handleTextarea}
+              className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px]"
+            ></textarea>
+          </div>
+          <div className="my-6 flex flex-row justify-start items-start">
+            <p htmlFor="detail" className="w-[85px] py-3 inline-block">
+              <span className="font-semibold text-lg relative">사진 첨부</span>
+            </p>
+            <div className="flex flex-row-reverse gap-2">
+              {fileImage ? (
+                <img
+                  src={fileImage.image}
+                  alt="Selected"
+                  className="h-[110px] w-[110px]"
+                />
+              ) : (
+                <div className="h-[110px] w-[110px] bg-[#D9D9D9] rounded-xl" />
+              )}
+              <label
+                htmlFor="image"
+                className="rounded-xl border-primary border h-[110px] w-[110px] flex justify-center items-center"
+              >
+                <img src="/src/assets/icon/photo.svg" className="w-14 h-14" />
+              </label>
+              <input
+                type="file"
+                id="image"
+                accept="*.jpg,*.png,*.jpeg,*.webp,*.avif"
+                name="image"
+                className="hidden"
+                ref={imageRef}
+                onChange={handleUpload}
+              />
+            </div>
+          </div>
+        </div>
 
-        {fileImage && (
-          <img
-            key={fileImage.label}
-            src={fileImage.image}
-            alt={fileImage.label}
-          />
-        )}
-
-        <button type="submit">등록</button>
-        <button type="reset">취소</button>
+        <div className="flex mx-auto gap-7">
+          <button
+            type="reset"
+            className="w-[186px] h-[50px] text-white font-medium rounded-xl text-lg block mt-14 bg-primaryContainer"
+          >
+            취소
+          </button>
+          <button
+            type="submit"
+            className="w-[186px] h-[50px] text-white font-medium rounded-xl text-lg block mt-14 bg-primary"
+          >
+            등록
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

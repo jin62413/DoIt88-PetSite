@@ -1,31 +1,42 @@
-import pb from '@/api/pocketbase';
-import commentProfile from '@/assets/community/commentProfile.svg';
 import EditDelete from '@/components/button/EditDelete';
+import { getPbImageURL } from '@/utils';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 function CommunityComment({ profile, nickname, comment, commentDate }) {
+  const [date, setDate] = useState('');
+
+  const commentProfile = getPbImageURL(profile, 'profile');
+
+  useEffect(() => {
+    if (commentDate) {
+      let dateTime = `${commentDate.slice(5, 7)}월 ${commentDate.slice(
+        8,
+        10
+      )}일`;
+      setDate(dateTime);
+    }
+  }, [commentDate]);
+
   return (
     <>
-      <div className="border-t-2 py-[30px]">
-        <div className="border-b-2 py-[16px]">
-          <div className="w-full pb-[12px] flex items-start justify-between">
-            <figure className="flex items-center">
-              <img
-                className="rounded-[50%] w-[60px] h-[60px] mr-[12px] "
-                src={profile}
-                alt="댓글 프로필 사진"
-              />
-              <figcaption className="text-[18px] text-black font-bold">
-                {nickname}
-              </figcaption>
-            </figure>
+      <div className="border-b my-4 pb-4">
+        <div className="w-full pb-[12px] flex items-start justify-between">
+          <figure className="flex items-center">
+            <img
+              className="rounded-full w-9 h-9 mr-3 object-contain"
+              src={commentProfile}
+              alt="댓글 프로필 사진"
+            />
+            <figcaption className="text-[18px] text-black font-bold">
+              {nickname}
+            </figcaption>
+          </figure>
 
-            <EditDelete />
-          </div>
-          <p className="pb-[8px]">{comment}</p>
-          <time className="text-sm">{commentDate}</time>
+          <EditDelete />
         </div>
+        <p className="pb-2 text-base">{comment}</p>
+        <time className="text-sm text-content">{date}</time>
       </div>
 
       {/* <div className="mb-[80px] py-[20px]">
