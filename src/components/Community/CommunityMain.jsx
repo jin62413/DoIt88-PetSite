@@ -9,9 +9,11 @@ import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
 import CommentInput from '../commentInput/CommentInput';
 import Comment from '../commentInput/Comment';
+import { useNavigate } from 'react-router-dom';
 
 function CommunityMain() {
   const { dataId } = useParams();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -27,7 +29,7 @@ function CommunityMain() {
       try {
         const data = await pb
           .collection('community')
-          .getOne('322brni67ol1ja2', { expand: 'user, comment, comment.user' });
+          .getOne('w7yse0ni9dvh5qb', { expand: 'user, comment, comment.user' });
         const { title, content, created, expand } = data;
         setTitle(title);
         setContent(content);
@@ -83,9 +85,9 @@ function CommunityMain() {
               <h3 className="text-black text-[32px] font-bold">{title}</h3>
               <time>{date}</time>
             </div>
-            <div className="flex flex-col justify-center gap-[22px] pb-[44px]">
+            <div className="flex flex-col justify-center w-full gap-[22px] pb-[44px]">
               <p className="pt-6">{content}</p>
-              <img src={image} alt="첨부 이미지" />
+              <img src={image} alt="첨부 이미지" className="w-1/3 mx-auto" />
             </div>
 
             {/* 아이콘 */}

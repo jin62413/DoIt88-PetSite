@@ -1,23 +1,67 @@
 import pb from '@/api/pocketbase';
-import useAuthStore from '@/store/auth';
+import { getPbImageURL } from '@/utils';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function CommunityNew() {
-  const isAuth = useAuthStore((state) => state.isAuth);
+const resetData = {
+  title: '',
+  content: '',
+  image: null,
+};
+
+function CommunityEdit() {
+  const { communityId } = useParams();
+  const navigator = useNavigate();
 
   const formRef = useRef(null);
   const titleRef = useRef(null);
   const contentRef = useRef(null);
   const imageRef = useRef(null);
 
-  const handleRegister = async (e) => {
+  useEffect(() => {
+    async function getCommunity() {
+      try {
+        const community = await pb
+          .collection('community')
+          .getOne('w7yse0ni9dvh5qb');
+        const { title, content } = community;
+        resetData.title = titleRef.current.value = title;
+        resetData.content = contentRef.current.value = content;
+        const imageUrl = (resetData.image = getPbImageURL(community, 'image'));
+        setFileImage({ image: imageUrl, label: imageUrl });
+        console.log(fileImage);
+      } catch (error) {
+        if (!(error in DOMException)) {
+          console.error();
+        }
+      }
+    }
+
+    getCommunity();
+  }, []);
+
+  const handleUpdateRecord = async (e) => {
     e.preventDefault();
 
     const titleValue = titleRef.current.value;
     const contentValue = contentRef.current.value;
     const imageValue = imageRef.current.files;
+
+    if (!titleValue && !contentValue) {
+      toast('제목과 내용을 입력해주세요!', {
+        icon: '😉',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+
+      return;
+    }
 
     const formData = new FormData();
 
@@ -33,34 +77,20 @@ function CommunityNew() {
       //   user: pb.authStore.model.id,
       // };
       console.log('ok');
-      await pb.collection('community').create(
+      await pb.collection('community').update(
+        'w7yse0ni9dvh5qb',
         formData
         // user: pb.authStore.model.id,
       );
-      // handleReset();
-      // navigator('/community');
-
-      if (!titleValue && !contentValue) {
-        toast('제목과 내용을 입력해주세요!', {
-          icon: '😉',
-          ariaProps: {
-            role: 'status',
-            'aria-live': 'polite',
-          },
-        });
-
-        return;
-      }
+      navigator('/communitymain');
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleReset = () => {
-    titleRef.current.value = '';
-    contentRef.current.value = '';
-    imageRef.current.value = '';
-    setFileImage(null);
+  const handleReset = (e) => {
+    e.preventDefault();
+    navigator('/communitymain');
   };
 
   const [fileImage, setFileImage] = useState(null);
@@ -71,12 +101,7 @@ function CommunityNew() {
     setFileImage(fileImage);
   };
 
-  // const [textareaValue, setTextareaValue] = useState('');
-
-  // const handleTextarea = (e) => {
-  //   setTextareaValue(e.target.value);
-  // };
-
+  console.log(fileImage);
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
       <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>
@@ -85,7 +110,7 @@ function CommunityNew() {
         encType="multipart/form-data"
         className="flex flex-col"
         ref={formRef}
-        onSubmit={handleRegister}
+        onSubmit={handleUpdateRecord}
         onReset={handleReset}
       >
         <div className="border-b border-t-2 border-[#E6E6E6]">
@@ -112,8 +137,6 @@ function CommunityNew() {
               placeholder="본문을 입력해주세요"
               name="content"
               ref={contentRef}
-              // value={textareaValue}
-              // onChange={handleTextarea}
               className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px]"
             ></textarea>
           </div>
@@ -126,7 +149,7 @@ function CommunityNew() {
                 <img
                   src={fileImage.image}
                   alt="Selected"
-                  className="h-[110px] w-[110px]"
+                  className="h-[110px] w-[110px] object-contain"
                 />
               ) : (
                 <div className="h-[110px] w-[110px] bg-[#D9D9D9] rounded-xl" />
@@ -161,7 +184,7 @@ function CommunityNew() {
             type="submit"
             className="w-[186px] h-[50px] text-white font-medium rounded-xl text-lg block mt-14 bg-primary"
           >
-            등록
+            수정
           </button>
         </div>
       </form>
@@ -169,4 +192,4 @@ function CommunityNew() {
   );
 }
 
-export default CommunityNew;
+export default CommunityEdit;
