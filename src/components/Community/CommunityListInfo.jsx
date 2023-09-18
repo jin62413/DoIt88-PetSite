@@ -1,24 +1,25 @@
-import profile from '@/assets/community/profile.svg';
+import { getPbImageURL } from '@/utils';
 
-function CommunityListInfo() {
+function CommunityListInfo({ item }) {
+  console.log(item?.expand?.user.profile);
   return (
     <>
-      <div className="CommunityListInfo flex justify-between items-center w-[258px] h-[30px]">
-        <div className="CommunityListProfile flex">
+      <div className="flex items-center">
+        <div className="flex">
           <img
-            src={profile}
+            src={getPbImageURL(item.expand.user, 'profile')}
             alt="프로필 사진"
-            className="text-[12px] text-black font-[400]"
+            className="text-[12px] w-[30px] h-[30px] text-black font-[400] rounded-[50%]"
           />
           <div className="flex items-center text-[12px] text-black font-[400] ml-[8px]">
-            닉네임자리
+            {item?.expand?.user.nickname}
           </div>
         </div>
-        <div className="CommunityListComments text-[12px] text-black font-[400]">
+        <div className="ml-[44px] text-[12px] text-black font-[400]">
           댓글: 12
         </div>
-        <div className="CommnunityListDate text-[12px] text-black font-[400]">
-          09.25
+        <div className="ml-[44px] text-[12px] text-black font-[400]">
+          {item.updated}
         </div>
       </div>
     </>
