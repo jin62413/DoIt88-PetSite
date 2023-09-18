@@ -4,7 +4,6 @@ function Community() {
   return (
     <div>
       <CommunityList />
-      {/* <Test /> */}
     </div>
   );
 }

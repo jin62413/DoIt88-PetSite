@@ -1,4 +1,3 @@
-// import mung from '@/assets/community/mung.svg';
 import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ function CommunityListContent({ item }) {
             <div className="CommunityListContentRight py-[11px]">
               <img
                 src={getPbImageURL(item, 'image')}
-                alt={item.imageAlt}
+                alt="첨부 이미지"
                 className="w-[120px] h-[120px] rounded-10"
               />
             </div>
