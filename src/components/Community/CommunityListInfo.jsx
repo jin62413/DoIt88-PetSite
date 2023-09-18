@@ -16,7 +16,7 @@ function CommunityListInfo({ item }) {
           </div>
         </div>
         <div className="ml-[44px] text-[12px] text-black font-[400]">
-          댓글: 12
+          댓글: {item?.comment.length}
         </div>
         <div className="ml-[44px] text-[12px] text-black font-[400]">
           {item.updated}

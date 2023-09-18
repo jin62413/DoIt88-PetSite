@@ -6,14 +6,14 @@ function CommunityListContent({ item }) {
     return (
       <>
         <Link to={`/community/detail/${item.id}`}>
-          <div className="CommunityListContent flex gap-[28px]">
-            <div className="CommunityListContentLeft py-[11px] w-[826px]">
-              <h2 className="CommunityListTitle text-black text-[21px] font-[700] pb-[12px]">
+          <div className="flex gap-[28px]">
+            <div className="py-[11px] w-[826px]">
+              <h2 className="text-black text-[21px] font-[700] pb-[12px]">
                 <p className="text-xl truncate">{item.title}</p>
               </h2>
               <div className="CommunityListText">{item.content}</div>
             </div>
-            <div className="CommunityListContentRight py-[11px]">
+            <div className="py-[11px]">
               <img
                 src={getPbImageURL(item, 'image')}
                 alt="첨부 이미지"
