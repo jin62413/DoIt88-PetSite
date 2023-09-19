@@ -1,6 +1,5 @@
 import Pagination from '../Pagination';
 import CommunityListPost from './CommunityListPost';
-import CommunityListProcedure from './CommunityListProcedure';
 
 function CommunityList() {
   return (
@@ -10,7 +9,6 @@ function CommunityList() {
           <h1 className="text-center text-black text-[28px] font-[700] mb-[50px]">
             커뮤니티
           </h1>
-          <CommunityListProcedure />
           <CommunityListPost />
           <div className="flex justify-end mt-[12px]">
             <button className="w-[140px] h-[52px] bg-primary text-white text-[16px] font-[500] rounded-10">
