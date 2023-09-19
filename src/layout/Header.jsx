@@ -4,12 +4,23 @@ import Logo from '@/components/header/Logo';
 import useAuthStore from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { kakaoLogout } from '@/utils/kakaoLogout';
 
 function Header() {
   const navigate = useNavigate();
   const isAuth = useAuthStore((state) => state.isAuth);
+  const token = useAuthStore((state) => state.token);
   const user = useAuthStore((state) => state.user);
   const signOut = useAuthStore((state) => state.signOut);
+
+  const authDataString = localStorage.getItem('pocketbase_auth');
+  const authData = JSON.parse(authDataString);
+  console.log(authData.model.id)
+
+  const handleGoToLogin = (e) => {
+    e.preventDefault();
+    navigate('/signIn');
+  };
 
   const handleSignOut = async (e) => {
     e.preventDefault();
@@ -17,19 +28,13 @@ function Header() {
     // PocketBase SDK 인증 요청
     try {
       signOut();
+      // kakaoLogout();
       toast.success(`이용해주셔서 감사합니다`, {
         icon: '🎉',
         duration: 2000,
       });
 
       navigate('/');
-
-      // const authData = await pb
-      //   .collection('users')
-      //   .authWithPassword('yamoo9', '123456789!');
-
-      // await pb.collection('users').create(formData);
-      // authSignUp(formData);
     } catch (error) {
       toast.error('로그아웃 실패');
 
@@ -38,18 +43,18 @@ function Header() {
   };
 
   return (
-    <div className="flex flex-row mx-auto py-10 items-center justify-around font-pre">
-      <Logo />
-      <HeaderNav />
+    <div className="flex flex-row flex-shrink-0 flex-nowrap mx-auto py-10 items-center justify-around font-pre">
+      <Logo className="flex-shrink-0" />
+      <HeaderNav className="flex-shrink-0" />
 
-      <SearchForm />
+      <SearchForm className="flex-shrink-0" />
 
-      {isAuth ? (
+      {authData ? (
         <div>
-          <span>{`${user.nickname}님 환영합니다.`}</span>
+          <span>{`${authData.model.nickname}님`}</span>
           <button
             type="button"
-            className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3"
+            className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-nowrap flex-shrink-0"
             onClick={handleSignOut}
           >
             로그아웃
@@ -58,8 +63,8 @@ function Header() {
       ) : (
         <button
           type="button"
-          className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3"
-          // onClick={navigate('/signIn')}
+          className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-shrink-0"
+          onClick={handleGoToLogin}
         >
           로그인
         </button>
