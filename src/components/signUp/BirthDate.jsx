@@ -1,6 +1,6 @@
 import useDate from '@/store/dateStore';
 import debounce from '@/utils/debounce';
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 function BirthDate() {
   const {

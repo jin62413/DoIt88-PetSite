@@ -6,7 +6,7 @@ import debounce from '@/utils/debounce';
 import AgreementCheckbox from '@/components/signUp/AgreementCheckbox';
 import ImageUploader from '@/components/signUp/ImageUploader';
 import FormInput from '@/components/signUp/FormInput';
-import date from '@/utils/dashDate';
+import dashDate from '@/utils/dashDate';
 import useDate from '@/store/dateStore';
 import useAgreement from '@/store/agreementStore';
 import useImage from '@/store/imageUploadStore';
@@ -45,7 +45,6 @@ function SignUP() {
     nickname,
     isEmailValid,
     isPasswordValid,
-    isPasswordConfirmValid,
     isNicknameValid,
     isEmailDateValid,
     isNicknameDateValid,
@@ -73,8 +72,6 @@ function SignUP() {
     setPrivacyPolicyCheck(false);
     setAgeVerificationCheck(false);
     setMarketingAgreementCheck(false);
-
-    // 여기에 다른 상태들도 추가...
   };
 
   const handleEmailInput = (e) => {
@@ -130,7 +127,6 @@ function SignUP() {
       setIsNicknameValid(false);
     }
 
-    console.log(isPasswordConfirmValid);
     setNickname(value);
   };
 
@@ -161,10 +157,9 @@ function SignUP() {
       formData.append('password', password);
       formData.append('passwordConfirm', passwordConfirm);
       formData.append('nickname', nickname);
-      formData.append('birthDate', date(year, month, day));
+      formData.append('birthDate', dashDate(year, month, day));
       formData.append('emailVisibility', true);
 
-      console.log(selectedImageFile);
       if (selectedImageFile) {
         formData.append('profile', selectedImageFile);
       }
@@ -199,9 +194,7 @@ function SignUP() {
       isPasswordValid &&
       isEmailDateValid &&
       isNicknameDateValid &&
-      // isPasswordConfirmValid &&
       isNicknameValid &&
-      // selectedImageFile &&
       serviceAgreementCheck &&
       privacyPolicyCheck &&
       ageVerificationCheck
@@ -214,7 +207,6 @@ function SignUP() {
     isValid,
     isEmailValid,
     isPasswordValid,
-    isPasswordConfirmValid,
     isNicknameValid,
     isEmailDateValid,
     isNicknameDateValid,
@@ -239,7 +231,6 @@ function SignUP() {
             placeholder="이메일를 입력해주세요"
             isBtn="true"
             defaultValue={email}
-            // defaultValue={formState.email}
             onChange={inputEmailDebounce}
           />
           {!isEmailValid && email ? (
@@ -257,7 +248,6 @@ function SignUP() {
             isNecessary="true"
             id="password"
             placeholder="비밀번호를 입력해주세요"
-            // defaultValue={formState.password}
             defaultValue={password}
             onChange={inputPasswordDebounce}
           />
@@ -277,7 +267,6 @@ function SignUP() {
             isNecessary="true"
             id="passwordConfirm"
             placeholder="비밀번호를 한 번 더 입력해주세요"
-            // defaultValue={formState.passwordConfirm}
             defaultValue={passwordConfirm}
             onChange={inputPasswordConfirmDebounce}
           />
@@ -297,7 +286,6 @@ function SignUP() {
             placeholder="닉네임을 입력해주세요"
             isBtn="true"
             defaultValue={nickname}
-            // defaultValue={formState.username}
             onChange={inputNicknameDebounce}
           />
           {!isNicknameValid && nickname ? (
