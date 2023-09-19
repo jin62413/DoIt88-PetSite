@@ -34,6 +34,114 @@ const animationConfig = {
   damping: 100,
 };
 
+// /* COMPONENT ---------------------------------------------------------------- */
+
+// function Dialog({
+//   type = 'rotate' /* drop, scale, rotate */,
+//   children,
+//   isBackdropClickClose = true,
+//   onClose,
+// }) {
+//   const dialogRef = useRef(null);
+
+//   useLayoutEffect(() => {
+//     const dialog = dialogRef.current;
+//     const focusable = dialog.querySelectorAll(
+//       'button:not([disabled]), input:not([disabled]), select:not([disabled]), div [tabindex]:not([tabindex="-1"])'
+//     );
+//     const firstFocusableElement = focusable[0];
+//     const lastFocusableElement = focusable[focusable.length - 1];
+
+//     const handleKeyDownTrap = (e) => {
+//       if (e.key === 'Tab' || e.keyCode === 9) {
+//         if (e.shiftKey) {
+//           /* shift + tab */ if (
+//             document.activeElement === firstFocusableElement
+//           ) {
+//             e.preventDefault();
+//             lastFocusableElement.focus();
+//           }
+//         } /* tab */ else {
+//           if (document.activeElement === lastFocusableElement) {
+//             e.preventDefault();
+//             firstFocusableElement.focus();
+//           }
+//         }
+//       }
+
+//       if (e.key === 'Escape' || e.keyCode === 27) {
+//         onClose();
+//       }
+//     };
+
+//     document.addEventListener('keydown', handleKeyDownTrap);
+
+//     return () => {
+//       document.removeEventListener('keydown', handleKeyDownTrap);
+//     };
+//   }, [onClose]);
+
+//   const handleStopPropagation = (e) => {
+//     e.stopPropagation();
+//   };
+
+//   return (
+//     <Backdrop onClose={isBackdropClickClose ? onClose : null}>
+//       <motion.div
+//         ref={dialogRef}
+//         className="box-border flex flex-col z-[100] fixed w-[750px] h-[500px] bg-white top-[25%] left-[30.5%] rounded-10"
+//         // drag
+//         // dragConstraints={{
+//         // top:
+//         //10,left:
+//         //10,right:
+//         //10,bottom:
+//         //10}}
+//         variants={
+//           type === 'scale'
+//             ? dropScaleInOut
+//             : type === 'rotate'
+//             ? dropRotateScaleInOut
+//             : dropInOut
+//         }
+//         initial="from"
+//         animate="to"
+//         exit="exit"
+//         transition={animationConfig}
+//         whileTap={{ scale: 0.95 }}
+//         onClick={handleStopPropagation}
+//       >
+//         {children}
+//       </motion.div>
+//     </Backdrop>
+//   );
+// }
+
+// Dialog.Head = function DialogHead({ children }) {
+//   return (
+//     <div className="flex justify-start text-2xl font-bold m-6">{children}</div>
+//   );
+// };
+
+// Dialog.Body = function DialogBody({ children }) {
+//   return <div className="DialogBody">{children}</div>;
+// };
+
+// Dialog.CloseButton = function DialogCloseButton({ onClose, label = 'close' }) {
+//   return (
+//     <button
+//       type="button"
+//       className="DialogCloseButton absolute top-5 right-5"
+//       aria-label={label}
+//       title={label}
+//       onClick={onClose}
+//     >
+//       <img src={closeButton} alt="닫기 버튼 이미지" />
+//     </button>
+//   );
+// };
+// export default Dialog;
+
 /* COMPONENT ---------------------------------------------------------------- */
 
 function Dialog({
@@ -47,7 +155,7 @@ function Dialog({
   useLayoutEffect(() => {
     const dialog = dialogRef.current;
     const focusable = dialog.querySelectorAll(
-      'button, h,input, textarea,p'
+      'button,div,span,h3'
     );
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -94,13 +202,6 @@ function Dialog({
       <motion.div
         ref={dialogRef}
         className="box-border flex flex-col z-[100] fixed  w-[750px] h-[500px] bg-white top-[25%] left-[30.5%] rounded-10"
-        // drag
-        // dragConstraints={{
-        //   top: 10,
-        //   left: 10,
-        //   right: 10,
-        //   bottom: 10,
-        // }}
         variants={
           type === 'scale'
             ? dropScaleInOut

@@ -11,6 +11,8 @@
     "pocketbase": "/pocketbase/pocketbase serve"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.35.3",
+    "@tanstack/react-query-devtools": "^4.35.3",
     "framer-motion": "^10.16.4",
     "pocketbase": "^0.18.0",
     "react": "^18.2.0",

@@ -15,7 +15,7 @@ function SearchForm() {
 
   return (
     <>
-      <form action="/" method="post" className="searchForm relative">
+      <form action="/" method="post" className="searchForm relative flex flex-shrink-0 flex-nowrap">
         <label htmlFor="allSearch" className="sr-only">
           통합검색
         </label>
