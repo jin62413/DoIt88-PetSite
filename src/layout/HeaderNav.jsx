@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 function HeaderNav() {
   return (
-    <nav className="flex justify-between gap-10">
-      <ul className="flex gap-10 font-semibold justify-start items-center mx-24 text-black">
+    <nav className="flex flex-nowrap justify-between gap-10">
+      <ul className="flex flex-nowrap gap-10 font-semibold justify-start items-center mx-24 text-black">
         {/* <li>
           <NavLink to="/">
             <Logo />

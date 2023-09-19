@@ -24,10 +24,7 @@ function FormInput({
     e.preventDefault();
     if (isEmailValid) {
       try {
-        // const records = await pb.collection('users').getFullList({
-        //   // filter: `'email = "${email}"'`,
-        //   sort: 'email',
-        // });
+        
         const records = await pb.collection('users').getFullList({
           filter: `(email='${email}')`,
         });
@@ -49,7 +46,7 @@ function FormInput({
         console.log('오류', error.response);
       }
     } else {
-      toast.success('아이디를 형식에 맞게 입력해주세요', {
+      toast.success('이메일을 형식에 맞게 입력해주세요', {
         icon: '🙏',
         duration: 2000,
       });
@@ -120,7 +117,7 @@ function FormInput({
         {isBtn ? (
           <button
             type="button"
-            className="rounded-xl  text-primary font-medium text-xl px-14 py-3 border-primary border"
+            className="rounded-xl  text-primary font-medium text-xl px-14 py-3 border-primary border hover:bg-primary hover:text-white"
             onClick={
               id === 'email' ? handleEmailDataValid : handleNicknameDataValid
             }

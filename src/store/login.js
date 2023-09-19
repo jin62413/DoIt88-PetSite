@@ -3,6 +3,7 @@ import { create } from 'zustand';
 const loginStore = (set) => ({
   loginEmail: '',
   loginPassword: '',
+  loginNickname: '',
 
   isLoginEmail: false,
   isLoginPassword: false,
@@ -13,6 +14,7 @@ const loginStore = (set) => ({
 
   setLoginEmail: (loginEmail) => set({ loginEmail }),
   setLoginPassword: (loginPassword) => set({ loginPassword }),
+  setLoginNickname: (loginNickname) => set({ loginNickname }),
   setIsLoginEmailValid: (isLoginEmail) => set({ isLoginEmail }),
   setIsLoginPasswordValid: (isLoginPassword) => set({ isLoginPassword }),
 

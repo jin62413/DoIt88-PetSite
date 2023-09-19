@@ -1,19 +1,39 @@
 import useImage from '@/store/imageUploadStore';
-import { useState } from 'react';
+import pb from '@/api/pocketbase';
+import { uploadPngFile } from '@/utils/setFiles';
+import { useEffect } from 'react';
 
 function ImageUploader() {
   const {
     selectedImageURL,
     selectedImageFile,
+    isChangeImage,
     setSelectedImageURL,
     setSelectedImageFile,
+    setIsChangeImage,
   } = useImage();
-  // const [selectedImageURL, setSelectedImageURL] = useState(null);
-  // const [imageName,setImageName]=useState(null)
 
-  const handleImageUpload = (e) => {
+  useEffect(() => {
+    uploadPngFile().then(({ baseImage, baseImageFile }) => {
+      console.log(baseImage);
+      console.log(baseImageFile);
+
+      setSelectedImageURL(baseImage);
+      setSelectedImageFile(baseImageFile);
+      // 서버에 업로드 로직 추가 가능
+    });
+
+    // const {} =uploadPngFile()
+    // const { baseImage, baseImageFile } = uploadSvgFile();
+  }, []);
+
+  const handleImageUpload = async (e) => {
+    setIsChangeImage(true);
     const file = e.target.files[0];
+
+    console.log(file);
     setSelectedImageURL(URL.createObjectURL(file));
+
     setSelectedImageFile(file);
   };
 
@@ -29,16 +49,17 @@ function ImageUploader() {
       <p className="w-[150px] py-3 inline-block">
         <span className="font-semibold text-lg relative">
           프로필 사진
-          <span className="text-[#FF483D] inline-block absolute -top-3 -right-3">
+          {/* <span className="text-[#FF483D] inline-block absolute -top-3 -right-3">
             *
-          </span>
+          </span> */}
         </span>
       </p>
       {selectedImageURL ? (
         <img
+          // src={selectedImageURL}
           src={selectedImageURL}
-          alt="Selected"
-          className="h-[110px] w-[110px]"
+          alt="선택된 이미지"
+          className="h-[130px] w-[130px]"
         />
       ) : (
         <div className="h-[130px] w-[130px] bg-[#D9D9D9] rounded-md" />
@@ -56,14 +77,13 @@ function ImageUploader() {
         tabIndex={0}
         onKeyPress={handleEnterPress}
       >
-        {selectedImageURL ? '사진 변경' : '사진 첨부'}
+        {isChangeImage ? '사진 변경' : '사진 첨부'}
       </label>
       <input
         type="file"
         id="profile"
-        accept="*.jpg,*.png,*.jpeg,*.webp,*.avif"
+        accept="*.jpg,*.png,*.jpeg,*.webp,*.avi"
         className="hidden"
-        // required
         onChange={handleImageUpload}
       />
     </div>

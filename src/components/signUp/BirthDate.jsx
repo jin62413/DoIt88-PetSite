@@ -90,13 +90,17 @@ function BirthDate() {
     setIsValid(true);
   };
   // Debounce the validateDate function
-  const debouncedValidateDate = useCallback(() => {
-    const handleDebounce = debounce(() => {
-      validateDate(`${year}/${month}/${day}`);
-    }, 300);
+  // const debouncedValidateDate = useCallback(() => {
+  //   const handleDebounce = debounce(() => {
+  //     validateDate(`${year}/${month}/${day}`);
+  //   }, 300);
 
-    handleDebounce();
-  }, [year, month, day]);
+  //   handleDebounce();
+  // }, [year, month, day]);
+
+  const handleDebounce = debounce(() => {
+    validateDate(`${year}/${month}/${day}`);
+  }, 300);
 
   // Refs for the input elements
   const yearInputRef = useRef(null);
@@ -135,18 +139,22 @@ function BirthDate() {
   };
 
   // Validate the date when any of the fields change
+  // useEffect(() => {
+  //   debouncedValidateDate();
+  // }, [debouncedValidateDate]);
+
   useEffect(() => {
-    debouncedValidateDate();
-  }, [debouncedValidateDate]);
+    handleDebounce();
+  }, [handleDebounce]);
 
   return (
     <div className="flex py-6 ">
       <p className="w-[150px] py-3 inline-block">
         <span className="font-semibold text-lg relative">
           생년월일
-          <span className="text-[#FF483D] inline-block absolute -top-3 -right-3">
+          {/* <span className="text-[#FF483D] inline-block absolute -top-3 -right-3">
             *
-          </span>
+          </span> */}
         </span>
       </p>
 

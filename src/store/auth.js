@@ -1,8 +1,12 @@
 import pb from '@/api/pocketbase';
+import { uploadPngFile } from '@/utils/setFiles';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+// import useImage from './imageUploadStore';
 
 const USER_COLLECTION = 'users';
+
+// const { selectedImageFile } = useImage();
 
 const initialAuthState = {
   isAuth: false,
@@ -47,8 +51,6 @@ const authStore = (set) => ({
 
     const { isValid, model, token } = pb.authStore;
 
-    
-
     set(
       (state) => ({
         ...state,
@@ -60,40 +62,86 @@ const authStore = (set) => ({
       '/singIn'
     );
 
+    if (authData.meta.isNew === true) {
+      const formData = new FormData();
 
-    console.log(isValid);
-    console.log(model);
-    console.log(token);
-    console.log(authData);
+      await uploadPngFile().then(({ baseImage, baseImageFile }) => {
+        formData.append('profile', baseImageFile);
+      });
+
+      if (authData.record.nickname === '') {
+        formData.append('nickname', authData.meta.name);
+      }
+
+      formData.append('emailVisibility', true);
+
+      formData.append('serviceCheck', true);
+      formData.append('privacyCheck', true);
+      formData.append('ageCheck', true);
+      formData.append('marketingCheck', false);
+
+      console.log(formData);
+
+      await pb.collection('users').update(authData.record.id, formData);
+    }
+
+    // console.log(isValid);
+    // console.log(model);
+    // console.log(token);
+    // console.log(authData);
     return authData;
   },
 
   kakaoLogin: async () => {
     try {
-      const user = await pb.collection('users').authWithOAuth2({
+      const authData = await pb.collection(USER_COLLECTION).authWithOAuth2({
         provider: 'kakao',
       });
 
-      // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
-      const role = await pb.collection('roles').getFirstListItem('name="일반"');
+      console.log(pb.authStore);
+      const { isValid, model, token } = pb.authStore;
 
-      // Kakao 공급자로부터 전달받은 메타데이터에서 필요한 데이터 추출
-      const { username: name, email } = user.meta;
+      set(
+        (state) => ({
+          ...state,
+          isAuth: isValid,
+          user: model,
+          token,
+        }),
+        false,
+        '/singIn'
+      );
 
-      console.log(user);
-      console.log(user.meta);
+      if (authData.meta.isNew === true) {
+        const formData = new FormData();
 
-      // 업데이트 할 사용자 정보 취합
-      const updateUser = {
-        name,
-        username: email.split('@')[0],
-        // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
-        role: role.id,
-      };
+        if (authData.record.nickname === '') {
+          formData.append('nickname', authData.meta.username);
+        }
 
-      // 사용자 정보 업데이트 요청
-      return await pb.collection('users').update(user.record.id, updateUser);
+        await uploadPngFile().then(({ baseImage, baseImageFile }) => {
+          formData.append('profile', baseImageFile);
+        });
+
+        formData.append('emailVisibility', true);
+        // formData.append('profile', selectedImageFile);
+        // formData.append('profile', cc);
+        formData.append('serviceCheck', true);
+        formData.append('privacyCheck', true);
+        formData.append('ageCheck', true);
+        formData.append('marketingCheck', false);
+
+        await pb.collection('users').update(authData.record.id, formData);
+      }
+
+      // console.log(isValid);
+      // console.log(model);
+      // console.log(token);
+      // console.log(authData);
+
+      return authData;
     } catch (error) {
+      console.log(error.response);
       throw new Error(error.message);
     }
   },

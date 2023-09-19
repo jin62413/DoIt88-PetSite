@@ -11,9 +11,8 @@ import useDate from '@/store/dateStore';
 import useAgreement from '@/store/agreementStore';
 import useImage from '@/store/imageUploadStore';
 import useRegister from '@/store/registerStore';
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import useAuthStore from '@/store/auth';
 
 function SignUP() {
   const navigate = useNavigate();
@@ -78,7 +77,6 @@ function SignUP() {
     // 여기에 다른 상태들도 추가...
   };
 
-  
   const handleEmailInput = (e) => {
     const value = e.target.value;
 
@@ -120,10 +118,6 @@ function SignUP() {
     }
 
     setPasswordConfirm(value);
-
-    // console.log(password);
-    // console.log(passwordConfirm);
-    // console.log(isPasswordConfirmValid);
   };
 
   const handleNicknameInput = (e) => {
@@ -169,7 +163,12 @@ function SignUP() {
       formData.append('nickname', nickname);
       formData.append('birthDate', date(year, month, day));
       formData.append('emailVisibility', true);
-      formData.append('profile', selectedImageFile);
+
+      console.log(selectedImageFile);
+      if (selectedImageFile) {
+        formData.append('profile', selectedImageFile);
+      }
+      // formData.append('profile', cc);
       formData.append('serviceCheck', serviceAgreementCheck);
       formData.append('privacyCheck', privacyPolicyCheck);
       formData.append('ageCheck', ageVerificationCheck);
@@ -202,7 +201,7 @@ function SignUP() {
       isNicknameDateValid &&
       // isPasswordConfirmValid &&
       isNicknameValid &&
-      selectedImageFile &&
+      // selectedImageFile &&
       serviceAgreementCheck &&
       privacyPolicyCheck &&
       ageVerificationCheck
@@ -234,10 +233,10 @@ function SignUP() {
       <form className="flex-col" onSubmit={handleRegister}>
         <div className="border-y-2 flex-col border-black items-center gap-10">
           <FormInput
-            label="아이디"
+            label="이메일"
             isNecessary="true"
             id="email"
-            placeholder="아이디를 입력해주세요"
+            placeholder="이메일를 입력해주세요"
             isBtn="true"
             defaultValue={email}
             // defaultValue={formState.email}
