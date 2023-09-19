@@ -26,14 +26,15 @@ function CommunityListPost() {
 
   return (
     <>
-      {data?.items?.map((item) => (
-        <div key={item.id}>
-          <div className="border-b-2 border-[#747474] p-[20px]">
-            <CommunityListContent key={item.id} item={item} />
-            <CommunityListInfo key={item.id} item={item} />
+      {data &&
+        data?.items?.map((item) => (
+          <div key={item.id}>
+            <div className="border-b-2 border-[#747474] p-[20px]">
+              <CommunityListContent item={item} />
+              <CommunityListInfo item={item} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   );
 }

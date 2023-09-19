@@ -7,13 +7,15 @@ import pb from '@/api/pocketbase';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
-import CommentInput from '../commentInput/CommentInput';
 import Comment from '../commentInput/Comment';
-import { useNavigate } from 'react-router-dom';
+import useAuthStore from '@/store/auth';
 
 function CommunityMain() {
   const { dataId } = useParams();
-  const navigate = useNavigate();
+  // const { isAuth } = useAuthStore();
+  const userId = pb.authStore.model.id;
+  const authDataString = localStorage.getItem('pocketbase_auth');
+  const authData = JSON.parse(authDataString);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -29,7 +31,7 @@ function CommunityMain() {
       try {
         const data = await pb
           .collection('community')
-          .getOne('w7yse0ni9dvh5qb', { expand: 'user, comment, comment.user' });
+          .getOne(dataId, { expand: 'user, comment, comment.user' });
         const { title, content, created, expand } = data;
         setTitle(title);
         setContent(content);
@@ -47,7 +49,7 @@ function CommunityMain() {
       }
     };
     getCommunityItem();
-  }, []);
+  }, [dataId]);
 
   const [date, setDate] = useState();
 
@@ -58,7 +60,8 @@ function CommunityMain() {
     }
   }, [created]);
 
-  // console.log(comment);
+  console.log(authData.model.id);
+  console.log(user.id);
   return (
     <>
       <h2 className="sr-only">커뮤니티</h2>
@@ -76,7 +79,8 @@ function CommunityMain() {
                 {user.nickname}
               </figcaption>
             </figure>
-            <EditDelete />
+            {user?.id === authData.model.id && <EditDelete item={comment} />}
+            {/* <EditDelete item={comment} /> */}
           </div>
 
           {/* 본문 */}

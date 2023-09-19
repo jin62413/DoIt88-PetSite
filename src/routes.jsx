@@ -14,6 +14,8 @@ import SignUP from './pages/SignUP';
 import SignIn from './pages/SignIn';
 import ContentDetail from './components/contents/ContentDetail';
 import CommunityNew from './pages/CommunityNew';
+import CommunityMain from './components/Community/CommunityMain';
+import CommunityEdit from './components/Community/CommunityEdit';
 
 // 구버전 처럼 사용할 사용자를 위한 최신 방법
 // 배열 → JSX
@@ -24,8 +26,10 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="contents" element={<Contents />} />
       <Route path="contents/detail/:contentId" element={<ContentDetail />} />
-      <Route path="community/:contentId" element={<Community />} />
-      <Route path="communitynew" element={<CommunityNew />} />
+      <Route path="community" element={<Community />} />
+      <Route path="community/detail/:dataId" element={<CommunityMain />} />
+      <Route path="community/new" element={<CommunityNew />} />
+      <Route path="community/edit/:dataId" element={<CommunityEdit />} />
       <Route path="event" element={<Event />} />
       <Route path="place" element={<Place />} />
       <Route path="signUP" element={<SignUP />} />

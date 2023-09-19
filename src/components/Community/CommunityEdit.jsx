@@ -14,8 +14,8 @@ const resetData = {
 };
 
 function CommunityEdit() {
-  const { communityId } = useParams();
-  const navigator = useNavigate();
+  const { dataId } = useParams();
+  const navigate = useNavigate();
 
   const formRef = useRef(null);
   const titleRef = useRef(null);
@@ -25,9 +25,7 @@ function CommunityEdit() {
   useEffect(() => {
     async function getCommunity() {
       try {
-        const community = await pb
-          .collection('community')
-          .getOne('w7yse0ni9dvh5qb');
+        const community = await pb.collection('community').getOne(dataId);
         const { title, content } = community;
         resetData.title = titleRef.current.value = title;
         resetData.content = contentRef.current.value = content;
@@ -42,7 +40,7 @@ function CommunityEdit() {
     }
 
     getCommunity();
-  }, []);
+  }, [dataId]);
 
   const handleUpdateRecord = async (e) => {
     e.preventDefault();
@@ -78,11 +76,14 @@ function CommunityEdit() {
       // };
       console.log('ok');
       await pb.collection('community').update(
-        'w7yse0ni9dvh5qb',
+        dataId,
         formData
         // user: pb.authStore.model.id,
       );
-      navigator('/communitymain');
+      toast('수정되었습니다', {
+        icon: '⚒',
+      });
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +91,7 @@ function CommunityEdit() {
 
   const handleReset = (e) => {
     e.preventDefault();
-    navigator('/communitymain');
+    navigator(-1);
   };
 
   const [fileImage, setFileImage] = useState(null);

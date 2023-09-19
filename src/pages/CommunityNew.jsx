@@ -1,11 +1,11 @@
 import pb from '@/api/pocketbase';
-import useAuthStore from '@/store/auth';
 import { useState } from 'react';
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function CommunityNew() {
-  const isAuth = useAuthStore((state) => state.isAuth);
+  const navigate = useNavigate();
 
   const formRef = useRef(null);
   const titleRef = useRef(null);
@@ -23,6 +23,7 @@ function CommunityNew() {
 
     formData.append('title', titleValue);
     formData.append('content', contentValue);
+    formData.set('user', pb.authStore.model.id);
     if (imageValue.length > 0) {
       formData.append('image', imageValue[0]);
     }
@@ -33,12 +34,9 @@ function CommunityNew() {
       //   user: pb.authStore.model.id,
       // };
       console.log('ok');
-      await pb.collection('community').create(
-        formData
-        // user: pb.authStore.model.id,
-      );
+      await pb.collection('community').create(formData);
       // handleReset();
-      // navigator('/community');
+      navigate('/community');
 
       if (!titleValue && !contentValue) {
         toast('제목과 내용을 입력해주세요!', {
@@ -112,8 +110,6 @@ function CommunityNew() {
               placeholder="본문을 입력해주세요"
               name="content"
               ref={contentRef}
-              // value={textareaValue}
-              // onChange={handleTextarea}
               className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px]"
             ></textarea>
           </div>
