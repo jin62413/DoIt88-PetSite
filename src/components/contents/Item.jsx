@@ -6,7 +6,7 @@ function Item({ item }) {
     return (
       <>
         <Link to={`/contents/detail/${item.id}`}>
-          <figure className="flex flex-col gap-4 w-[310px] h-[210px] overflow-hidden relative rounded-10">
+          <figure className="flex flex-col gap-20 w-[310px] h-[210px] overflow-hidden relative rounded-10">
             <img
               src={getPbImageURL(item, 'image')}
               className="-translate-y-1/4"
