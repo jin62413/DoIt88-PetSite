@@ -76,7 +76,7 @@ function ContentDetail() {
             <div className="flex gap-2 items-center">
               <BookMark />
               <LikeButton />
-              <CommentCount />
+              <CommentCount id={contentId} />
             </div>
             <ShareButton id={contentId} title={title} image={image} />
           </div>

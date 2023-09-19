@@ -1,4 +1,11 @@
 function CommentInput() {
+  //   const data = {
+  //     "user": "RELATION_RECORD_ID",
+  //     "comment": "test",
+  //     "post": "RELATION_RECORD_ID"
+  // };
+
+  // const record = await pb.collection('contentComment').create(data);
   return (
     <textarea
       type="text"
