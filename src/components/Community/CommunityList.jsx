@@ -1,4 +1,4 @@
-import Pagination from '../Pagination';
+import Pagination from '../home/Pagination';
 import CommunityListPost from './CommunityListPost';
 
 function CommunityList() {

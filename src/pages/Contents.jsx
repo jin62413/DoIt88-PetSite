@@ -1,5 +1,5 @@
 import ContentPost from '@/components/contents/ContentPost';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/home/Pagination';
 
 function Contents() {
   return (
