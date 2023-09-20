@@ -25,6 +25,7 @@ function LoginButtonGroup() {
 
   const isAuth = useAuthStore((state) => state.isAuth);
   const user = useAuthStore((state) => state.user);
+  // const {}
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -62,6 +63,7 @@ function LoginButtonGroup() {
       }
     } catch (error) {
       toast.error('로그인 실패하였습니다.');
+      console.log('오류', error.response);
       throw new Error(error.message);
     }
   };
@@ -81,43 +83,43 @@ function LoginButtonGroup() {
           icon: '🎉',
           duration: 2000,
         });
+        
+      }
+      navigate('/');
+      
+    } catch (error) {
+      toast.error('로그인 실패하였습니다.');
+
+      console.log('오류', error.response);
+      throw new Error(error.message);
+    }
+  };
+
+  const kakaoLogin = async (e) => {
+    e.preventDefault();
+
+    // PocketBase SDK 인증 요청
+    try {
+      signInKakao();
+
+      // await pb.collection('users').create(formData);
+      // authSignUp(formData);
+
+      if (isAuth) {
+        toast.success(`환영합니다.`, {
+          icon: '🎉',
+          duration: 2000,
+        });
         navigate('/');
       }
     } catch (error) {
       toast.error('로그인 실패하였습니다.');
 
+      console.log('오류', error.response);
       throw new Error(error.message);
     }
   };
-
-  const kakaoLogin = async () => {
-    try {
-      const user = await pb.collection('users').authWithOAuth2({
-        provider: 'kakao',
-      });
-
-      // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
-      // const role = await pb.collection('roles').getFirstListItem('name="일반"');
-
-      // Kakao 공급자로부터 전달받은 메타데이터에서 필요한 데이터 추출
-      // const { username: name, email } = user.meta;
-
-      // // 업데이트 할 사용자 정보 취합
-      // const updateUser = {
-      //   name,
-      //   username: email.split('@')[0],
-      //   // ※ 권한(Authorization) 부여를 위한 역할(role)이 설정된 경우
-      //   // role: role.id,
-      // };
-
-      console.log(user);
-      console.log(user.meta);
-      // 사용자 정보 업데이트 요청
-      // return await pb.collection('users').update(user.record.id, updateUser);
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
+  
 
   return (
     <div className="buttonGroup flex-col justify-center">
