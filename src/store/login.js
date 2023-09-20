@@ -4,9 +4,10 @@ const loginStore = (set) => ({
   loginEmail: '',
   loginPassword: '',
   loginNickname: '',
+  profileURL: '',
 
-  isLoginEmail: false,
-  isLoginPassword: false,
+  isLoginEmailValid: false,
+  isLoginPasswordValid: false,
 
   isGoogle: false,
   isKakao: false,
@@ -18,9 +19,12 @@ const loginStore = (set) => ({
   setLoginEmail: (loginEmail) => set({ loginEmail }),
   setLoginPassword: (loginPassword) => set({ loginPassword }),
   setLoginNickname: (loginNickname) => set({ loginNickname }),
-  setIsLoginEmailValid: (isLoginEmail) => set({ isLoginEmail }),
-  setIsLoginPasswordValid: (isLoginPassword) => set({ isLoginPassword }),
+  setIsLoginEmailValid: (isLoginEmailValid) => set({ isLoginEmailValid }),
+  setIsLoginPasswordValid: (isLoginPasswordValid) =>
+    set({ isLoginPasswordValid }),
   setIsKakao: (isKakao) => set({ isKakao }),
+  setIsGoogle: (isGoogle) => set({ isGoogle }),
+  setProfileURL: (profileURL) => set({ profileURL }),
   // setIsPasswordConfirmValid: (isPasswordConfirm) => set({ isPasswordConfirm }),
   // setIsNicknameValid: (isNicknameValid) => set({ isNicknameValid }),
   // setIsEmailDataValid: (isEmailDateValid) => set({ isEmailDateValid }),
