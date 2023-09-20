@@ -28,7 +28,7 @@ export default defineConfig({
           react: ['react', 'react-dom'],
           reactRouter: ['react-router-dom'],
           animations: ['framer-motion', 'gsap'],
-          extra: ['zustand', 'immer', 'ramda', '@tanstack/react-query'],
+          extra: ['zustand', 'immer', '@tanstack/react-query'],
         },
       },
     },
