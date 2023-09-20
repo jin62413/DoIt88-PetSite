@@ -5,9 +5,11 @@ import ContentCommentForm from './ContentCommentForm';
 import CommentEdit from './CommentEdit';
 import CommentItem from './CommentItem';
 import toast from 'react-hot-toast';
+import useAuthStore from '@/store/auth';
 
 function ContentComment({ comments, id, setComment }) {
-  const userId = pb.authStore.model.id;
+  // const userId = pb.authStore.model.id;
+  const isAuth = useAuthStore((state) => state.isAuth);
 
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editComment, setEditComment] = useState(comments);
@@ -89,7 +91,7 @@ function ContentComment({ comments, id, setComment }) {
                 <CommentItem comment={item.comment} />
               )}
             </div>
-            {userId == item.expand.user.id && (
+            {isAuth && pb.authStore.model.id == item.expand.user.id && (
               <div className="align-middle items-center right-0">
                 <div className="flex gap-2 pt-7">
                   {editingCommentId === item.id ? null : (
