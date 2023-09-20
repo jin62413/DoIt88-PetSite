@@ -5,66 +5,85 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import uselogin from '@/store/login';
 import pb from '@/api/pocketbase';
+import { getPbImageURL } from '@/utils';
+import useImageURL from '@/store/imageURL';
 
 function LoginButtonGroup() {
   const navigate = useNavigate();
-  const signInHome = useAuthStore((state) => state.signIn);
+
   const signInGoogle = useAuthStore((state) => state.signInGoogle);
   const signInKakao = useAuthStore((state) => state.kakaoLogin);
-
+  const setURL = useImageURL((state) => state.setProfileURL);
   const {
     loginEmail,
     loginPassword,
-    isLoginEmail,
-    isLoginPassword,
+    isLoginEmailValid,
+    isLoginPasswordValid,
+    profileURL,
+    setIsGoogle,
+    setIsKakao,
     setLoginEmail,
     setLoginPassword,
     setIsLoginEmailValid,
     setIsLoginPasswordValid,
+    setProfileURL,
   } = uselogin();
 
+  const signInHome = useAuthStore((state) => state.signIn);
   const isAuth = useAuthStore((state) => state.isAuth);
   const user = useAuthStore((state) => state.user);
   // const {}
+
+  const handleLoginReset = () => {
+    setLoginEmail('');
+    setLoginPassword('');
+    setIsLoginEmailValid(false);
+    setIsLoginPasswordValid(false);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     // PocketBase SDK 인증 요청
     try {
-      console.log(loginEmail);
-      console.log(loginPassword);
-      if (
-        isLoginEmail !== true &&
-        isLoginPassword !== true &&
-        isAuth === false
-      ) {
-        toast.error('아이디 또는 비밀번호가 잘못되었습니다.');
+      if (isLoginEmailValid !== true || isLoginPasswordValid !== true) {
+        toast.error('아이디 또는 비밀번호를 형식에 맞게 입력해주세요');
         return;
       }
-      const authData = signInHome(loginEmail, loginPassword);
 
-      // const authData = await pb
-      //   .collection('users')
-      //   .authWithPassword('yamoo9', '123456789!');
+      const authData = await signInHome(loginEmail, loginPassword);
       console.log(authData);
-      console.log(user);
-      console.log(isAuth);
 
-      // await pb.collection('users').create(formData);
-      // authSignUp(formData);
+      // if (!authData) {
+      //   toast.success(`아이디 또는 비밀번호가 일치하지 않습니다.`, {
+      //     icon: '🎉',
+      //     duration: 2000,
+      //   });
 
-      if (isAuth) {
-        toast.success(`${user.nickname}님 환영합니다.`, {
+      //   return;
+      // }
+
+      if (authData) {
+        toast.success(`${authData.record.nickname}님 환영합니다.`, {
           icon: '🎉',
           duration: 2000,
         });
+
+        const record = await pb.collection('users').getOne(authData.record.id);
+        const url = getPbImageURL(record, 'profile');
+        setURL(url);
+        // setProfileURL(url);
+
+        // console.log(url);
+        handleLoginReset();
+
         navigate('/');
       }
     } catch (error) {
-      toast.error('로그인 실패하였습니다.');
+      // handleLoginReset();
+      toast.error('아이디 또는 비밀번호가 일치하지 않습니다.');
       console.log('오류', error.response);
-      throw new Error(error.message);
+      // throw new Error(error.message);
     }
   };
 
@@ -73,20 +92,19 @@ function LoginButtonGroup() {
 
     // PocketBase SDK 인증 요청
     try {
-      signInGoogle();
+      const authData = await signInGoogle();
 
-      // await pb.collection('users').create(formData);
-      // authSignUp(formData);
-
-      if (isAuth) {
+      setIsGoogle(true);
+      if (authData.meta) {
+        const record = await pb.collection('users').getOne(authData.record.id);
+        const url = getPbImageURL(record, 'profile');
+        setURL(url);
         toast.success(`환영합니다.`, {
           icon: '🎉',
           duration: 2000,
         });
-        
+        navigate('/');
       }
-      navigate('/');
-      
     } catch (error) {
       toast.error('로그인 실패하였습니다.');
 
@@ -100,12 +118,13 @@ function LoginButtonGroup() {
 
     // PocketBase SDK 인증 요청
     try {
-      signInKakao();
+      const authData = await signInKakao();
+      setIsKakao(true);
 
-      // await pb.collection('users').create(formData);
-      // authSignUp(formData);
-
-      if (isAuth) {
+      if (authData.meta) {
+        const record = await pb.collection('users').getOne(authData.record.id);
+        const url = getPbImageURL(record, 'profile');
+        setURL(url);
         toast.success(`환영합니다.`, {
           icon: '🎉',
           duration: 2000,
@@ -119,7 +138,6 @@ function LoginButtonGroup() {
       throw new Error(error.message);
     }
   };
-  
 
   return (
     <div className="buttonGroup flex-col justify-center">

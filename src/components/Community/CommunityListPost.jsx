@@ -4,12 +4,13 @@ import pb from '@/api/pocketbase';
 
 function CommunityListPost() {
   const [data, setData] = useState([]);
+  const [check, setCheck] = useState('-created');
 
   useEffect(() => {
     async function getCommunity() {
       try {
         const record = await pb.collection('community').getList(1, 30, {
-          sort: '-created',
+          sort: check,
           expand: 'user',
         });
         setData(record);
@@ -23,30 +24,43 @@ function CommunityListPost() {
     getCommunity();
   }, []);
 
+  // function CheckCreated() {
+  //   useEffect(() => {
+  //     setCheck('-created');
+  //   }, []);
+  // }
+
+  // function CheckedLike() {
+  //   setCheck('-like');
+  // }
+
   return (
     <>
       <fieldset className="CommunityListProcedure flex">
-        <div className="" onClick="">
-          <input
-            id="radio1"
-            type="radio"
-            name="radio"
-            className="hidden"
-            checked
-          />
-          <label htmlFor="radio1" className="flex items-center cursor-pointer">
-            <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
-            최신순
-          </label>
-        </div>
+        <input
+          id="radio1"
+          type="radio"
+          name="radio"
+          className="hidden"
+          checked
+          onClick={() => setCheck('-created')}
+        />
+        <label htmlFor="radio1" className="flex items-center cursor-pointer">
+          <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
+          최신순
+        </label>
 
-        <div className="" onClick="">
-          <input id="radio2" type="radio" name="radio" className="hidden" />
-          <label htmlFor="radio2" className="flex items-center cursor-pointer">
-            <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
-            인기순
-          </label>
-        </div>
+        <input
+          id="radio2"
+          type="radio"
+          name="radio"
+          className="hidden"
+          onClick={() => setCheck('-like')}
+        />
+        <label htmlFor="radio2" className="flex items-center cursor-pointer">
+          <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
+          인기순
+        </label>
       </fieldset>
 
       {data?.items?.map((item) => (

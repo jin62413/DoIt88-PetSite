@@ -1,12 +1,10 @@
 import useImage from '@/store/imageUploadStore';
-import pb from '@/api/pocketbase';
 import { uploadPngFile } from '@/utils/setFiles';
 import { useEffect } from 'react';
 
 function ImageUploader() {
   const {
     selectedImageURL,
-    selectedImageFile,
     isChangeImage,
     setSelectedImageURL,
     setSelectedImageFile,
@@ -15,16 +13,13 @@ function ImageUploader() {
 
   useEffect(() => {
     uploadPngFile().then(({ baseImage, baseImageFile }) => {
-      console.log(baseImage);
-      console.log(baseImageFile);
-
+      
       setSelectedImageURL(baseImage);
       setSelectedImageFile(baseImageFile);
-      // 서버에 업로드 로직 추가 가능
+     
     });
 
-    // const {} =uploadPngFile()
-    // const { baseImage, baseImageFile } = uploadSvgFile();
+
   }, []);
 
   const handleImageUpload = async (e) => {
@@ -56,7 +51,7 @@ function ImageUploader() {
       </p>
       {selectedImageURL ? (
         <img
-          // src={selectedImageURL}
+       
           src={selectedImageURL}
           alt="선택된 이미지"
           className="h-[130px] w-[130px]"
