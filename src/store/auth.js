@@ -85,10 +85,6 @@ const authStore = (set) => ({
       await pb.collection('users').update(authData.record.id, formData);
     }
 
-    // console.log(isValid);
-    // console.log(model);
-    // console.log(token);
-    // console.log(authData);
     return authData;
   },
 
@@ -98,20 +94,19 @@ const authStore = (set) => ({
         provider: 'kakao',
       });
 
-      console.log(pb.authStore);
-      const { isValid, model, token } = pb.authStore;
+      // console.log(pb.authStore);
+      // const { isValid, model, token } = pb.authStore;
 
-      set(
-        (state) => ({
-          ...state,
-          isAuth: isValid,
-          user: model,
-          token,
-        }),
-        false,
-        '/singIn'
-      );
-
+      // set(
+      //   (state) => ({
+      //     ...state,
+      //     isAuth: isValid,
+      //     user: model,
+      //     token,
+      //   }),
+      //   false,
+      //   '/singIn'
+      // );
       if (authData.meta.isNew === true) {
         const formData = new FormData();
 
@@ -124,8 +119,7 @@ const authStore = (set) => ({
         });
 
         formData.append('emailVisibility', true);
-        // formData.append('profile', selectedImageFile);
-        // formData.append('profile', cc);
+
         formData.append('serviceCheck', true);
         formData.append('privacyCheck', true);
         formData.append('ageCheck', true);
@@ -133,11 +127,6 @@ const authStore = (set) => ({
 
         await pb.collection('users').update(authData.record.id, formData);
       }
-
-      // console.log(isValid);
-      // console.log(model);
-      // console.log(token);
-      // console.log(authData);
 
       return authData;
     } catch (error) {
@@ -158,6 +147,37 @@ const authStore = (set) => ({
       false,
       '/signOut'
     );
+
+    return response;
+  },
+
+  signOutGoogle: async () => {
+    // const { isValid, model, token } = pb.authStore;
+    // console.log(pb.authStore.baseModel.id);
+    // set(
+    //   (state) => ({
+    //     ...state,
+    //     isAuth: isValid,
+    //     user: model,
+    //     token,
+    //   }),
+    //   false,
+    //   '/singIn'
+    // );
+
+    // const response = await pb
+    //   .collection('users')
+    //   .unlinkExternalAuth(pb.authStore.baseModel.id, 'google');
+    const response = await pb.authStore.clear();
+
+    // set(
+    //   (state) => ({
+    //     ...state,
+    //     ...initialAuthState,
+    //   }),
+    //   false,
+    //   '/signOut'
+    // );
 
     return response;
   },

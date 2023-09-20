@@ -5,6 +5,9 @@ import useAuthStore from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { kakaoLogout } from '@/utils/kakaoLogout';
+import uselogin from '@/store/login';
+import pb from '@/api/pocketbase';
+import useImageURL from '@/store/imageURL';
 
 function Header() {
   const navigate = useNavigate();
@@ -12,10 +15,20 @@ function Header() {
   const token = useAuthStore((state) => state.token);
   const user = useAuthStore((state) => state.user);
   const signOut = useAuthStore((state) => state.signOut);
+  const signOutGoogle = useAuthStore((state) => state.signOutGoogle);
+  const { isKakao, setIsKakao, isGoogle, setIsGoogle } = uselogin();
+
+  // const setURL =useImageURL((state)=>state.setProfileURL)
+  const url = useImageURL((state) => state.profileURL);
+  const setURL = useImageURL((state) => state.setProfileURL);
+  const clearURL = useImageURL((state) => state.clearProfileURL);
+
+  // const url=
 
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
-  console.log(authData.model.id)
+
+  // console.log(authData.model.id)
 
   const handleGoToLogin = (e) => {
     e.preventDefault();
@@ -27,6 +40,7 @@ function Header() {
 
     // PocketBase SDK 인증 요청
     try {
+      clearURL();
       signOut();
       // kakaoLogout();
       toast.success(`이용해주셔서 감사합니다`, {
@@ -42,6 +56,53 @@ function Header() {
     }
   };
 
+  const handleGoogleLogout = async (e) => {
+    e.preventDefault();
+
+    // PocketBase SDK 인증 요청
+    try {
+      clearURL();
+      setIsGoogle(false);
+      signOutGoogle();
+      // signOut();
+      toast.success(`이용해주셔서 감사합니다`, {
+        icon: '🎉',
+        duration: 2000,
+      });
+
+      navigate('/');
+    } catch (error) {
+      toast.error('로그아웃 실패');
+
+      console.log('오류', error.response);
+    }
+  };
+
+  const handleKakaoLogout = async (e) => {
+    e.preventDefault();
+
+    // PocketBase SDK 인증 요청
+    try {
+      clearURL();
+      setIsKakao(false);
+
+      const kakao = await kakaoLogout();
+
+      console.log(kakao);
+
+      // kakaoLogout();
+      toast.success(`이용해주셔서 감사합니다`, {
+        icon: '🎉',
+        duration: 2000,
+      });
+
+      navigate('/');
+    } catch (error) {
+      // toast.error('로그아웃 실패');
+      // console.log('오류', error.response);
+    }
+  };
+
   return (
     <div className="flex flex-row flex-shrink-0 flex-nowrap mx-auto py-10 items-center justify-around font-pre">
       <Logo className="flex-shrink-0" />
@@ -50,15 +111,28 @@ function Header() {
       <SearchForm className="flex-shrink-0" />
 
       {authData ? (
-        <div>
-          <span>{`${authData.model.nickname}님`}</span>
-          <button
-            type="button"
-            className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-nowrap flex-shrink-0"
-            onClick={handleSignOut}
-          >
-            로그아웃
-          </button>
+        <div className="flex items-center flex-nowrap">
+          {url ? (
+            <>
+              <img src={url} alt="" className="w-7 h-7 rounded-full mr-2" />
+              <span className="font-medium text-xl underline underline-offset-8 flex-nowrap">{`${authData.model.nickname}님`}</span>
+              <button
+                type="button"
+                className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-nowrap flex-shrink-0 ml-8"
+                onClick={
+                  isKakao
+                    ? handleKakaoLogout
+                    : isGoogle
+                    ? handleGoogleLogout
+                    : handleSignOut
+                }
+              >
+                로그아웃
+              </button>
+            </>
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         <button

@@ -8,10 +8,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
 
 function SignIn() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [isIdValid, setIsIdValid] = useState(false);
-  // const [isPasswordValid, setIsPasswordValid] = useState(false);
+ 
 
   // const navigate = useNavigate();
 
@@ -25,8 +22,8 @@ function SignIn() {
   const {
     loginEmail,
     loginPassword,
-    isLoginEmail,
-    isLoginPassword,
+    isLoginEmailValid,
+    isLoginPasswordValid,
     setLoginEmail,
     setLoginPassword,
     setIsLoginEmailValid,
@@ -153,7 +150,7 @@ function SignIn() {
               defaultValue={loginEmail}
               onChange={inputIdDebounce}
             />
-            {!isLoginEmail && loginEmail ? (
+            {!isLoginEmailValid && loginEmail ? (
               <p className="text-error w-[340px]  text-sm font-medium mt-1 ml-2">
                 아이디(이메일)를 형식에 맞게 입력해주세요.
               </p>
@@ -176,7 +173,7 @@ function SignIn() {
               defaultValue={loginPassword}
               onChange={inputPasswordDebounce}
             />
-            {!isLoginPassword && loginPassword ? (
+            {!isLoginPasswordValid && loginPassword ? (
               <p className="text-error w-[340px] text-sm font-medium mt-1 ml-3">
                 비밀번호를 형식에 맞게 입력해주세요
               </p>
