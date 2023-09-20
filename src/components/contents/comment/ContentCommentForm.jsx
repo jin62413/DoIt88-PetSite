@@ -1,22 +1,13 @@
-import Comment from '@/components/commentInput/Comment';
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import pb from '@/api/pocketbase';
 import { useState } from 'react';
-import { createComment, createRecord } from '@/utils/createComment';
 import toast from 'react-hot-toast';
-import CommentInput from '@/components/commentInput/CommentInput';
-import CommentSubmitButton from '@/components/commentInput/CommentSubmitButton';
 
-function ContentCommentForm(props) {
-  const navigate = useNavigate();
-
-  const [comment, setComment] = useState(null);
-  // const [isValid, setIsValid] = useState(false);
+function ContentCommentForm({ id, setComment }) {
+  const [setReply] = useState(null);
 
   const formRef = useRef(null);
   const commentRef = useRef(null);
-  // const postRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,17 +34,24 @@ function ContentCommentForm(props) {
       });
       return;
     }
-
     const data = {
       user: pb.authStore.model.id,
       comment: commentValue,
-      post: props.postId,
+      post: id,
     };
-
     try {
-      await pb.collection('contentComment').create(data);
-
-      setComment();
+      const newData = await pb.collection('contentComment').create(data);
+      if (newData) {
+        await pb.collection('contents').update(id, {
+          'comments+': newData.id,
+        });
+      }
+      const commentArr = await pb
+        .collection('contentComment')
+        .getOne(newData.id, { expand: 'user' });
+      // let deepArr = JSON.parse(JSON.stringify(comments));
+      // console.log(comments, deepArr);
+      setComment((comment) => [...comment, commentArr]);
       commentRef.current.value = '';
     } catch (error) {
       console.error(error);
@@ -61,7 +59,7 @@ function ContentCommentForm(props) {
   };
 
   const handleChange = (e) => {
-    setComment(e.target.value);
+    setReply(e.target.value);
   };
 
   return (

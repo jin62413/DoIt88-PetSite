@@ -1,23 +1,19 @@
 import pb from '@/api/pocketbase';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import ContentComment from './ContentComment';
+import { useEffect, useState } from 'react';
 
-const resetData = {
-  comment: '',
-};
-
-function CommentEdit({ item: { id, comment } }) {
-  const { commentId } = useParams();
-  const commentRef = useRef(null);
+function CommentEdit({ comment, commentId, setEditingCommentId, onUpdate }) {
+  const [commentValue, setCommentValue] = useState(comment);
+  const [savedValue, setSavedValue] = useState('');
+  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     async function getComment() {
       try {
-        const comments = pb.collection('contentComment').getOne(commentId);
+        const comments = await pb
+          .collection('contentComment')
+          .getOne(commentId);
         const { comment } = comments;
-        resetData.comment = commentRef.current.value = comment;
+        setCommentValue(comment);
       } catch (error) {
         if (!(error in DOMException)) {
           console.error();
@@ -27,43 +23,57 @@ function CommentEdit({ item: { id, comment } }) {
     getComment();
   }, [commentId]);
 
-  const hadleUpdate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const commentValue = commentRef.current.value;
+    const newCommentValue = commentValue;
 
     const formData = new FormData();
 
-    formData.append('comment', commentValue);
+    formData.append('comment', newCommentValue);
 
     try {
       await pb.collection('contentComment').update(commentId, formData);
+      setIsEditing(false);
+      setSavedValue(newCommentValue);
+      setEditingCommentId(null);
+
+      onUpdate(newCommentValue);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const userId = pb.authStore.model.id;
   return (
-    <form action="" className="flex">
-      <textarea
-        type="text"
-        className="w-[820px] focus:outline-none resize-none"
-        defaultValue={comment}
-      />
-      <div className="flex gap-2">
-        <button type="button" onClick={hadleUpdate}>
-          저장
-        </button>
-        <button
-          type="button"
-          className="text-error"
-          onClick={() => setEditMode(false)}
-        >
-          취소
-        </button>
-      </div>
-    </form>
+    <>
+      {isEditing ? (
+        <form onSubmit={handleUpdate}>
+          <div className="flex gap-2 align-top items-start">
+            <textarea
+              type="text"
+              className="w-[820px] focus:outline-primary resize-none"
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+            />
+            <div className="flex gap-2">
+              <button type="submit">저장</button>
+              <button
+                type="button"
+                className="text-error"
+                onClick={() => setEditingCommentId(null)}
+              >
+                취소
+              </button>
+            </div>
+          </div>
+        </form>
+      ) : (
+        <>
+          {/* 저장된 값 표시 */}
+          {savedValue && <p>저장된 값: {savedValue}</p>}
+        </>
+      )}
+    </>
   );
 }
 export default CommentEdit;

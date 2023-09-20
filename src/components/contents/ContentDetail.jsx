@@ -1,4 +1,3 @@
-import anonymous from '@/assets/images/Ellipse.svg';
 import BookMark from '@/components/button/Bookmark';
 import LikeButton from '@/components/button/likeButton';
 import CommentCount from '@/components/button/CommentCount';
@@ -18,17 +17,29 @@ function ContentDetail() {
   const [imageAlt, setImageAlt] = useState();
 
   const [created, setCreated] = useState();
+  const [comment, setComment] = useState();
+  const [user, setUser] = useState();
+  const [commentLength, setCommentLength] = useState(0);
 
   useEffect(() => {
     async function getContent() {
       try {
-        const data = await pb.collection('contents').getOne(contentId);
-        const { title, content, imageAlt, created } = data;
+        const data = await pb.collection('contents').getOne(contentId, {
+          expand: 'comments , comments.user',
+        });
+        const { title, content, imageAlt, created, comments, expand } = data;
         setTitle(title);
         setContent(content);
         setImage(getPbImageURL(data, 'image'));
         setImageAlt(imageAlt);
         setCreated(created);
+        setCommentLength(comments.length);
+        console.log();
+
+        if (expand) {
+          setComment(expand.comments);
+          setUser(expand.comments.expand.user);
+        }
       } catch (error) {
         if (!(error in DOMException)) {
           console.error();
@@ -52,15 +63,7 @@ function ContentDetail() {
     <div className="flex flex-col m-auto items-center gap-11 my-10 w-full ">
       <div className="w-[988px]">
         <h1 className="text-black text-[32px] mb-3">{title}</h1>
-        <div className="flex justify-between">
-          <figure className="flex gap-2 align-middle items-center">
-            <img
-              src={anonymous}
-              alt="익명"
-              className="rounded-full w-10 h-10"
-            />
-            <p>이름 넣는 곳</p>
-          </figure>
+        <div className="flex justify-end">
           <span className="pt-2">{date}</span>
         </div>
         <div className="flex flex-col gap-11 mt-8">
@@ -76,13 +79,21 @@ function ContentDetail() {
             <div className="flex gap-2 items-center">
               <BookMark />
               <LikeButton />
-              <CommentCount id={contentId} />
+              <CommentCount
+                id={contentId}
+                setCommentLength={setCommentLength}
+                commentLength={commentLength}
+              />
             </div>
             <ShareButton id={contentId} title={title} image={image} />
           </div>
         </div>
       </div>
-      <ContentComment id={contentId} />
+      <ContentComment
+        comments={comment}
+        id={contentId}
+        setComment={setComment}
+      />
     </div>
   );
 }
