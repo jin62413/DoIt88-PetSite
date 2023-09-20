@@ -28,8 +28,6 @@ function Header() {
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
-  // console.log(authData.model.id)
-
   const handleGoToLogin = (e) => {
     e.preventDefault();
     navigate('/signIn');
