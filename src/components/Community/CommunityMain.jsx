@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
 import Comment from '../commentInput/Comment';
 import useAuthStore from '@/store/auth';
-import { useRef } from 'react';
 
 function CommunityMain() {
   const { dataId } = useParams();

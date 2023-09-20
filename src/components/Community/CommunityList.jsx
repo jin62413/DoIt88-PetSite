@@ -1,16 +1,16 @@
 import Pagination from '../Pagination';
 import CommunityListPost from './CommunityListPost';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '@/store/auth';
 import toast from 'react-hot-toast';
 
 function CommunityList() {
   const navigate = useNavigate();
 
-  const isAuth = useAuthStore((state) => state.isAuth);
+  const authDataString = localStorage.getItem('pocketbase_auth');
+  const authData = JSON.parse(authDataString);
 
   const handlePage = () => {
-    if (isAuth) {
+    if (authData) {
       navigate('/community/new');
     } else {
       toast('로그인해야 글 작성이 가능합니다.', {
