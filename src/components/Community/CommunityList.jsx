@@ -1,6 +1,5 @@
 import Pagination from '../Pagination';
 import CommunityListPost from './CommunityListPost';
-import CommunityListProcedure from './CommunityListProcedure';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '@/store/auth';
 import toast from 'react-hot-toast';

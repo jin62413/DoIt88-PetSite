@@ -29,16 +29,7 @@ function CommunityNew() {
     }
 
     try {
-      // const record = {
-      //   formData,
-      //   user: pb.authStore.model.id,
-      // };
-      console.log('ok');
-      await pb.collection('community').create(formData);
-      // handleReset();
-      navigate('/community');
-
-      if (!titleValue && !contentValue) {
+      if (!titleValue || !contentValue) {
         toast('제목과 내용을 입력해주세요!', {
           icon: '😉',
           ariaProps: {
@@ -49,6 +40,9 @@ function CommunityNew() {
 
         return;
       }
+      console.log('ok');
+      await pb.collection('community').create(formData);
+      navigate('/community');
     } catch (error) {
       console.error(error);
     }

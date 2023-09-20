@@ -2,6 +2,7 @@ import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
 
 function CommunityListContent({ item }) {
+  console.log(item.id);
   if (item) {
     return (
       <>
@@ -14,11 +15,13 @@ function CommunityListContent({ item }) {
               <div className="CommunityListText">{item.content}</div>
             </div>
             <div className="py-[11px]">
-              <img
-                src={getPbImageURL(item, 'image')}
-                alt="첨부 이미지"
-                className="w-[120px] h-[120px] rounded-10"
-              />
+              {item.image && (
+                <img
+                  src={getPbImageURL(item, 'image')}
+                  alt="첨부 이미지"
+                  className="w-[120px] h-[120px] rounded-10"
+                />
+              )}
             </div>
           </div>
         </Link>

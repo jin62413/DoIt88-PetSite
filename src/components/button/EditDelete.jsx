@@ -25,7 +25,7 @@ function EditDelete({ item }) {
               await pb.collection('communityComment').delete(item.id)
           );
         }
-        navigate('community');
+        navigate(-1);
       }
     } catch (err) {
       console.log(err);

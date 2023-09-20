@@ -24,14 +24,21 @@ function CommunityEdit() {
 
   useEffect(() => {
     async function getCommunity() {
+      // 등록되어있던 정보 가져오기
       try {
         const community = await pb.collection('community').getOne(dataId);
-        const { title, content } = community;
+        const { title, content, image } = community;
         resetData.title = titleRef.current.value = title;
         resetData.content = contentRef.current.value = content;
+
         const imageUrl = (resetData.image = getPbImageURL(community, 'image'));
-        setFileImage({ image: imageUrl, label: imageUrl });
-        console.log(fileImage);
+        if (image) {
+          setFileImage({ image: imageUrl, label: imageUrl });
+        } else {
+          setFileImage(null);
+        }
+
+        console.log(image);
       } catch (error) {
         if (!(error in DOMException)) {
           console.error();
@@ -42,6 +49,7 @@ function CommunityEdit() {
     getCommunity();
   }, [dataId]);
 
+  // 업로드
   const handleUpdateRecord = async (e) => {
     e.preventDefault();
 
@@ -49,7 +57,7 @@ function CommunityEdit() {
     const contentValue = contentRef.current.value;
     const imageValue = imageRef.current.files;
 
-    if (!titleValue && !contentValue) {
+    if (!titleValue || !contentValue) {
       toast('제목과 내용을 입력해주세요!', {
         icon: '😉',
         ariaProps: {
@@ -61,6 +69,7 @@ function CommunityEdit() {
       return;
     }
 
+    // 수정된 데이터를 폼 데이터에 추가
     const formData = new FormData();
 
     formData.append('title', titleValue);
@@ -70,11 +79,6 @@ function CommunityEdit() {
     }
 
     try {
-      // const record = {
-      //   formData,
-      //   user: pb.authStore.model.id,
-      // };
-      console.log('ok');
       await pb.collection('community').update(
         dataId,
         formData
@@ -91,7 +95,7 @@ function CommunityEdit() {
 
   const handleReset = (e) => {
     e.preventDefault();
-    navigator(-1);
+    navigate(-1);
   };
 
   const [fileImage, setFileImage] = useState(null);
@@ -102,7 +106,7 @@ function CommunityEdit() {
     setFileImage(fileImage);
   };
 
-  console.log(fileImage);
+  // console.log(formData);
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
       <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>

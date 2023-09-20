@@ -52,7 +52,7 @@ function CommunityListPost() {
       {data?.items?.map((item) => (
         <div key={item.id}>
           <div className="border-b-2 border-[#747474] p-[20px]">
-            <CommunityListContent key={item.id} item={item} />
+            <CommunityListContent item={item} />
           </div>
         </div>
       ))}

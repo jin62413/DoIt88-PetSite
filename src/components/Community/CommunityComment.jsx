@@ -20,7 +20,7 @@ function CommunityComment({ profile, nickname, comment, commentDate }) {
 
   return (
     <>
-      <div className="border-b my-4 pb-4">
+      <li className="border-b my-4 pb-4">
         <div className="w-full pb-[12px] flex items-start justify-between">
           <figure className="flex items-center">
             <img
@@ -37,7 +37,7 @@ function CommunityComment({ profile, nickname, comment, commentDate }) {
         </div>
         <p className="pb-2 text-base">{comment}</p>
         <time className="text-sm text-content">{date}</time>
-      </div>
+      </li>
 
       {/* <div className="mb-[80px] py-[20px]">
         <div className="p-[20px] w-[988px] h-[118px] rounded-[10px] bg-[#F1F1F1]">
