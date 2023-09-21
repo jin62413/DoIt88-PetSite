@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import photo from '@/assets/icon/photo.svg';
 
 const resetData = {
   title: '',
@@ -163,7 +164,7 @@ function CommunityEdit() {
                 htmlFor="image"
                 className="rounded-xl border-primary border h-[110px] w-[110px] flex justify-center items-center"
               >
-                <img src="/src/assets/icon/photo.svg" className="w-14 h-14" />
+                <img src={photo} className="w-14 h-14" />
               </label>
               <input
                 type="file"
