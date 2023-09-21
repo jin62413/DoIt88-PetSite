@@ -3,25 +3,14 @@ import { useState } from 'react';
 import { getPbImageURL } from '@/utils';
 import ContentCommentForm from './ContentCommentForm';
 import CommentEdit from './CommentEdit';
-import CommentItem from './CommentItem';
 import toast from 'react-hot-toast';
 import useAuthStore from '@/store/auth';
 
 function ContentComment({ comments, id, setComment }) {
-  // const userId = pb.authStore.model.id;
+  const userId = pb.authStore.model.id;
   const isAuth = useAuthStore((state) => state.isAuth);
 
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editComment, setEditComment] = useState(comments);
-
-  const handleUpdate = async (commentId) => {
-    try {
-      const updatedComment = { comment: editComment };
-      await pb.collection('contentComment').update(commentId, updatedComment);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
 
   const handleDelete = async (commentId) => {
     toast((t) => (
@@ -30,9 +19,12 @@ function ContentComment({ comments, id, setComment }) {
         <button
           onClick={async () => {
             try {
-              if (editingCommentId === commentId)
-                await pb.collection('contentComment').delete(commentId);
+              await pb.collection('contentComment').delete(commentId);
               toast.remove(t.id);
+
+              setComment(
+                comments.filter((comment) => comment.id !== commentId)
+              );
             } catch (err) {
               console.error(err);
             }
@@ -52,13 +44,13 @@ function ContentComment({ comments, id, setComment }) {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {comments?.map((item) => {
         return (
           <div className="flex gap-6 w-[988px] h-20 align-middle" key={item.id}>
             <figure className="w-14">
               <img
-                src={getPbImageURL(item?.expand?.user, 'profile')}
+                src={getPbImageURL(item.expand.user, 'profile')}
                 alt="유저 프로필 사진"
                 className="w-auto h-14 m-auto rounded-full"
               />
@@ -66,7 +58,7 @@ function ContentComment({ comments, id, setComment }) {
             <div>
               <div className="flex gap-6 items-baseline">
                 <p className="font-semibold text-lg">
-                  {item?.expand?.user?.nickname}
+                  {item.expand.user.nickname}
                 </p>
                 <span className="text-sm h-fit">{`${item.created.slice(
                   0,
@@ -83,42 +75,60 @@ function ContentComment({ comments, id, setComment }) {
                   commentId={item.id}
                   setEditingCommentId={setEditingCommentId}
                   onUpdate={(updatedContent) => {
-                    setEditComment(updatedContent);
-                    handleUpdate(item.id);
+                    // 현재 렌더링 중인 댓글의 내용 업데이트
+                    setComment(
+                      comments.map((comment) =>
+                        comment.id === item.id
+                          ? { ...comment, comment: updatedContent }
+                          : comment
+                      )
+                    );
                   }}
                 />
               ) : (
-                <CommentItem comment={item.comment} />
+                <div className="flex">
+                  <p className="w-[820px]">{item.comment}</p>
+                  {isAuth && pb.authStore.model.id === item.id && (
+                    <div className="align-middle items-center right-0">
+                      <div className="flex gap-2">
+                        <button type="button" onClick={() => <CommentEdit />}>
+                          수정
+                        </button>
+                        <button type="button" className="text-error">
+                          삭제
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
             {isAuth && pb.authStore.model.id == item.expand.user.id && (
-              <div className="align-middle items-center right-0">
-                <div className="flex gap-2 pt-7">
-                  {editingCommentId === item.id ? null : (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setEditingCommentId(item.id)}
-                      >
-                        수정
-                      </button>
-                      <button
-                        type="button"
-                        className="text-error"
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        삭제
-                      </button>
-                    </>
-                  )}
-                </div>
+              <div className="flex gap-2 pt-7 align-middle items-center right-0">
+                {editingCommentId === item.id ? null : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setEditingCommentId(item.id)}
+                    >
+                      수정
+                    </button>
+                    <button
+                      type="button"
+                      className="text-error"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      삭제
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
         );
       })}
       <ContentCommentForm comments={comments} id={id} setComment={setComment} />
-    </>
+    </div>
   );
 }
 export default ContentComment;
