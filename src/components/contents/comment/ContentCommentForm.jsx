@@ -4,8 +4,6 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 function ContentCommentForm({ id, setComment }) {
-  const [setReply] = useState(null);
-
   const formRef = useRef(null);
   const commentRef = useRef(null);
 
@@ -59,7 +57,7 @@ function ContentCommentForm({ id, setComment }) {
   };
 
   const handleChange = (e) => {
-    setReply(e.target.value);
+    // setReply(e.target.value);
   };
 
   return (
