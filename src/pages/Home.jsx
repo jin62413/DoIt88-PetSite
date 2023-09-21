@@ -1,6 +1,6 @@
-import MainBanner from '@/components/MainBanner';
 import Recommend from '@/components/MainRecommend/Recommend';
-import PopularPosts from '@/components/Posts';
+import MainBanner from '@/components/home/MainBanner';
+import PopularPosts from '@/components/home/Posts';
 
 function Home() {
   return (

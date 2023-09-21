@@ -1,4 +1,4 @@
-import Pagination from '../Pagination';
+import Pagination from '../home/Pagination';
 import CommunityListPost from './CommunityListPost';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';

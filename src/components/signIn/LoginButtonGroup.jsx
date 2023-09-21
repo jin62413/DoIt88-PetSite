@@ -142,7 +142,7 @@ function LoginButtonGroup() {
   return (
     <div className="buttonGroup flex-col justify-center">
       <button
-        type="button"
+        type="submit"
         className="w-[340px] h-[50px] bg-primary text-white text-center font-medium rounded-xl text-lg  my-2"
         onClick={handleLogin}
       >
@@ -161,7 +161,7 @@ function LoginButtonGroup() {
         카카오로 로그인
       </button>
       <button
-        type="submit"
+        type="button"
         className="w-[340px] h-[50px] bg-white text-black text-center font-medium rounded-xl text-lg  my-2 border border-[#C4C4C4] relative"
         onClick={handleLoginGoogle}
       >
