@@ -1,7 +1,5 @@
-const { VITE_KAKAO_CLIENT_ID, VITE_KAKAO_LOGOUT_REDIRECT_URI } = import.meta
-  .env;
+const { VITE_KAKAO_CLIENT_ID, VITE_KAKAO_LOGOUT_REDIRECT_URI } = import.meta.env;
 
-//
 
 export const kakaoLogout = async () => {
   try {
