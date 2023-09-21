@@ -94,6 +94,8 @@ const authStore = (set) => ({
         provider: 'kakao',
       });
 
+      console.log(authData);
+
       // console.log(pb.authStore);
       // const { isValid, model, token } = pb.authStore;
 

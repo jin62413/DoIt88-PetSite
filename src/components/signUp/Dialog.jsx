@@ -144,7 +144,6 @@ const animationConfig = {
 
 /* COMPONENT ---------------------------------------------------------------- */
 
-
 function Dialog({
   type = 'drop' /* drop, scale, rotate */,
   children,
@@ -188,6 +187,10 @@ function Dialog({
             firstFocusableElement.focus();
           }
         }
+      } else if (event.key === 'Escape') {
+        // ESC key
+        event.preventDefault();
+        onClose(); // 모달 창 닫기
       }
     };
 
@@ -206,13 +209,13 @@ function Dialog({
     <Backdrop onClose={isBackdropClickClose ? onClose : null}>
       <motion.div
         ref={dialogRef}
-        className="box-border flex flex-col z-[100] fixed w-[750px] h-[500px] bg-white top-[25%] left-[30.5%] rounded-10"
+        className="box-border fixed flex flex-col z-[100]  w-[750px] bg-white  top-[15%] left-[30%]  rounded-10"
         variants={
           type === 'scale'
             ? dropScaleInOut
             : type === 'rotate'
-              ? dropRotateScaleInOut
-              : dropInOut
+            ? dropRotateScaleInOut
+            : dropInOut
         }
         initial="from"
         animate="to"
@@ -221,35 +224,34 @@ function Dialog({
         whileTap={{ scale: 0.95 }}
         onClick={handleStopPropagation}
       >
-       {children}
-     </motion.div>
-   </Backdrop>
- );
+        {children}
+      </motion.div>
+    </Backdrop>
+  );
 }
 
 Dialog.Head = function DialogHead({ children }) {
- return (
-   <div className="flex justify-start text-2xl font-bold m-6">{children}</div>
- );
+  return (
+    <div className="flex justify-start text-2xl font-bold m-6">{children}</div>
+  );
 };
 
 Dialog.Body = function DialogBody({ children }) {
- return <div className="DialogBody">{children}</div>;
+  return <div className="DialogBody">{children}</div>;
 };
 
-Dialog.CloseButton = function DialogCloseButton({ onClose, label = 'close' }) 
-{
- return (
-   <button
-     type="button"
-     className="DialogCloseButton absolute top-5 right-5"
-     aria-label={label}
-     title={label}
-     onClick={onClose}
-   >
-     <img src={closeButton} alt="닫기 버튼 이미지" />
-   </button>
- );
+Dialog.CloseButton = function DialogCloseButton({ onClose, label = 'close' }) {
+  return (
+    <button
+      type="button"
+      className="DialogCloseButton absolute top-5 right-5"
+      aria-label={label}
+      title={label}
+      onClick={onClose}
+    >
+      <img src={closeButton} alt="닫기 버튼 이미지" />
+    </button>
+  );
 };
 
 export default Dialog;

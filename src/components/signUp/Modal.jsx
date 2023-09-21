@@ -2,8 +2,11 @@ import Dialog from './Dialog';
 import arrow from '@/assets/icon/arrow.svg';
 import { useState, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import ServiceAgreement from './Agreement/ServiceAgreement';
+import MarketingAgreement from './Agreement/MarketingAgreement';
+import PrivacyPolicy from './Agreement/PrivacyPolicy';
 
-function Modal({ headline, contents }) {
+function Modal({ headline, id }) {
   //모달
   const opennerRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -37,8 +40,14 @@ function Modal({ headline, contents }) {
               <h3 className="DialogHeadline">{headline}</h3>
             </Dialog.Head>
             <Dialog.Body>
-              <div className="border border-[#C4C4C4] rounded-10 w-[700px] h-[390px] ml-6 mr-6 mt-1 p-5">
-                <span>{contents}</span>
+              <div className="border border-[#C4C4C4] rounded-10 m-6 p-5">
+                {id === 'service' ? (
+                  <ServiceAgreement />
+                ) : id === 'privacy' ? (
+                  <PrivacyPolicy />
+                ) : (
+                  <MarketingAgreement />
+                )}
               </div>
             </Dialog.Body>
             <Dialog.CloseButton onClose={handleClose} />

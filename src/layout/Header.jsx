@@ -6,21 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { kakaoLogout } from '@/utils/kakaoLogout';
 import uselogin from '@/store/login';
-import pb from '@/api/pocketbase';
+// import pb from '@/api/pocketbase';
 import useImageURL from '@/store/imageURL';
 
 function Header() {
   const navigate = useNavigate();
-  const isAuth = useAuthStore((state) => state.isAuth);
-  const token = useAuthStore((state) => state.token);
-  const user = useAuthStore((state) => state.user);
+  // const isAuth = useAuthStore((state) => state.isAuth);
+  // const token = useAuthStore((state) => state.token);
+  // const user = useAuthStore((state) => state.user);
   const signOut = useAuthStore((state) => state.signOut);
   const signOutGoogle = useAuthStore((state) => state.signOutGoogle);
   const { isKakao, setIsKakao, isGoogle, setIsGoogle } = uselogin();
 
   // const setURL =useImageURL((state)=>state.setProfileURL)
   const url = useImageURL((state) => state.profileURL);
-  const setURL = useImageURL((state) => state.setProfileURL);
+  // const setURL = useImageURL((state) => state.setProfileURL);
   const clearURL = useImageURL((state) => state.clearProfileURL);
 
   // const url=
