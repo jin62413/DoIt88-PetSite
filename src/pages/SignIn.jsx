@@ -10,15 +10,6 @@ import { useNavigate, Link } from 'react-router-dom';
 function SignIn() {
  
 
-  // const navigate = useNavigate();
-
-  // // const signUp = useAuthStore((state) => state.signUp);
-
-  
-
-  // const signInHome = useAuthStore((state) => state.signIn);
-  // const signInGoogle = useAuthStore((state) => state.signInGoogle);
-
   const {
     loginEmail,
     loginPassword,
@@ -29,69 +20,8 @@ function SignIn() {
     setIsLoginEmailValid,
     setIsLoginPasswordValid,
   } = uselogin();
-  // const handleLoginGoogle=(e)=>{
 
-  // }
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-
-  //   if (isLoginEmail !== true && isLoginPassword !== true) {
-  //     return;
-  //   }
-  //   // PocketBase SDK 인증 요청
-  //   try {
-  //     const authData = signInHome(loginEmail, loginPassword);
-
-  //     // const authData = await pb
-  //     //   .collection('users')
-  //     //   .authWithPassword('yamoo9', '123456789!');
-  //     console.log(authData);
-
-  //     // await pb.collection('users').create(formData);
-  //     // authSignUp(formData);
-
-  //     toast.success(`${user.username}님 환영합니다.`, {
-  //       icon: '🎉',
-  //       duration: 2000,
-  //     });
-
-  //     navigate('/');
-  //   } catch (error) {
-  //     toast.error('로그인 실패하였습니다.');
-
-  //     console.log('오류', error.response);
-  //   }
-  // };
-
-  // const handleLoginGoogle = async (e) => {
-  //   e.preventDefault();
-
-  //   // PocketBase SDK 인증 요청
-  //   try {
-  //     const authData = await pb
-  //       .collection('users')
-  //       .authWithOAuth2({ provider: 'google' });
-
-  //     console.log(authData);
-
-  //     // await pb.collection('users').create(formData);
-  //     // authSignUp(formData);
-
-  //     toast.success(`환영합니다.`, {
-  //       icon: '🎉',
-  //       duration: 2000,
-  //     });
-
-  //     navigate('/');
-  //   } catch (error) {
-  //     toast.error('로그인 실패하였습니다.');
-
-  //     console.log('오류', error.response);
-  //   }
-  // };
-
-  const handleIdInput = (e) => {
+  const handleEmailInput = (e) => {
     const value = e.target.value;
     setLoginEmail(value);
 
@@ -122,10 +52,9 @@ function SignIn() {
       setIsLoginPasswordValid(false);
     }
 
-    console.log(loginPassword)
   };
 
-  const inputIdDebounce = debounce(handleIdInput, 500);
+  const inputIdDebounce = debounce(handleEmailInput, 500);
   const inputPasswordDebounce = debounce(handlepasswordInput, 500);
 
   return (
@@ -133,8 +62,7 @@ function SignIn() {
       <h1 className="text-center font-semibold text-3xl my-12">로그인</h1>
 
       <form>
-        {/* <input type="file" id="fileInput" onChange={handleUpload}  ref={photoRef}/> */}
-
+      
         <div>
           <div className="mb-7">
             <label htmlFor="signInID" className="sr-only">
