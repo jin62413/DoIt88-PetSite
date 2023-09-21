@@ -4,8 +4,10 @@ import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperMainBanner from './SwiperMainBanner';
+import leftButton from '@/assets/icon/mainbanner-left.svg';
+import rightButton from '@/assets/icon/mainbanner-right.svg';
 
-// 메인 배너 스와이퍼 기능 추가
+// 메인 배너 스와이퍼 기능
 function MainBanner() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -59,10 +61,10 @@ function MainBanner() {
 
       <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 w-[1250px] flex items-center justify-between">
         <button ref={prevRef} type="button">
-          <img src="/src/assets/icon/mainbanner-left.svg" />
+          <img src={leftButton} />
         </button>
         <button ref={nextRef} type="button">
-          <img src="/src/assets/icon/mainbanner-right.svg" />
+          <img src={rightButton} />
         </button>
       </div>
     </div>
