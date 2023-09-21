@@ -34,8 +34,39 @@ function CommunityListPost() {
   //   setCheck('-like');
   // }
 
+  // ------------------------------------------------------------------
+
+  // const handleSortChange = (event) => {
+  //   setCheck(event.target.value);
+  // };
+
   return (
     <>
+      {/* <div className="sort-container">
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="-creadted"
+            checked={check === '-created'}
+            onChange={(e) => {
+              setCheck(e.target.value);
+            }}
+          />
+          최신순
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="-like"
+            checked={check === '-like'}
+            onChange={handleSortChange}
+          />
+          인기순
+        </label>
+      </div> */}
+
       <fieldset className="CommunityListProcedure flex">
         <input
           id="radio1"
