@@ -98,7 +98,7 @@ function CommunityMain() {
     }
   };
   console.log(commentList); */
-
+  console.log(commentList);
   return (
     data && (
       <>
@@ -165,7 +165,11 @@ function CommunityMain() {
             </ul>
 
             {/* 댓글 작성 */}
-            <Comment dataId={dataId} />
+            <Comment
+              dataId={dataId}
+              comment={commentList}
+              setCommentList={setCommentList}
+            />
             {/* <textarea
               type="text"
               className="bg-[#f1f1f1] w-[860px] h-[100px] rounded-10 p-5 mr-5 focus:outline-none resize-none"
