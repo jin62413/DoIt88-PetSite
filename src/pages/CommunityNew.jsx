@@ -41,9 +41,11 @@ function CommunityNew() {
 
         return;
       }
-      console.log('ok');
-      await pb.collection('community').create(formData);
-      navigate('/community');
+
+      const newFeed = await pb.collection('community').create(formData);
+      await pb.collection('community').getOne(newFeed.id);
+      console.log(newFeed.id);
+      navigate(`/community/detail/${newFeed.id}`);
     } catch (error) {
       console.error(error);
     }
@@ -63,12 +65,6 @@ function CommunityNew() {
     const fileImage = { image: URL.createObjectURL(file), label: file.name };
     setFileImage(fileImage);
   };
-
-  // const [textareaValue, setTextareaValue] = useState('');
-
-  // const handleTextarea = (e) => {
-  //   setTextareaValue(e.target.value);
-  // };
 
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
