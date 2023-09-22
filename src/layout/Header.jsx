@@ -1,6 +1,6 @@
 import SearchForm from '@/components/signUp/SearchForm';
 import HeaderNav from './HeaderNav';
-import Logo from '@/components/header/Logo';
+// import Logo from '@/components/header/Logo';
 import useAuthStore from '@/store/auth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -41,8 +41,9 @@ function Header() {
       clearURL();
       signOut();
       // kakaoLogout();
+
       toast.success(`이용해주셔서 감사합니다`, {
-        icon: '🎉',
+        icon: '🙇🏻‍♂️',
         duration: 2000,
       });
 
@@ -64,7 +65,7 @@ function Header() {
       signOutGoogle();
       // signOut();
       toast.success(`이용해주셔서 감사합니다`, {
-        icon: '🎉',
+        icon: '🙇🏻‍♂️',
         duration: 2000,
       });
 
@@ -90,12 +91,11 @@ function Header() {
       // console.log(kakao);
 
       // kakaoLogout();
+      navigate('/');
       toast.success(`이용해주셔서 감사합니다`, {
-        icon: '🎉',
+        icon: '🙇🏻‍♂️',
         duration: 2000,
       });
-
-      navigate('/');
     } catch (error) {
       // toast.error('로그아웃 실패');
       // console.log('오류', error.response);
@@ -107,7 +107,7 @@ function Header() {
       {/* <Logo className="flex-shrink-0" /> */}
       <HeaderNav className="flex-shrink-0" />
 
-      <div className='flex flex-row gap-7'>
+      <div className="flex flex-row gap-7">
         <SearchForm className="flex-shrink-0" />
         {authData ? (
           <div className="flex items-center flex-nowrap">
