@@ -83,10 +83,11 @@ function Header() {
     try {
       clearURL();
       setIsKakao(false);
+      signOut();
 
-      const kakao = await kakaoLogout();
+      await kakaoLogout();
 
-      console.log(kakao);
+      // console.log(kakao);
 
       // kakaoLogout();
       toast.success(`이용해주셔서 감사합니다`, {
