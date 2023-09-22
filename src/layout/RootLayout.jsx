@@ -7,7 +7,7 @@ import Header from './Header';
 
 function RootLayout() {
   return (
-    <>
+    <div className='mx-auto'>
       {/* <Main/> */}
       <Header />
 
@@ -16,7 +16,7 @@ function RootLayout() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
