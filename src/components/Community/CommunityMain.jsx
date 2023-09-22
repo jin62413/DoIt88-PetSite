@@ -125,7 +125,7 @@ function CommunityMain() {
               <div className="flex gap-11 mb-11">
                 <BookMark className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[7px]" />
                 <LikeButton className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[7px]" />
-                <ShareButton className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[11px] pl-[7px]" />
+                <ShareButton className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[11px] pl-[7px] mb-1" />
               </div>
             </div>
           )}
