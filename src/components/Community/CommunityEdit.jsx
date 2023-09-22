@@ -80,11 +80,7 @@ function CommunityEdit() {
     }
 
     try {
-      await pb.collection('community').update(
-        dataId,
-        formData
-        // user: pb.authStore.model.id,
-      );
+      await pb.collection('community').update(dataId, formData);
       toast('수정되었습니다', {
         icon: '⚒',
       });
@@ -94,11 +90,13 @@ function CommunityEdit() {
     }
   };
 
+  // 취소 시 뒤로 가기
   const handleReset = (e) => {
     e.preventDefault();
     navigate(-1);
   };
 
+  // 이미지 업로드하기
   const [fileImage, setFileImage] = useState(null);
 
   const handleUpload = (e) => {
@@ -107,7 +105,6 @@ function CommunityEdit() {
     setFileImage(fileImage);
   };
 
-  // console.log(formData);
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
       <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>

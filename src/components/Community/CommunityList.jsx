@@ -13,8 +13,8 @@ function CommunityList() {
     if (authData) {
       navigate('/community/new');
     } else {
-      toast('로그인해야 글 작성이 가능합니다.', {
-        icon: '🗑',
+      toast('로그인을 해주세요.', {
+        icon: '🐾',
       });
       navigate('/signIn');
     }
