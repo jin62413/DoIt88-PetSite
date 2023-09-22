@@ -33,8 +33,6 @@ function ContentDetail() {
         setImage(getPbImageURL(data, 'image'));
         setImageAlt(imageAlt);
         setCreated(created);
-        setCommentLength(comments.length);
-        console.log();
 
         if (expand) {
           setComment(expand.comments);
@@ -42,7 +40,7 @@ function ContentDetail() {
         }
       } catch (error) {
         if (!(error in DOMException)) {
-          console.error();
+          console.error(error);
         }
       }
     }

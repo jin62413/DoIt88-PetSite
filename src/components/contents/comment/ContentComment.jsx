@@ -4,13 +4,17 @@ import { getPbImageURL } from '@/utils';
 import ContentCommentForm from './ContentCommentForm';
 import CommentEdit from './CommentEdit';
 import toast from 'react-hot-toast';
-import useAuthStore from '@/store/auth';
-
 function ContentComment({ comments, id, setComment }) {
-  const userId = pb.authStore.model.id;
-  const isAuth = useAuthStore((state) => state.isAuth);
-
   const [editingCommentId, setEditingCommentId] = useState(null);
+
+  const {
+    localStorage: storage,
+    JSON: { parse: deserialize },
+  } = globalThis;
+
+  const getData = (key) => {
+    return deserialize(storage.getItem(key));
+  };
 
   const handleDelete = async (commentId) => {
     toast((t) => (
@@ -89,27 +93,28 @@ function ContentComment({ comments, id, setComment }) {
                 <p className="w-[820px]">{item.comment}</p>
               )}
             </div>
-            {isAuth && pb.authStore.model.id == item.expand.user.id && (
-              <div className="flex gap-2 pt-7 align-middle items-center right-0">
-                {editingCommentId === item.id ? null : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => setEditingCommentId(item.id)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      type="button"
-                      className="text-error"
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      삭제
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
+            {getData('pocketbase_auth') &&
+              pb.authStore.model.id == item.expand.user.id && (
+                <div className="flex gap-2 pt-7 align-middle items-center right-0">
+                  {editingCommentId === item.id ? null : (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setEditingCommentId(item.id)}
+                      >
+                        수정
+                      </button>
+                      <button
+                        type="button"
+                        className="text-error"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        삭제
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
           </div>
         );
       })}

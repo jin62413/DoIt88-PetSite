@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 function CommentCount({ id, commentLength, setCommentLength }) {
   const [data, setData] = useState([]);
   const [comment, setComment] = useState();
-  // const [commentLength, setCommentLength] = useState(0);
 
   useEffect(() => {
     const getComment = async () => {
@@ -15,7 +14,7 @@ function CommentCount({ id, commentLength, setCommentLength }) {
           filter: `(post='${id}')`,
         });
 
-        // setCommentLength(data.length);
+        setCommentLength(data.length);
         setComment(data);
       } catch (error) {
         if (!(error in DOMException)) {
