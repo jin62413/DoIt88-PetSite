@@ -15,7 +15,7 @@ function SearchForm() {
 
   return (
     <>
-      <form action="/" method="post" className="searchForm relative flex flex-shrink-0 flex-nowrap">
+      <form method="post" className="searchForm relative flex flex-shrink-0 flex-nowrap">
         <label htmlFor="allSearch" className="sr-only">
           통합검색
         </label>
@@ -27,14 +27,14 @@ function SearchForm() {
           required
           value={searchText}
           onChange={handleInputChange}
-          className="border border-[#5956E9] rounded-3xl w-[280px] pl-16 py-3 outline-none"
+          className="border border-[#5956E9] rounded-3xl w-[240px] pl-16 py-2 outline-none text-lg"
         />
 
         {searchText && (
           <button
             type="button"
             onClick={clearInput}
-            className="absolute top-3.5 right-5"
+            className="absolute top-3 right-5"
           >
             <img src={close} alt="내용 초기화 버튼" className="w-5 h-5" />
           </button>
@@ -44,7 +44,7 @@ function SearchForm() {
           <img
             src={search}
             alt="검색 버튼"
-            className="w-6 h-6 absolute top-3.5 left-5"
+            className="w-[26px] h-[26px] absolute top-3 left-4"
           />
         </button>
       </form>
