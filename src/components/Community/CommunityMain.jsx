@@ -13,14 +13,6 @@ import Spinner from '../home/Spinner';
 function CommunityMain() {
   const { dataId } = useParams();
 
-  const {
-    localStorage: storage,
-    JSON: { parse: deserialize },
-  } = globalThis;
-
-  const getData = (key) => {
-    return deserialize(storage.getItem(key));
-  };
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -97,7 +89,7 @@ function CommunityMain() {
                   {user.nickname}
                 </figcaption>
               </figure>
-              {getData && user.id === authData.model.id && (
+              {authData && user.id === authData.model.id && (
                 <EditDelete item={commentList} />
               )}
             </div>

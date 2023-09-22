@@ -2,8 +2,11 @@
 import pb from '@/api/pocketbase';
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Comment({ dataId, comments, setCommentList }) {
+  const navigate = useNavigate();
+
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -21,8 +24,7 @@ function Comment({ dataId, comments, setCommentList }) {
           'aria-live': 'polite',
         },
       });
-
-      return;
+      navigate('/signIn');
     }
 
     const commentValue = commentRef.current.value;

@@ -1,7 +1,6 @@
 import { getPbImageURL } from '@/utils';
 import { useState, useEffect } from 'react';
 import CommentEditDelete from '../commentInput/CommentEditDelete';
-import useAuthStore from '@/store/auth';
 
 function CommunityComment({
   profile,
@@ -11,14 +10,6 @@ function CommunityComment({
   commentList,
   setCommentList,
 }) {
-  const {
-    localStorage: storage,
-    JSON: { parse: deserialize },
-  } = globalThis;
-
-  const getData = (key) => {
-    return deserialize(storage.getItem(key));
-  };
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -49,7 +40,7 @@ function CommunityComment({
             {nickname}
           </figcaption>
         </figure>
-        {getData && authData.model.id === userId && (
+        {authData && authData.model.id === userId && (
           <CommentEditDelete
             commentId={id}
             comments={commentList}
