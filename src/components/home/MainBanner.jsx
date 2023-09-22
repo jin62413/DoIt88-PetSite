@@ -20,7 +20,7 @@ function MainBanner() {
     loop: true,
     enabled: true,
     autoplay: {
-      delay: 2500,
+      delay: 3000,
       disableOnInteraction: false,
     },
     slidesPerView: 1,
@@ -59,7 +59,7 @@ function MainBanner() {
         </SwiperSlide>
       </Swiper>
 
-      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 w-[1250px] flex items-center justify-between">
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-30 w-[1250px] flex items-center justify-between">
         <button ref={prevRef} type="button">
           <img src={leftButton} />
         </button>

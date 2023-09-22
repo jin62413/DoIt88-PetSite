@@ -8,13 +8,19 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
 import Comment from '../commentInput/Comment';
-import useAuthStore from '@/store/auth';
 import Spinner from '../home/Spinner';
 
 function CommunityMain() {
   const { dataId } = useParams();
 
-  const isAuth = useAuthStore((state) => state.isAuth);
+  const {
+    localStorage: storage,
+    JSON: { parse: deserialize },
+  } = globalThis;
+
+  const getData = (key) => {
+    return deserialize(storage.getItem(key));
+  };
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -91,7 +97,7 @@ function CommunityMain() {
                   {user.nickname}
                 </figcaption>
               </figure>
-              {isAuth && user.id === authData.model.id && (
+              {getData && user.id === authData.model.id && (
                 <EditDelete item={commentList} />
               )}
             </div>
@@ -117,9 +123,9 @@ function CommunityMain() {
 
               {/* 아이콘 */}
               <div className="flex gap-11 mb-11">
-                <BookMark className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-1.5" />
-                <LikeButton className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-1.5" />
-                <ShareButton className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-2 pl-[6px]" />
+                <BookMark className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[7px]" />
+                <LikeButton className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[7px]" />
+                <ShareButton className="bg-[#E6E6E6] rounded-full w-11 h-11 bg-cover bg-center bg-no-repeat bg-origin-content p-[11px] pl-[7px]" />
               </div>
             </div>
           )}

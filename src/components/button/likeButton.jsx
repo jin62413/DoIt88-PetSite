@@ -10,8 +10,8 @@ function LikeButton(props) {
         aria-label="북마크"
         className={
           click
-            ? 'bg-likeCheck w-8 h-8 ' + `${props.className}`
-            : 'bg-like w-8 h-8 ' + `${props.className}`
+            ? 'bg-likeCheck ' + `${props.className}`
+            : 'bg-like ' + `${props.className}`
         }
         onClick={() => {
           setClick(!click);
