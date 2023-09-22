@@ -61,7 +61,7 @@ function CommunityListPost() {
 
       {isLoading && (
         <p className="flex justify-center items-center">
-          <Spinner className="p-10 text-center" />
+          <Spinner className="text-center" />
         </p>
       )}
 
