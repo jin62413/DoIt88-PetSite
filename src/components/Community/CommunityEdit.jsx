@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import photo from '@/assets/icon/photo.svg';
 
 const resetData = {
   title: '',
@@ -79,11 +80,7 @@ function CommunityEdit() {
     }
 
     try {
-      await pb.collection('community').update(
-        dataId,
-        formData
-        // user: pb.authStore.model.id,
-      );
+      await pb.collection('community').update(dataId, formData);
       toast('수정되었습니다', {
         icon: '⚒',
       });
@@ -93,11 +90,13 @@ function CommunityEdit() {
     }
   };
 
+  // 취소 시 뒤로 가기
   const handleReset = (e) => {
     e.preventDefault();
     navigate(-1);
   };
 
+  // 이미지 업로드하기
   const [fileImage, setFileImage] = useState(null);
 
   const handleUpload = (e) => {
@@ -106,7 +105,6 @@ function CommunityEdit() {
     setFileImage(fileImage);
   };
 
-  // console.log(formData);
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
       <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>
@@ -163,7 +161,7 @@ function CommunityEdit() {
                 htmlFor="image"
                 className="rounded-xl border-primary border h-[110px] w-[110px] flex justify-center items-center"
               >
-                <img src="/src/assets/icon/photo.svg" className="w-14 h-14" />
+                <img src={photo} className="w-14 h-14" />
               </label>
               <input
                 type="file"

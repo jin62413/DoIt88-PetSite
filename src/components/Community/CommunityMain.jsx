@@ -9,14 +9,16 @@ import { useParams } from 'react-router-dom';
 import { getPbImageURL } from '@/utils';
 import Comment from '../commentInput/Comment';
 import useAuthStore from '@/store/auth';
+import Spinner from '../home/Spinner';
 
 function CommunityMain() {
   const { dataId } = useParams();
-  // const { isAuth } = useAuthStore();
-  // const userId = pb.authStore.model.id;
+
   const isAuth = useAuthStore((state) => state.isAuth);
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -27,9 +29,7 @@ function CommunityMain() {
   const [data, setData] = useState(null);
   const [created, setCreated] = useState('');
 
-  // const commentInputRef = useRef(null);
-  // const [commentInput, setCommentInput] = useState('');
-
+  // 데이터 가져오기
   useEffect(() => {
     const getCommunityItem = async () => {
       try {
@@ -44,12 +44,12 @@ function CommunityMain() {
           image && setImage(getPbImageURL(data, 'image'));
         }
         setCreated(created);
-        // console.log(data);
         if (expand) {
           setProfile(getPbImageURL(expand.user, 'profile'));
           setCommentList(expand.comment);
           setUser(expand.user);
         }
+        setIsLoading(true);
       } catch (error) {
         console.error(error);
       }
@@ -57,6 +57,7 @@ function CommunityMain() {
     getCommunityItem();
   }, [dataId]);
 
+  // 글 날짜 설정
   const [date, setDate] = useState();
 
   useEffect(() => {
@@ -66,50 +67,23 @@ function CommunityMain() {
     }
   }, [created]);
 
-  // console.log(isAuth);
-
-  /* const handleSubmitComment = async (e) => {
-    e.preventDefault();
-    console.log('click');
-    const commentValue = commentInputRef.current.value;
-
-    const newComment = {
-      comment: commentValue,
-      user: `${authData.model.id}`,
-      record: `${dataId}`,
-    };
-
-    // const newCommentData = await pb
-    //   .collection('communityComment')
-    //   .getList(1, 30, {
-    //     filter: `record="${dataId}"`,
-    //     sort: '-created',
-    //     // expand: 'user, record',
-    //   });
-
-    try {
-      await pb.collection('communityComment').create(newComment);
-      commentInputRef.current.value = '';
-      setCommentList([...commentList, newComment]);
-      // console.log(newCommentData);
-      console.log('ok');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  console.log(commentList); */
-
   return (
-    data && (
-      <>
-        <h2 className="sr-only">커뮤니티</h2>
-        <div className="flex justify-center max-w-full my-10">
-          <div className="flex-col max-w-[988px]">
-            {/* 작성자 */}
+    <>
+      <h2 className="sr-only">커뮤니티</h2>
+
+      <div className="flex justify-center max-w-full my-10">
+        <div className="flex-col max-w-[988px]">
+          {!isLoading && (
+            <div className="mx-auto">
+              <Spinner />
+            </div>
+          )}
+          {/* 작성자 */}
+          {isLoading && data && (
             <div className="flex items-end justify-between">
               <figure className="flex items-center">
                 <img
-                  className="rounded-full w-[60px] h-[60px] mr-2 object-contain"
+                  className="rounded-full w-[60px] h-[60px] mr-2 object-cover"
                   src={profile}
                   alt="프로필 사진"
                 />
@@ -120,10 +94,11 @@ function CommunityMain() {
               {isAuth && user.id === authData.model.id && (
                 <EditDelete item={commentList} />
               )}
-              {/* <EditDelete item={comment} /> */}
             </div>
+          )}
 
-            {/* 본문 */}
+          {/* 본문 */}
+          {isLoading && data && (
             <div className="flex flex-col items-center border-b border-[#A6A6A6]">
               <div className="flex justify-between items-end py-6 w-full">
                 <h3 className="text-black text-[32px] font-bold">{title}</h3>
@@ -142,13 +117,15 @@ function CommunityMain() {
 
               {/* 아이콘 */}
               <div className="flex gap-11 mb-11">
-                <BookMark className="bg-[#E6E6E6] no-repeat rounded-full" />
-                <LikeButton className="bg-[#E6E6E6] no-repeat rounded-full" />
-                <ShareButton className="bg-[#E6E6E6] no-repeat rounded-full" />
+                <BookMark className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-1.5" />
+                <LikeButton className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-1.5" />
+                <ShareButton className="bg-[#E6E6E6] rounded-full w-10 h-10 bg-cover bg-center bg-no-repeat bg-origin-content p-2 pl-[6px]" />
               </div>
             </div>
+          )}
 
-            {/* 댓글 */}
+          {/* 댓글 */}
+          {isLoading && data && (
             <ul className="py-8">
               {commentList &&
                 commentList?.map((item) => {
@@ -156,33 +133,28 @@ function CommunityMain() {
                     <CommunityComment
                       key={item.id}
                       profile={item.expand.user}
+                      userId={item.expand.user.id}
                       nickname={item.expand.user.nickname}
-                      comment={item.comment}
-                      commentDate={item.created}
+                      comments={item}
+                      commentList={commentList}
+                      setCommentList={setCommentList}
                     />
                   );
                 })}
             </ul>
+          )}
 
-            {/* 댓글 작성 */}
-            <Comment dataId={dataId} />
-            {/* <textarea
-              type="text"
-              className="bg-[#f1f1f1] w-[860px] h-[100px] rounded-10 p-5 mr-5 focus:outline-none resize-none"
-              placeholder="댓글을 입력해주세요"
-              name="comment"
-              ref={commentInputRef}
+          {/* 댓글 작성 */}
+          {isLoading && data && (
+            <Comment
+              dataId={dataId}
+              comments={commentList}
+              setCommentList={setCommentList}
             />
-            <button
-              onClick={handleSubmitComment}
-              className="bg-primary text-white px-4 py-9 rounded-10 right-0 h-5 items-center flex"
-            >
-              댓글 달기
-            </button> */}
-          </div>
+          )}
         </div>
-      </>
-    )
+      </div>
+    </>
   );
 }
 

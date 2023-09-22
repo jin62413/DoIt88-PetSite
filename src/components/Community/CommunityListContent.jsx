@@ -1,8 +1,8 @@
 import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
+import Community from '../../pages/Community';
 
 function CommunityListContent({ item }) {
-  console.log(item.id);
   if (item) {
     return (
       <>
@@ -33,6 +33,7 @@ function CommunityListContent({ item }) {
               alt="프로필 사진"
               className="text-[12px] w-[30px] h-[30px] text-black font-[400] rounded-[50%]"
             />
+
             <div className="flex items-center text-[12px] text-black font-[400] ml-[8px]">
               {item?.expand?.user.nickname}
             </div>

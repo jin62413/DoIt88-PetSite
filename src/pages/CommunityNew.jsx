@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import photo from '@/assets/icon/photo.svg';
 
 function CommunityNew() {
   const navigate = useNavigate();
@@ -40,9 +41,11 @@ function CommunityNew() {
 
         return;
       }
-      console.log('ok');
-      await pb.collection('community').create(formData);
-      navigate('/community');
+
+      const newFeed = await pb.collection('community').create(formData);
+      await pb.collection('community').getOne(newFeed.id);
+      console.log(newFeed.id);
+      navigate(`/community/detail/${newFeed.id}`);
     } catch (error) {
       console.error(error);
     }
@@ -62,12 +65,6 @@ function CommunityNew() {
     const fileImage = { image: URL.createObjectURL(file), label: file.name };
     setFileImage(fileImage);
   };
-
-  // const [textareaValue, setTextareaValue] = useState('');
-
-  // const handleTextarea = (e) => {
-  //   setTextareaValue(e.target.value);
-  // };
 
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
@@ -125,7 +122,7 @@ function CommunityNew() {
                 htmlFor="image"
                 className="rounded-xl border-primary border h-[110px] w-[110px] flex justify-center items-center"
               >
-                <img src="/src/assets/icon/photo.svg" className="w-14 h-14" />
+                <img src={photo} className="w-14 h-14" />
               </label>
               <input
                 type="file"
