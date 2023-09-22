@@ -38,7 +38,7 @@ function CommunityListPost() {
           name="radio"
           className="hidden"
           checked={check === '-created'}
-          onClick={() => setCheck('-created')}
+          onChange={() => setCheck('-created')}
         />
         <label htmlFor="radio1" className="flex items-center cursor-pointer">
           <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
@@ -51,7 +51,7 @@ function CommunityListPost() {
           name="radio"
           className="hidden"
           checked={check === '-like'}
-          onClick={() => setCheck('-like')}
+          onChange={() => setCheck('-like')}
         />
         <label htmlFor="radio2" className="flex items-center cursor-pointer">
           <span className="w-4 h-4 inline-block mr-1 rounded-full border border-grey ml-[20px]"></span>
@@ -59,7 +59,6 @@ function CommunityListPost() {
         </label>
       </fieldset>
 
-      {/* {isLoading && <p className="p-10 text-center">로딩 중...</p>} */}
       {isLoading && (
         <p className="flex justify-center items-center">
           <Spinner className="p-10 text-center" />
