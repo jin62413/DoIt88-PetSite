@@ -19,7 +19,6 @@ function ContentDetail() {
   const [created, setCreated] = useState();
   const [comment, setComment] = useState();
   const [user, setUser] = useState();
-  const [commentLength, setCommentLength] = useState(0);
 
   useEffect(() => {
     async function getContent() {
@@ -33,7 +32,7 @@ function ContentDetail() {
         setImage(getPbImageURL(data, 'image'));
         setImageAlt(imageAlt);
         setCreated(created);
-
+        setComment(comments);
         if (expand) {
           setComment(expand.comments);
           setUser(expand.comments.expand.user);
@@ -77,11 +76,7 @@ function ContentDetail() {
             <div className="flex gap-2 items-center">
               <BookMark />
               <LikeButton />
-              <CommentCount
-                id={contentId}
-                setCommentLength={setCommentLength}
-                commentLength={commentLength}
-              />
+              <CommentCount id={contentId} comments={comment} />
             </div>
             <ShareButton id={contentId} title={title} image={image} />
           </div>
