@@ -103,45 +103,46 @@ function Header() {
   };
 
   return (
-    <div className="flex flex-row flex-shrink-0 flex-nowrap mx-auto py-10 items-center justify-around font-pre">
-      <Logo className="flex-shrink-0" />
+    <div className="flex flex-row flex-shrink-0 flex-nowrap py-10 items-center mx-auto justify-between font-pre max-w-[1200px]">
+      {/* <Logo className="flex-shrink-0" /> */}
       <HeaderNav className="flex-shrink-0" />
 
-      <SearchForm className="flex-shrink-0" />
-
-      {authData ? (
-        <div className="flex items-center flex-nowrap">
-          {url ? (
-            <>
-              <img src={url} alt="" className="w-7 h-7 rounded-full mr-2" />
-              <span className="font-medium text-xl underline underline-offset-8 flex-nowrap">{`${authData.model.nickname}님`}</span>
-              <button
-                type="button"
-                className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-nowrap flex-shrink-0 ml-8"
-                onClick={
-                  isKakao
-                    ? handleKakaoLogout
-                    : isGoogle
-                    ? handleGoogleLogout
-                    : handleSignOut
-                }
-              >
-                로그아웃
-              </button>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
-      ) : (
-        <button
-          type="button"
-          className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-shrink-0"
-          onClick={handleGoToLogin}
-        >
-          로그인
-        </button>
-      )}
+      <div className='flex flex-row gap-7'>
+        <SearchForm className="flex-shrink-0" />
+        {authData ? (
+          <div className="flex items-center flex-nowrap">
+            {url ? (
+              <>
+                <img src={url} alt="" className="w-7 h-7 rounded-full mr-2" />
+                <span className="font-medium text-xl underline underline-offset-8 flex-nowrap flex-shrink-0">{`${authData.model.nickname}님`}</span>
+                <button
+                  type="button"
+                  className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-nowrap flex-shrink-0 ml-8"
+                  onClick={
+                    isKakao
+                      ? handleKakaoLogout
+                      : isGoogle
+                      ? handleGoogleLogout
+                      : handleSignOut
+                  }
+                >
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              ''
+            )}
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="rounded-xl bg-primary text-white font-medium text-base px-11 py-3 flex-shrink-0"
+            onClick={handleGoToLogin}
+          >
+            로그인
+          </button>
+        )}
+      </div>
     </div>
   );
 }
