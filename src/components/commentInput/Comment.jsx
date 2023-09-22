@@ -1,9 +1,9 @@
 // import CommentInput from './CommentInput';
 import pb from '@/api/pocketbase';
 import { useRef } from 'react';
-import { useState } from 'react';
+import toast from 'react-hot-toast';
 
-function Comment({ dataId, setCommentList }) {
+function Comment({ dataId, comments, setCommentList }) {
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -12,12 +12,37 @@ function Comment({ dataId, setCommentList }) {
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
+
+    if (!authData) {
+      toast('로그인을 해주세요!', {
+        icon: '🐾',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+
+      return;
+    }
+
     const commentValue = commentRef.current.value;
 
+    if (!commentValue) {
+      toast('내용을 입력해주세요!', {
+        icon: '😉',
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+
+      return;
+    }
+
+    // 새로운 댓글 등록
     const newComment = {
       comment: commentValue,
       user: authData.model.id,
-      record: dataId,
     };
 
     try {
@@ -35,10 +60,14 @@ function Comment({ dataId, setCommentList }) {
         .getOne(newCommentData.id, {
           expand: 'user',
         });
-      setCommentList((comment) => [...comment, newCommentList]);
 
+      // 댓글 배열이 비었을 때 반복문 안되는 부분 조건 처리
+      if (!comments) {
+        setCommentList([newCommentList]);
+      } else {
+        setCommentList((comment) => [...comment, newCommentList]);
+      }
       commentRef.current.value = '';
-      console.log('ok');
     } catch (err) {
       console.log(err);
     }
@@ -52,8 +81,6 @@ function Comment({ dataId, setCommentList }) {
         onSubmit={handleSubmitComment}
         className="bg-[#f1f1f1] rounded-10 w-[988px] h-[100px] flex items-center align-middle"
       >
-        {/* <CommentInput /> */}
-        {/* <CommentSubmitButton props={props} /> */}
         <textarea
           type="text"
           className="bg-[#f1f1f1] w-[860px] h-[100px] rounded-10 p-5 mr-5 focus:outline-none resize-none"
@@ -67,7 +94,6 @@ function Comment({ dataId, setCommentList }) {
         >
           댓글 달기
         </button>
-        {/* <CommentSubmitButton onClick={handleSubmitComment} /> */}
       </form>
     </>
   );
