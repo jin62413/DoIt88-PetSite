@@ -4,15 +4,7 @@ import { getPbImageURL } from '@/utils';
 import ContentCommentForm from './ContentCommentForm';
 import CommentEdit from './CommentEdit';
 import toast from 'react-hot-toast';
-import useAuthStore from '@/store/auth';
-import userIdStore from '@/store/userIdStore';
-import { useEffect } from 'react';
-
 function ContentComment({ comments, id, setComment }) {
-  const isAuth = useAuthStore((state) => state.isAuth);
-
-  const setIsUser = userIdStore((state) => state.setIsUser);
-
   const [editingCommentId, setEditingCommentId] = useState(null);
 
   const {
@@ -23,10 +15,6 @@ function ContentComment({ comments, id, setComment }) {
   const getData = (key) => {
     return deserialize(storage.getItem(key));
   };
-
-  useEffect(() => {
-    setIsUser(isAuth);
-  }, [isAuth, setIsUser]);
 
   const handleDelete = async (commentId) => {
     toast((t) => (
