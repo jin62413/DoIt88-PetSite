@@ -1,6 +1,7 @@
 import CommunityListContent from './CommunityListContent';
 import { useState, useEffect } from 'react';
 import pb from '@/api/pocketbase';
+import Spinner from '../home/Spinner';
 
 function CommunityListPost() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +59,12 @@ function CommunityListPost() {
         </label>
       </fieldset>
 
-      {isLoading && <p className="p-10 text-center">로딩 중...</p>}
+      {/* {isLoading && <p className="p-10 text-center">로딩 중...</p>} */}
+      {isLoading && (
+        <p className="flex justify-center items-center">
+          <Spinner className="p-10 text-center" />
+        </p>
+      )}
 
       {!isLoading &&
         data?.items?.map((item) => (
