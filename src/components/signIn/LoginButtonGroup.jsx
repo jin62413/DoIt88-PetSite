@@ -19,19 +19,19 @@ function LoginButtonGroup() {
     loginPassword,
     isLoginEmailValid,
     isLoginPasswordValid,
-    profileURL,
+    // profileURL,
     setIsGoogle,
     setIsKakao,
     setLoginEmail,
     setLoginPassword,
     setIsLoginEmailValid,
     setIsLoginPasswordValid,
-    setProfileURL,
+    // setProfileURL,
   } = uselogin();
 
   const signInHome = useAuthStore((state) => state.signIn);
-  const isAuth = useAuthStore((state) => state.isAuth);
-  const user = useAuthStore((state) => state.user);
+  // const isAuth = useAuthStore((state) => state.isAuth);
+  // const user = useAuthStore((state) => state.user);
   // const {}
 
   const handleLoginReset = () => {
@@ -65,7 +65,7 @@ function LoginButtonGroup() {
 
       if (authData) {
         toast.success(`${authData.record.nickname}님 환영합니다.`, {
-          icon: '🎉',
+          icon: '😄',
           duration: 2000,
         });
 
@@ -99,8 +99,8 @@ function LoginButtonGroup() {
         const record = await pb.collection('users').getOne(authData.record.id);
         const url = getPbImageURL(record, 'profile');
         setURL(url);
-        toast.success(`환영합니다.`, {
-          icon: '🎉',
+        toast.success(`${authData.record.nickname}님 환영합니다.`, {
+          icon: '😄',
           duration: 2000,
         });
         navigate('/');
@@ -125,8 +125,8 @@ function LoginButtonGroup() {
         const record = await pb.collection('users').getOne(authData.record.id);
         const url = getPbImageURL(record, 'profile');
         setURL(url);
-        toast.success(`환영합니다.`, {
-          icon: '🎉',
+        toast.success(`${authData.record.nickname}님 환영합니다.`, {
+          icon: '😄',
           duration: 2000,
         });
         navigate('/');
