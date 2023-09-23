@@ -1,13 +1,12 @@
 import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
-import Community from '../../pages/Community';
 
 function CommunityListContent({ item }) {
   if (item) {
     return (
       <>
         <Link to={`/community/detail/${item.id}`}>
-          <div className="flex gap-[28px]">
+          <div className="flex gap-[28px] h-[120px]">
             <div className="py-[11px] w-[826px]">
               <h2 className="text-black text-[21px] font-[700] pb-[12px]">
                 <p className="text-xl truncate">{item.title}</p>
@@ -19,7 +18,7 @@ function CommunityListContent({ item }) {
                 <img
                   src={getPbImageURL(item, 'image')}
                   alt="첨부 이미지"
-                  className="w-[120px] h-[120px] rounded-10"
+                  className="w-[120px] h-[120px] rounded-10 object-cover bg-center"
                 />
               )}
             </div>
@@ -42,7 +41,7 @@ function CommunityListContent({ item }) {
             댓글: {item?.comment.length}
           </div>
           <div className="ml-[44px] text-[12px] text-black font-[400]">
-            {item.updated}
+            {item.updated.substr(0, 10)}
           </div>
         </div>
       </>
