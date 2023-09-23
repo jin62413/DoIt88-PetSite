@@ -1,16 +1,22 @@
-function PopularItem() {
+import { Link } from 'react-router-dom';
+
+function PopularItem({ item }) {
   return (
-    <div className="flex flex-col gap-4 mt-8 w-[640px]">
-      <div className="flex justify-between h-20 border-b border-black">
-        <a href="/">
+    <div className="flex flex-col gap-4 w-[640px]">
+      <div className="flex justify-between h-[94px] border-b border-black">
+        <Link to={`/community/detail/${item.id}`}>
           <ul className="max-w-lg">
-            <li className="font-bold text-lg">제목입니당</li>
-            <li className="pt-2 text-ellipsis">내용입니당</li>
+            <li className="font-bold text-lg">{item.title}</li>
+            <li className="pt-2 text-ellipsis">{item.content}</li>
           </ul>
-        </a>
-        <a href="/" className="more w-16 h-fit py-4 text-[#747474]">
+        </Link>
+        <Link
+          to={`/community/detail/${item.id}`}
+          className="more w-16 h-fit py-4 text-[#747474]"
+        >
+          {/* <a href="/" className="more w-16 h-fit py-4 text-[#747474]"> */}
           <span>더보기</span>
-        </a>
+        </Link>
       </div>
     </div>
   );
