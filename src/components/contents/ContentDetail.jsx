@@ -74,11 +74,20 @@ function ContentDetail() {
           <div className="px-10">{content}</div>
           <div className="flex justify-between">
             <div className="flex gap-2 items-center">
-              <BookMark />
-              <LikeButton />
-              <CommentCount id={contentId} comments={comment} />
+              <BookMark className="w-8 h-8" />
+              <LikeButton className="w-8 h-8" />
+              <CommentCount
+                id={contentId}
+                setCommentLength={setCommentLength}
+                commentLength={commentLength}
+              />
             </div>
-            <ShareButton id={contentId} title={title} image={image} />
+            <ShareButton
+              className="w-6 h-6 p-4 my-3"
+              id={contentId}
+              title={title}
+              image={image}
+            />
           </div>
         </div>
       </div>
