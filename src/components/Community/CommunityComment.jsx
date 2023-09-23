@@ -1,7 +1,6 @@
 import { getPbImageURL } from '@/utils';
 import { useState, useEffect } from 'react';
 import CommentEditDelete from '../commentInput/CommentEditDelete';
-import useAuthStore from '@/store/auth';
 
 function CommunityComment({
   profile,
@@ -11,7 +10,6 @@ function CommunityComment({
   commentList,
   setCommentList,
 }) {
-  const isAuth = useAuthStore((state) => state.isAuth);
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
@@ -42,7 +40,7 @@ function CommunityComment({
             {nickname}
           </figcaption>
         </figure>
-        {isAuth && authData.model.id === userId && (
+        {authData && authData.model.id === userId && (
           <CommentEditDelete
             commentId={id}
             comments={commentList}
@@ -58,7 +56,7 @@ function CommunityComment({
           type="text"
           value={editComment}
           onChange={(e) => setEditComment(e.target.value)}
-          className="w-full focus:outline-primary"
+          className="w-full focus:outline-primary resize-none"
         />
       ) : (
         <p className="pb-2 text-base">{editComment}</p>

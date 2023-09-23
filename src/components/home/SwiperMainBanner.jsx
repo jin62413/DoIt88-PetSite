@@ -4,7 +4,7 @@ import SmallButton from './SmallButton';
 function SwiperMainBanner({ title1, title2 = '', descript, bg }) {
   return (
     <div
-      className={`w-full relative flex flex-col justify-center items-center ${bg} h-[500px] bg-no-repeat`}
+      className={`w-full relative flex flex-col justify-center items-center ${bg} h-[500px] bg-no-repeat z-20`}
     >
       <div className="absolute w-[1120px] px-7">
         <p className="flex flex-col gap-2">

@@ -92,7 +92,12 @@ function ContentDetail() {
               />
               <CommentCount id={contentId} comments={comment} />
             </div>
-            <ShareButton id={contentId} title={title} image={image} />
+            <ShareButton
+              className="w-6 h-6 p-4 my-3"
+              id={contentId}
+              title={title}
+              image={image}
+            />
           </div>
         </div>
       </div>
