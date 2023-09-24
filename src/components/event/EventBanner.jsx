@@ -1,6 +1,7 @@
 import pb from '@/api/pocketbase';
 import { useEffect, useState } from 'react';
 import EventBannerImage from './EventBannerImage';
+import Spinner from '../home/Spinner';
 
 function EventBanner() {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +12,9 @@ function EventBanner() {
     async function getCommunity() {
       setIsLoading(true);
       try {
-        const record = await pb.collection('bannerImage').getList(1, 30);
+        const record = await pb.collection('bannerImage').getList(1, 30, {
+          sort: '-created',
+        });
         setData(record);
         setIsLoading(false);
       } catch (error) {
@@ -24,14 +27,21 @@ function EventBanner() {
 
     getCommunity();
   }, []);
-
+  // console.log(data.items[0].image);
   return (
     <>
+      {isLoading && (
+        <div className="mx-auto">
+          <Spinner />
+        </div>
+      )}
       {!isLoading &&
-        data?.items?.map((item) => {
-          <div key={item.id} className="flex flex-col gap-10">
-            <EventBannerImage item={item} />
-          </div>;
+        data?.items.map((item) => {
+          return (
+            <div key={item.id} className="flex flex-col gap-10">
+              <EventBannerImage item={item} />
+            </div>
+          );
         })}
     </>
   );
