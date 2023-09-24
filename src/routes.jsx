@@ -13,7 +13,7 @@ import Place from './pages/Place';
 import SignUP from './pages/SignUP';
 import SignIn from './pages/SignIn';
 import ContentDetail from './components/contents/ContentDetail';
-import CommunityNew from './pages/CommunityNew';
+import CommunityNew from './components/Community/CommunityNew';
 import CommunityMain from './components/Community/CommunityMain';
 import CommunityEdit from './components/Community/CommunityEdit';
 

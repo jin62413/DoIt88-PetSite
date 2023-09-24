@@ -10,8 +10,8 @@ function BookMark(props) {
         aria-label="북마크"
         className={
           click
-            ? 'bg-bookmarkCheck w-8 h-8 ' + `${props.className}`
-            : 'bg-bookmark w-8 h-8 ' + `${props.className}`
+            ? 'bg-bookmarkCheck ' + `${props.className}`
+            : 'bg-bookmark ' + `${props.className}`
         }
         onClick={() => {
           setClick(!click);

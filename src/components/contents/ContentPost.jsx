@@ -1,6 +1,5 @@
 import Item from './Item';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import pb from '@/api/pocketbase';
 import Spinner from '../home/Spinner';
 
@@ -33,11 +32,7 @@ function ContentPost() {
     <>
       {isLoading && <Spinner />}
       {!isLoading &&
-        data?.items?.map((item) => (
-          <div key={item.id}>
-            <Item key={item.id} item={item} />
-          </div>
-        ))}
+        data?.items?.map((item) => <Item key={item.id} item={item} />)}
     </>
   );
 }
