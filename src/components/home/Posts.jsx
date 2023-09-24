@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import pb from '@/api/pocketbase';
 import PopularItem from './PopularItem';
 
