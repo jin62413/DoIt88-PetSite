@@ -88,7 +88,7 @@ function Header() {
 
       await kakaoLogout();
 
-      // console.log(kakao);
+   
 
       // kakaoLogout();
       navigate('/');
@@ -98,16 +98,16 @@ function Header() {
       });
     } catch (error) {
       // toast.error('로그아웃 실패');
-      // console.log('오류', error.response);
+      console.log('오류', error.response);
     }
   };
-
+  // max-w-[1200px]
   return (
-    <div className="flex flex-row flex-shrink-0 flex-nowrap py-10 items-center mx-auto justify-between font-pre max-w-[1200px]">
+    <div className="flex flex-row  flex-nowrap py-10 items-center mx-auto justify-between font-pre max-w-[1200px] ">
       {/* <Logo className="flex-shrink-0" /> */}
       <HeaderNav className="flex-shrink-0" />
 
-      <div className="flex flex-row gap-7">
+      <div className="flex flex-row gap-7 flex-shrink-0 flex-grow-0">
         <SearchForm className="flex-shrink-0" />
         {authData ? (
           <div className="flex items-center flex-nowrap">

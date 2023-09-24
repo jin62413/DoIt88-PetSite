@@ -6,7 +6,6 @@ import Spinner from '../home/Spinner';
 import useSearch from '@/store/searchStore';
 
 function SearchContentPost() {
-  // const [data, setData] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const { contentData, setContentData, searchStorage } = useSearch();
@@ -14,7 +13,6 @@ function SearchContentPost() {
     async function getContents() {
       setIsLoading(true);
       try {
-        console.log(searchStorage);
         if (searchStorage !== '') {
           await pb
             .collection('contents')

@@ -19,8 +19,6 @@ function LoginButtonGroup() {
     loginPassword,
     isLoginEmailValid,
     isLoginPasswordValid,
-    isLoading,
-    setIsLoading,
     // profileURL,
     setIsGoogle,
     setIsKakao,
@@ -54,16 +52,7 @@ function LoginButtonGroup() {
       }
 
       const authData = await signInHome(loginEmail, loginPassword);
-      console.log(authData);
-
-      // if (!authData) {
-      //   toast.success(`아이디 또는 비밀번호가 일치하지 않습니다.`, {
-      //     icon: '🎉',
-      //     duration: 2000,
-      //   });
-
-      //   return;
-      // }
+    
 
       if (authData) {
         toast.success(`${authData.record.nickname}님 환영합니다.`, {
@@ -74,9 +63,7 @@ function LoginButtonGroup() {
         const record = await pb.collection('users').getOne(authData.record.id);
         const url = getPbImageURL(record, 'profile');
         setURL(url);
-        // setProfileURL(url);
-
-        // console.log(url);
+      
         handleLoginReset();
 
         navigate('/');

@@ -80,7 +80,7 @@ const authStore = (set) => ({
       formData.append('ageCheck', true);
       formData.append('marketingCheck', false);
 
-      console.log(formData);
+   
 
       await pb.collection('users').update(authData.record.id, formData);
     }
@@ -94,21 +94,7 @@ const authStore = (set) => ({
         provider: 'kakao',
       });
 
-      console.log(authData);
-
-      // console.log(pb.authStore);
-      // const { isValid, model, token } = pb.authStore;
-
-      // set(
-      //   (state) => ({
-      //     ...state,
-      //     isAuth: isValid,
-      //     user: model,
-      //     token,
-      //   }),
-      //   false,
-      //   '/singIn'
-      // );
+    
       if (authData.meta.isNew === true) {
         const formData = new FormData();
 
@@ -154,32 +140,10 @@ const authStore = (set) => ({
   },
 
   signOutGoogle: async () => {
-    // const { isValid, model, token } = pb.authStore;
-    // console.log(pb.authStore.baseModel.id);
-    // set(
-    //   (state) => ({
-    //     ...state,
-    //     isAuth: isValid,
-    //     user: model,
-    //     token,
-    //   }),
-    //   false,
-    //   '/singIn'
-    // );
-
-    // const response = await pb
-    //   .collection('users')
-    //   .unlinkExternalAuth(pb.authStore.baseModel.id, 'google');
+  
     const response = await pb.authStore.clear();
 
-    // set(
-    //   (state) => ({
-    //     ...state,
-    //     ...initialAuthState,
-    //   }),
-    //   false,
-    //   '/signOut'
-    // );
+
 
     return response;
   },
