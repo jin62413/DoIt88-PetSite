@@ -44,7 +44,6 @@ function CommunityNew() {
 
       const newFeed = await pb.collection('community').create(formData);
       await pb.collection('community').getOne(newFeed.id);
-      console.log(newFeed.id);
       navigate(`/community/detail/${newFeed.id}`);
     } catch (error) {
       console.error(error);

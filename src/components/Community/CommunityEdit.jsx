@@ -1,11 +1,8 @@
 import pb from '@/api/pocketbase';
 import { getPbImageURL } from '@/utils';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import photo from '@/assets/icon/photo.svg';
 
 const resetData = {

@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
@@ -8,36 +7,12 @@ import leftButton from '@/assets/icon/mainbanner-left.svg';
 import rightButton from '@/assets/icon/mainbanner-right.svg';
 import useSwiperRef from '@/hooks/useSwiperRef';
 
-// 메인 배너 스와이퍼 기능
 function MainBanner() {
   const [prevEl, prevElRef] = useSwiperRef(null);
   const [nextEl, nextElRef] = useSwiperRef(null);
 
   return (
     <div className="max-w-full min-w-[1120px] relative">
-      {/* <Swiper
-        // {...setSwiperSetting}
-
-        // install Swiper modules
-        modules={[Autoplay, Navigation]}
-        // spaceBetween={60}
-        // centeredSlides={true}
-        loop={true}
-        // enabled={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        slidesPerView={1}
-        navigation={{
-          prevEl: prevRef.current, // 이전 버튼
-          nextEl: nextRef.current, // 다음 버튼
-        }}
-        onInit={(swiper) => {
-          // 초기 설정
-          swiper.params.navigation.prevEl = prevRef.current;
-          swiper.params.navigation.nextEl = nextRef.current;
-          swiper.navigation.update();
-        }}
-        className="flex justify-center items-center"
-      > */}
       <Swiper
         modules={[Autoplay, Navigation]}
         loop={true}

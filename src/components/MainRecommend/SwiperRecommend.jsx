@@ -1,7 +1,6 @@
 import prevRef from '@/assets/icon/mainbanner-left.svg';
 import nextRef from '@/assets/icon/mainbanner-right.svg';
 
-import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -9,8 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Navigation } from 'swiper/modules';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import pb from '@/api/pocketbase';
 import RecommendItem from './RecommendItem';
 

@@ -1,6 +1,5 @@
 import SmallButton from './SmallButton';
 
-// 메인 배너 이미지와 내용
 function SwiperMainBanner({ title1, title2 = '', descript, bg }) {
   return (
     <div

@@ -1,8 +1,6 @@
 import pb from '@/api/pocketbase';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 
 function EditDelete({ item }) {
   const { dataId } = useParams();
