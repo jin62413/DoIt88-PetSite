@@ -20,21 +20,12 @@ function HeaderNav() {
         <li className="flex-nowrap flex-shrink-0">
           <NavLink to="/community">커뮤니티</NavLink>
         </li>
-        <li className="flex-nowrap flex-shrink-0">
+        {/* <li className="flex-nowrap flex-shrink-0">
           <NavLink to="/place">나들이</NavLink>
-        </li>
+        </li> */}
         <li className="flex-shrink-0">
           <NavLink to="/event">이벤트</NavLink>
         </li>
-        <li className="flex-nowrap flex-shrink-0">
-          <NavLink to="/search">서치리스트</NavLink>
-        </li>
-        {/* <li>
-          <NavLink to="/signUP">회원가입</NavLink>
-        </li>
-        <li>
-          <NavLink to="/signIn">로그인</NavLink>
-        </li> */}
       </ul>
     </nav>
   );
