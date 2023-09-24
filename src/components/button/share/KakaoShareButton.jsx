@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 export default function KakaoShare(props) {
-  console.log(props);
   useEffect(() => {
     kakaoButton();
   }, []);

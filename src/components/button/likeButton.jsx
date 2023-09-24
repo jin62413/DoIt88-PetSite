@@ -23,7 +23,7 @@ function LikeButton(props) {
           .getOne(getData('pocketbase_auth').model.id);
         setClick(user.contentsLike.includes(props.contentId));
       } catch (err) {
-        console.log(err);
+        console.error();
       }
     };
     fetchLikeStatus();
@@ -55,15 +55,8 @@ function LikeButton(props) {
             'contentsLike-': props.contentId,
           });
       }
-
-      const buttonClicked = await pb
-        .collection('users')
-        .getOne(pb.authStore.model.id, {
-          expand: 'contentsLike',
-        });
-      console.log(buttonClicked);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
