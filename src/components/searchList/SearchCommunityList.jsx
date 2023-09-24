@@ -1,13 +1,8 @@
 import CommunityListPost from './SearchCommunityListPost';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+
 
 function SearchCommunityList() {
-  const navigate = useNavigate();
-
-  const authDataString = localStorage.getItem('pocketbase_auth');
-  const authData = JSON.parse(authDataString);
-
+ 
 
   return (
     <div className="flex justify-center">

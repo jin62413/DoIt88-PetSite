@@ -180,7 +180,7 @@ function SignUP() {
 
       resetFormState();
 
-      navigate('/');
+      navigate('/signIn');
     } catch (error) {
       toast.error('회원가입에 실패하였습니다.');
 
@@ -236,7 +236,7 @@ function SignUP() {
           />
           {!isEmailValid && email ? (
             <p className="text-error text-sm font-medium ml-[168px] -mt-4">
-              아이디: 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+              이메일: 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
               가능합니다.
             </p>
           ) : (

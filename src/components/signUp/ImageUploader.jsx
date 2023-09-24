@@ -26,7 +26,6 @@ function ImageUploader() {
     setIsChangeImage(true);
     const file = e.target.files[0];
 
-    console.log(file);
     setSelectedImageURL(URL.createObjectURL(file));
 
     setSelectedImageFile(file);

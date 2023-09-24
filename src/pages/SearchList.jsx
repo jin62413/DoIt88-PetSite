@@ -1,7 +1,7 @@
 // import SHcommunityList from '@/components/searchList/SHcommunityList';
 import Pagination from '@/components/home/Pagination';
 import SEcontentPost from '@/components/searchList/SearchContentPost';
-import useSearch from '@/store/searchStore';
+
 
 // import CommunityListPost from '@/components/Community/CommunityListPost';
 import SHcommunityListPost from '@/components/searchList/SearchCommunityListPost';

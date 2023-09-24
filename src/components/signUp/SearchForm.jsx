@@ -4,13 +4,10 @@ import close from '@/assets/icon/close.svg';
 import useSearch from '@/store/searchStore';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import debounce from '@/utils/debounce';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-// import { useEffect } from 'react';
+
 
 function SearchForm() {
-  const { searchText, setSearchText, searchStorage, setSearchStorage } =
+  const { searchText, setSearchText, setSearchStorage } =
     useSearch();
   // const [searchText, setSearchText] = useState('');
 
@@ -19,7 +16,6 @@ function SearchForm() {
   const handleSendData = (e) => {
     e.preventDefault();
     if (searchText !== '') {
-      console.log(searchText);
       setSearchText(searchText.replace(/\s/g, ''));
       setSearchStorage(searchText.replace(/\s/g, ''));
       setSearchText('');
@@ -38,16 +34,14 @@ function SearchForm() {
     setSearchText(value);
   };
 
-  // const debounceInputChange = debounce(handleInputChange, 100);
+ 
 
   const clearInput = () => {
     // e.target.value = '';
     setSearchText('');
   };
 
-  // useEffect(() => {
-  //   console.log(searchStorage);
-  // });
+ 
 
   return (
     <>
@@ -65,13 +59,9 @@ function SearchForm() {
           placeholder="통합 검색"
           required
           value={searchText}
-          // defaultValue={searchText}
+       
           onChange={handleInputChange}
-          // onKeyDown={(e) => {
-          //   if (e.key === 'Backspace' && searchText.length === 1) {
-          //     setSearchText('');
-          //   }
-          // }}
+        
           className="border border-[#5956E9] rounded-3xl w-[240px] px-16  py-2 outline-none text-lg"
         />
 

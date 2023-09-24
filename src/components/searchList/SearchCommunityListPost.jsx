@@ -19,15 +19,12 @@ function SearchCommunityListPost() {
       setIsLoading(true);
 
       try {
-        console.log(keyword);
         if (keyword !== '') {
           const record = await pb.collection('community').getList(1, 30, {
             filter: `(title ?~ "${keyword}" || content ?~ "${keyword}" )`,
             // filter: `'title ~ "${ddd}" || content ~ "${ddd}"'`,
             expand: 'user',
           });
-          console.log(record);
-          console.log(record.items);
           setCommunityData(record);
           setIsLoading(false);
           // setSearchText('');
@@ -37,7 +34,6 @@ function SearchCommunityListPost() {
         }
       } catch (error) {
         if (!(error in DOMException)) {
-          console.error();
           setIsLoading(false);
         }
       }

@@ -31,7 +31,6 @@ function SignIn() {
       setIsLoginEmailValid(false);
     }
 
-    console.log(loginEmail);
   };
 
   const handlepasswordInput = (e) => {
