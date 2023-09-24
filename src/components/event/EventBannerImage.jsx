@@ -1,7 +1,6 @@
 import { getPbImageURL } from '@/utils';
 
 function EventBannerImage({ item }) {
-  console.log(item);
   return (
     <>
       <figure>
