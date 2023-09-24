@@ -107,7 +107,7 @@ function CommunityEdit() {
 
   return (
     <div className="mx-auto max-w-[750px] flex-col my-10">
-      <h2 className="text-center font-bold text-[28px] pb-14">글쓰기</h2>
+      <h2 className="text-center font-bold text-[28px] pb-14">글 수정</h2>
 
       <form
         encType="multipart/form-data"
@@ -140,7 +140,7 @@ function CommunityEdit() {
               placeholder="본문을 입력해주세요"
               name="content"
               ref={contentRef}
-              className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px]"
+              className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px] resize-none"
             ></textarea>
           </div>
           <div className="my-6 flex flex-row justify-start items-start">
