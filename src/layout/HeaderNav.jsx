@@ -12,7 +12,7 @@ function HeaderNav() {
           </NavLink>
         </li> */}
         <li className="flex-nowrap flex-shrink-0 flex-grow-0">
-          <Logo/>
+          <Logo />
         </li>
         <li className="flex-nowrap flex-shrink-0">
           <NavLink to="/contents">콘텐츠</NavLink>
@@ -25,6 +25,9 @@ function HeaderNav() {
         </li>
         <li className="flex-shrink-0">
           <NavLink to="/event">이벤트</NavLink>
+        </li>
+        <li className="flex-nowrap flex-shrink-0">
+          <NavLink to="/search">서치리스트</NavLink>
         </li>
         {/* <li>
           <NavLink to="/signUP">회원가입</NavLink>

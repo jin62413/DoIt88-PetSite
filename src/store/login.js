@@ -12,9 +12,13 @@ const loginStore = (set) => ({
   isGoogle: false,
   isKakao: false,
 
+  isLoading: true,
+
   // isNicknameValid: false,
   // isEmailDateValid: false,
   // isNicknameDateValid: false,
+
+  setIsLoading: (isLoading) => set({ isLoading }),
 
   setLoginEmail: (loginEmail) => set({ loginEmail }),
   setLoginPassword: (loginPassword) => set({ loginPassword }),
