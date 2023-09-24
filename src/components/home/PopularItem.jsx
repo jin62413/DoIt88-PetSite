@@ -6,8 +6,8 @@ function PopularItem({ item }) {
       <div className="flex justify-between h-[94px] border-b border-black">
         <Link to={`/community/detail/${item.id}`}>
           <ul className="max-w-lg">
-            <li className="font-bold text-lg">{item.title}</li>
-            <li className="pt-2 text-ellipsis">{item.content}</li>
+            <li className="font-bold text-lg truncate">{item.title}</li>
+            <li className="pt-2 truncate">{item.content}</li>
           </ul>
         </Link>
         <Link
