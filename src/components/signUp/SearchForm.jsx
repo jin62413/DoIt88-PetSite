@@ -5,10 +5,13 @@ import useSearch from '@/store/searchStore';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import debounce from '@/utils/debounce';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 // import { useEffect } from 'react';
 
 function SearchForm() {
-  const { searchText, setSearchText } = useSearch();
+  const { searchText, setSearchText, searchStorage, setSearchStorage } =
+    useSearch();
   // const [searchText, setSearchText] = useState('');
 
   const navigate = useNavigate();
@@ -16,15 +19,17 @@ function SearchForm() {
   const handleSendData = (e) => {
     e.preventDefault();
     if (searchText !== '') {
-      console.log(searchText)
+      console.log(searchText);
       setSearchText(searchText.replace(/\s/g, ''));
+      setSearchStorage(searchText.replace(/\s/g, ''));
+      setSearchText('');
       navigate('/search');
-      // setSearchText('');
     } else {
       toast.success(`검색어를 입력해주세요`, {
         icon: '🙏',
         duration: 1000,
       });
+      return;
     }
   };
 
@@ -40,7 +45,10 @@ function SearchForm() {
     setSearchText('');
   };
 
-  
+  // useEffect(() => {
+  //   console.log(searchStorage);
+  // });
+
   return (
     <>
       <form

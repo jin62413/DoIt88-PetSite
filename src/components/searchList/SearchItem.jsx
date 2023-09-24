@@ -1,7 +1,7 @@
 import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
 
-function SEitem({ item }) {
+function SearchItem({ item }) {
   if (item) {
     return (
       <>
@@ -22,4 +22,4 @@ function SEitem({ item }) {
   }
 }
 
-export default SEitem;
+export default SearchItem;

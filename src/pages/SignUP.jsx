@@ -159,6 +159,7 @@ function SignUP() {
       formData.append('nickname', nickname);
       formData.append('birthDate', dashDate(year, month, day));
       formData.append('emailVisibility', true);
+      // formData.append('verified', true);
 
       if (selectedImageFile) {
         formData.append('profile', selectedImageFile);

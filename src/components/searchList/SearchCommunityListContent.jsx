@@ -2,7 +2,7 @@ import { getPbImageURL } from '@/utils';
 import { Link } from 'react-router-dom';
 // import Community from '../../pages/Community';
 
-function SHcommunityListContent({ item }) {
+function SearchCommunityListContent({ item }) {
   if (item) {
     return (
       <>
@@ -50,4 +50,4 @@ function SHcommunityListContent({ item }) {
   }
 }
 
-export default SHcommunityListContent;
+export default SearchCommunityListContent;

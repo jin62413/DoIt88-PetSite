@@ -1,15 +1,9 @@
-import pb from '@/api/pocketbase';
 import LoginButtonGroup from '@/components/signIn/LoginButtonGroup';
-import useAuthStore from '@/store/auth';
 import uselogin from '@/store/login';
 import debounce from '@/utils/debounce';
-import { useState, useRef } from 'react';
-import toast from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
- 
-
   const {
     loginEmail,
     loginPassword,
@@ -37,7 +31,7 @@ function SignIn() {
       setIsLoginEmailValid(false);
     }
 
-    console.log(loginEmail)
+    console.log(loginEmail);
   };
 
   const handlepasswordInput = (e) => {
@@ -51,7 +45,6 @@ function SignIn() {
     } else {
       setIsLoginPasswordValid(false);
     }
-
   };
 
   const inputIdDebounce = debounce(handleEmailInput, 500);
@@ -62,7 +55,6 @@ function SignIn() {
       <h1 className="text-center font-semibold text-3xl my-12">로그인</h1>
 
       <form>
-      
         <div>
           <div className="mb-7">
             <label htmlFor="signInID" className="sr-only">

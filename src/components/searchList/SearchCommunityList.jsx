@@ -1,23 +1,13 @@
-import CommunityListPost from './SHcommunityListPost';
+import CommunityListPost from './SearchCommunityListPost';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-function SHcommunityList() {
+function SearchCommunityList() {
   const navigate = useNavigate();
 
   const authDataString = localStorage.getItem('pocketbase_auth');
   const authData = JSON.parse(authDataString);
 
-  const handlePage = () => {
-    if (authData) {
-      navigate('/community/new');
-    } else {
-      toast('로그인을 해주세요.', {
-        icon: '🐾',
-      });
-      navigate('/signIn');
-    }
-  };
 
   return (
     <div className="flex justify-center">
@@ -33,4 +23,4 @@ function SHcommunityList() {
   );
 }
 
-export default SHcommunityList;
+export default SearchCommunityList;

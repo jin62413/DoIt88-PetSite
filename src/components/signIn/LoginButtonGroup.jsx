@@ -19,6 +19,8 @@ function LoginButtonGroup() {
     loginPassword,
     isLoginEmailValid,
     isLoginPasswordValid,
+    isLoading,
+    setIsLoading,
     // profileURL,
     setIsGoogle,
     setIsKakao,

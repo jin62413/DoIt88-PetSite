@@ -1,39 +1,39 @@
 // import CommunityListContent from './SHCommunityComment';
 
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import pb from '@/api/pocketbase';
 import useSearch from '@/store/searchStore';
-import SHcommunityListContent from './SHommunityListContent';
+import SHcommunityListContent from './SearchCommunityListContent';
 import Spinner from '../home/Spinner';
 
-function SHcommunityListPost() {
-  // const [isLoading, setIsLoading] = useState(true);
+function SearchCommunityListPost() {
+  const [isLoading, setIsLoading] = useState(true);
   // const [data, setData] = useState(null);
   // const [check, setCheck] = useState('-created');
-  const { searchText, setSearchText, data, setData, isLoading, setIsLoading } =
-    useSearch();
+  const { communityData, setCommunityData, searchStorage } = useSearch();
 
   //검색된 리스트 가져옴
-  useLayoutEffect(() => {
+  useEffect(() => {
     async function getCommunity() {
+      const keyword = searchStorage;
       setIsLoading(true);
-      // if (searchText === '') {
-      //   setIsLoading(false);
-      //   return;
-      // }
+
       try {
-        console.log(searchText);
-        if (searchText.length > 0) {
+        console.log(keyword);
+        if (keyword !== '') {
           const record = await pb.collection('community').getList(1, 30, {
-            filter: `(title ?~ "${searchText}" || content ?~ "${searchText}" )`,
+            filter: `(title ?~ "${keyword}" || content ?~ "${keyword}" )`,
             // filter: `'title ~ "${ddd}" || content ~ "${ddd}"'`,
             expand: 'user',
           });
           console.log(record);
           console.log(record.items);
-          setData(record);
+          setCommunityData(record);
           setIsLoading(false);
-          setSearchText('');
+          // setSearchText('');
+        } else {
+          setIsLoading(false);
+          return;
         }
       } catch (error) {
         if (!(error in DOMException)) {
@@ -44,30 +44,26 @@ function SHcommunityListPost() {
     }
 
     getCommunity();
-  }, []);
+  }, [searchStorage, setCommunityData]);
 
   return (
     <>
-      {isLoading && (
-        <p className="p-10 text-center">
-          <Spinner />
-        </p>
-      )}
+      {isLoading && <Spinner />}
 
-      {isLoading === false && data.totalItems === 0 ? (
-        <div>없는 데이터 입니다</div>
-      ) : (
-        data?.items?.map((item) => (
+      {!isLoading &&
+        communityData?.items?.map((item) => (
           <div key={item.id}>
             <div className="border-b-2 border-[#747474] p-[20px]">
               <SHcommunityListContent item={item} />
-              {/* <CommunityListContent item={item} /> */}
             </div>
           </div>
-        ))
+        ))}
+
+      {isLoading === false && communityData.totalItems === 0 && (
+        <div className='text-3xl my-16 text-center'>검색어와 관련된 커뮤니티 내용을 찾을 수 없습니다.</div>
       )}
     </>
   );
 }
 
-export default SHcommunityListPost;
+export default SearchCommunityListPost;
