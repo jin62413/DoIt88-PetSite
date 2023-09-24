@@ -20,13 +20,24 @@ function ContentDetail() {
   const [comment, setComment] = useState();
   const [user, setUser] = useState();
 
+  const [collectionName, setCollectionName] = useState();
+
   useEffect(() => {
     async function getContent() {
       try {
         const data = await pb.collection('contents').getOne(contentId, {
           expand: 'comments , comments.user',
         });
-        const { title, content, imageAlt, created, comments, expand } = data;
+        const {
+          collectionName,
+          title,
+          content,
+          imageAlt,
+          created,
+          comments,
+          expand,
+        } = data;
+        setCollectionName(collectionName);
         setTitle(title);
         setContent(content);
         setImage(getPbImageURL(data, 'image'));
@@ -74,13 +85,12 @@ function ContentDetail() {
           <div className="px-10">{content}</div>
           <div className="flex justify-between">
             <div className="flex gap-2 items-center">
-              <BookMark className="w-8 h-8" />
-              <LikeButton className="w-8 h-8" />
-              <CommentCount
-                id={contentId}
-                setCommentLength={setCommentLength}
-                commentLength={commentLength}
+              <BookMark />
+              <LikeButton
+                contentId={contentId}
+                collectionName={collectionName}
               />
+              <CommentCount id={contentId} comments={comment} />
             </div>
             <ShareButton
               className="w-6 h-6 p-4 my-3"

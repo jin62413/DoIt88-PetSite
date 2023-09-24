@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import pb from '@/api/pocketbase';
-import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function ContentCommentForm({ id, setComment }) {
+  const navigate = useNavigate();
   const formRef = useRef(null);
   const commentRef = useRef(null);
 
@@ -23,14 +24,20 @@ function ContentCommentForm({ id, setComment }) {
     }
 
     if (!pb.authStore.model) {
-      toast('로그인을 해주세요!', {
-        icon: '🐾',
-        ariaProps: {
-          role: 'status',
-          'aria-live': 'polite',
-        },
-      });
-      return;
+      toast(() => (
+        <div className="flex w-64 justify-between ">
+          <span className="border-r-2 mr-2 pr-3">로그인이 필요합니다 🐾 </span>
+          <button
+            onClick={() => {
+              navigate('/signIn');
+              toast.remove();
+            }}
+            className="text-primary font-bold"
+          >
+            LogIn
+          </button>
+        </div>
+      ));
     }
     const data = {
       user: pb.authStore.model.id,
