@@ -1,6 +1,5 @@
 import pb from '@/api/pocketbase';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function LikeButton(props) {
   const {
@@ -11,7 +10,7 @@ function LikeButton(props) {
   const getData = (key) => {
     return deserialize(storage.getItem(key));
   };
-  // console.log(getData('pocketbase_auth').model.id);
+
   const [click, setClick] = useState(false);
   const [like, setLike] = useState(0);
 
