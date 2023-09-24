@@ -54,8 +54,6 @@ function ContentCommentForm({ id, setComment }) {
       const commentArr = await pb
         .collection('contentComment')
         .getOne(newData.id, { expand: 'user' });
-      // let deepArr = JSON.parse(JSON.stringify(comments));
-      // console.log(comments, deepArr);
       setComment((comment) => [...comment, commentArr]);
       commentRef.current.value = '';
     } catch (error) {
