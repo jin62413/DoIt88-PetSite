@@ -2,7 +2,6 @@
 
 # <div align='center'>🐶재미있는 펫들의 스토리😺</div>
 
----
 
 <br>
 
@@ -41,11 +40,8 @@
 <br>
 <br>
 <br>
-<br>
 
 ### 👩‍👩‍👧‍👦 팀원 소개
-
-<div align="center">
 
 |                                                 **백수빈**                                                 |                                                  **윤진**                                                   |                                                **김재희**                                                 |                                                  **이재호**                                                  |
 | :--------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: |
@@ -319,7 +315,7 @@
 
 #### 로그인
 
-<img src="https://i.imgur.com/NglzuSF.gif" width=600 height=300>
+<img src="https://i.imgur.com/NglzuSF.gif" width=700 height=400>
 이메일, 비밀번호, 닉네임 Validation 검사
 
 
@@ -331,39 +327,44 @@
 
 <br>
 
-<div align="center">
+
 <b>메인 페이지</b>
+
 <img src='https://i.imgur.com/cZfZ3XS.png'>
-</div>
+
 <br>
 <br>
 
-<div align="center">
+
   <b>콘텐츠 페이지</b>
+
   <img src='https://i.imgur.com/KU7IXLo.png'>
-</div>
+
 
 <br>
 <br>
 
-<div align="center">
+
   <b>커뮤니티 페이지</b>
+
   <img src='https://i.imgur.com/21ido9Q.png'>
-</div>
+
 
 <br>
 <br>
 
-<div align="center">
+
   <b>로그인</b>
+
   <img src='https://i.imgur.com/L11b6no.png'>
-</div>
+
 <br>
 <br>
-<div align="center">
+
   <b>회원가입</b>
+
   <img src='https://i.imgur.com/goLPiCF.png'>
-</div>
+
  
 
 <br>
@@ -371,6 +372,7 @@
 
 
 ### 후기
+
 
 백수빈 :
 
