@@ -6,13 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperMainBanner from './SwiperMainBanner';
 import leftButton from '@/assets/icon/mainbanner-left.svg';
 import rightButton from '@/assets/icon/mainbanner-right.svg';
+import useSwiperRef from '@/hooks/useSwiperRef';
 
 // 메인 배너 스와이퍼 기능
 function MainBanner() {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-
-  console.log(prevRef);
+  const [prevEl, prevElRef] = useSwiperRef(null);
+  const [nextEl, nextElRef] = useSwiperRef(null);
 
   return (
     <div className="max-w-full min-w-[1120px] relative">
@@ -48,14 +47,8 @@ function MainBanner() {
         }}
         slidesPerView={1}
         navigation={{
-          prevEl: prevRef.current, // 이전 버튼
-          nextEl: nextRef.current, // 다음 버튼
-        }}
-        onBeforeInit={(swiper) => {
-          // 초기 설정
-          swiper.params.navigation.prevEl = prevRef.current;
-          swiper.params.navigation.nextEl = nextRef.current;
-          swiper.navigation.update();
+          prevEl,
+          nextEl,
         }}
         className="flex justify-center items-center"
       >
@@ -77,10 +70,10 @@ function MainBanner() {
       </Swiper>
 
       <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-30 w-[1250px] flex items-center justify-between">
-        <button ref={prevRef} type="button">
+        <button ref={prevElRef} type="button">
           <img src={leftButton} />
         </button>
-        <button ref={nextRef} type="button">
+        <button ref={nextElRef} type="button">
           <img src={rightButton} />
         </button>
       </div>
