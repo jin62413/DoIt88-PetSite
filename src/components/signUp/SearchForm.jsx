@@ -1,21 +1,52 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import search from '@/assets/icon/search.svg';
 import close from '@/assets/icon/close.svg';
+import useSearch from '@/store/searchStore';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import debounce from '@/utils/debounce';
+// import { useEffect } from 'react';
 
 function SearchForm() {
-  const [searchText, setSearchText] = useState('');
+  const { searchText, setSearchText } = useSearch();
+  // const [searchText, setSearchText] = useState('');
 
-  const handleInputChange = (e) => {
-    setSearchText(e.target.value);
+  const navigate = useNavigate();
+
+  const handleSendData = (e) => {
+    e.preventDefault();
+    if (searchText !== '') {
+      console.log(searchText)
+      setSearchText(searchText.replace(/\s/g, ''));
+      navigate('/search');
+      // setSearchText('');
+    } else {
+      toast.success(`검색어를 입력해주세요`, {
+        icon: '🙏',
+        duration: 1000,
+      });
+    }
   };
 
+  const handleInputChange = (e) => {
+    const value = e.target.value; // 입력 값에서 모든 공백을 제거합니다
+    setSearchText(value);
+  };
+
+  // const debounceInputChange = debounce(handleInputChange, 100);
+
   const clearInput = () => {
+    // e.target.value = '';
     setSearchText('');
   };
 
+  
   return (
     <>
-      <form method="post" className="searchForm relative flex flex-shrink-0 flex-nowrap">
+      <form
+        className="searchForm relative flex flex-shrink-0 flex-nowrap"
+        onSubmit={handleSendData}
+      >
         <label htmlFor="allSearch" className="sr-only">
           통합검색
         </label>
@@ -26,8 +57,14 @@ function SearchForm() {
           placeholder="통합 검색"
           required
           value={searchText}
+          // defaultValue={searchText}
           onChange={handleInputChange}
-          className="border border-[#5956E9] rounded-3xl w-[240px] pl-16 py-2 outline-none text-lg"
+          // onKeyDown={(e) => {
+          //   if (e.key === 'Backspace' && searchText.length === 1) {
+          //     setSearchText('');
+          //   }
+          // }}
+          className="border border-[#5956E9] rounded-3xl w-[240px] px-16  py-2 outline-none text-lg"
         />
 
         {searchText && (
@@ -40,7 +77,7 @@ function SearchForm() {
           </button>
         )}
 
-        <button type="submit">
+        <button type="submit" onClick={handleSendData}>
           <img
             src={search}
             alt="검색 버튼"
