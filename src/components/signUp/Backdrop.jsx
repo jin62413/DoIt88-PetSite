@@ -14,6 +14,4 @@ function Backdrop({ children, onClose }) {
   );
 }
 
-
-
 export default Backdrop;

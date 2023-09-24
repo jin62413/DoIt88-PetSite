@@ -14,10 +14,6 @@ const loginStore = (set) => ({
 
   isLoading: true,
 
-  // isNicknameValid: false,
-  // isEmailDateValid: false,
-  // isNicknameDateValid: false,
-
   setIsLoading: (isLoading) => set({ isLoading }),
 
   setLoginEmail: (loginEmail) => set({ loginEmail }),
@@ -29,10 +25,6 @@ const loginStore = (set) => ({
   setIsKakao: (isKakao) => set({ isKakao }),
   setIsGoogle: (isGoogle) => set({ isGoogle }),
   setProfileURL: (profileURL) => set({ profileURL }),
-  // setIsPasswordConfirmValid: (isPasswordConfirm) => set({ isPasswordConfirm }),
-  // setIsNicknameValid: (isNicknameValid) => set({ isNicknameValid }),
-  // setIsEmailDataValid: (isEmailDateValid) => set({ isEmailDateValid }),
-  // setIsNicknameDateValid: (isNicknameDateValid) => set({ isNicknameDateValid }),
 });
 
 const uselogin = create(loginStore);

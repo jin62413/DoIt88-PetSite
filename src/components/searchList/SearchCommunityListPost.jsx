@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import pb from '@/api/pocketbase';
 import useSearch from '@/store/searchStore';
-import SHcommunityListContent from './SearchCommunityListContent';
+import SearchCommunityListContent from './SearchCommunityListContent';
 import Spinner from '../home/Spinner';
 
 function SearchCommunityListPost() {
@@ -50,7 +50,7 @@ function SearchCommunityListPost() {
         communityData?.items?.map((item) => (
           <div key={item.id}>
             <div className="border-b-2 border-[#747474] p-[20px]">
-              <SHcommunityListContent item={item} />
+              <SearchCommunityListContent item={item} />
             </div>
           </div>
         ))}

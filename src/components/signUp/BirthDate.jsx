@@ -89,14 +89,6 @@ function BirthDate() {
 
     setIsValid(true);
   };
-  // Debounce the validateDate function
-  // const debouncedValidateDate = useCallback(() => {
-  //   const handleDebounce = debounce(() => {
-  //     validateDate(`${year}/${month}/${day}`);
-  //   }, 300);
-
-  //   handleDebounce();
-  // }, [year, month, day]);
 
   const handleDebounce = debounce(() => {
     validateDate(`${year}/${month}/${day}`);
@@ -137,11 +129,6 @@ function BirthDate() {
       }
     }
   };
-
-  // Validate the date when any of the fields change
-  // useEffect(() => {
-  //   debouncedValidateDate();
-  // }, [debouncedValidateDate]);
 
   useEffect(() => {
     handleDebounce();
