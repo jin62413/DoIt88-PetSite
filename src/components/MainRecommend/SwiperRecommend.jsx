@@ -1,8 +1,5 @@
 import prevRef from '@/assets/icon/mainbanner-left.svg';
 import nextRef from '@/assets/icon/mainbanner-right.svg';
-import pet1 from '@/assets/recommend/pet1.svg';
-import pet2 from '@/assets/recommend/pet2.svg';
-import pet3 from '@/assets/recommend/pet3.svg';
 
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,10 +9,37 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Navigation } from 'swiper/modules';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import pb from '@/api/pocketbase';
+import RecommendItem from './RecommendItem';
 
 function SwiperRecommend() {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
+
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function getContents() {
+      setIsLoading(true);
+      try {
+        const record = await pb.collection('contents').getList(1, 30, {
+          sort: '-created',
+        });
+        setData(record);
+        setIsLoading(false);
+      } catch (error) {
+        if (!(error in DOMException)) {
+          console.error();
+          setIsLoading(false);
+        }
+      }
+    }
+
+    getContents();
+  }, []);
 
   return (
     <>
@@ -49,78 +73,12 @@ function SwiperRecommend() {
           }}
           className="mySwiper max-w-[1000px]"
         >
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet1}
-                alt="강아지 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                강아지 상하체 구분, 어떻게 할까?
-              </span>
-            </span>
-          </SwiperSlide>
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet2}
-                alt="강아지 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                올바르게 강아지 안는 법
-              </span>
-            </span>
-          </SwiperSlide>
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet3}
-                alt="고양이 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                안자?
-              </span>
-            </span>
-          </SwiperSlide>
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet1}
-                alt="강아지 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                강아지 상하체 구분, 어떻게 할까?
-              </span>
-            </span>
-          </SwiperSlide>
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet2}
-                alt="강아지 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                올바르게 강아지 안는 법
-              </span>
-            </span>
-          </SwiperSlide>
-          <SwiperSlide>
-            <span>
-              <img
-                src={pet3}
-                alt="고양이 사진"
-                className="w-[310px] h-[210px] mb-[16px]"
-              />
-              <span className="text-[20px] font-[500] text-[#1E1E1E]">
-                안자?
-              </span>
-            </span>
-          </SwiperSlide>
+          {!isLoading &&
+            data?.items?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <RecommendItem item={item} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </>
