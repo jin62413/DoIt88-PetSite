@@ -18,7 +18,7 @@ function RelatedSite() {
           </a>
         </li>
         <li>
-          <a href="https://github.com/FRONTENDSCHOOL6/finalize-react-6">
+          <a href="https://github.com/FRONTENDSCHOOL6/DoIt88-PetSite">
             <img src={github} alt="깃허브" />
           </a>
         </li>
