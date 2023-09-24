@@ -12,7 +12,7 @@ function Recommend() {
           <SwiperRecommend />
         </div>
       </div>
-      <div className="flex justify-center bg-white cursor-pointer">
+      <div className="flex justify-center bg-white">
         <BannerRecommend />
       </div>
     </>
