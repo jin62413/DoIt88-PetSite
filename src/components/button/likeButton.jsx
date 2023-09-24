@@ -1,6 +1,5 @@
 import pb from '@/api/pocketbase';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function LikeButton(props) {
   const {
@@ -11,7 +10,7 @@ function LikeButton(props) {
   const getData = (key) => {
     return deserialize(storage.getItem(key));
   };
-  // console.log(getData('pocketbase_auth').model.id);
+
   const [click, setClick] = useState(false);
   const [like, setLike] = useState(0);
 
@@ -24,7 +23,7 @@ function LikeButton(props) {
           .getOne(getData('pocketbase_auth').model.id);
         setClick(user.contentsLike.includes(props.contentId));
       } catch (err) {
-        console.log(err);
+        console.error();
       }
     };
     fetchLikeStatus();
@@ -56,15 +55,8 @@ function LikeButton(props) {
             'contentsLike-': props.contentId,
           });
       }
-
-      const buttonClicked = await pb
-        .collection('users')
-        .getOne(pb.authStore.model.id, {
-          expand: 'contentsLike',
-        });
-      console.log(buttonClicked);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

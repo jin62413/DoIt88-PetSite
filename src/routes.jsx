@@ -16,6 +16,7 @@ import ContentDetail from './components/contents/ContentDetail';
 import CommunityNew from './components/Community/CommunityNew';
 import CommunityMain from './components/Community/CommunityMain';
 import CommunityEdit from './components/Community/CommunityEdit';
+import SearchList from './pages/SearchList';
 
 // 구버전 처럼 사용할 사용자를 위한 최신 방법
 // 배열 → JSX
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="place" element={<Place />} />
       <Route path="signUP" element={<SignUP />} />
       <Route path="signIn" element={<SignIn />} />
+      <Route path="search" element={<SearchList />} />
     </Route>
   )
 );

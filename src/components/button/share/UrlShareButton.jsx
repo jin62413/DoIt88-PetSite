@@ -1,5 +1,6 @@
 import link from '@/assets/icon/link.svg';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import toast from 'react-hot-toast';
 
 function UrlShare() {
   const currentUrl = window.location.href;
@@ -7,7 +8,7 @@ function UrlShare() {
   return (
     <CopyToClipboard
       text={`${currentUrl}`}
-      onCopy={() => alert('클립보드에 복사되었습니다.')}
+      onCopy={() => toast.success('클립보드에 복사되었습니다!')}
     >
       <button
         type="button"

@@ -85,10 +85,11 @@ function ContentDetail() {
           <div className="px-10">{content}</div>
           <div className="flex justify-between">
             <div className="flex gap-2 items-center">
-              <BookMark />
+              <BookMark className="w-8 h-8 bg-cover bg-center" />
               <LikeButton
                 contentId={contentId}
                 collectionName={collectionName}
+                className="w-8 h-8 bg-cover bg-center"
               />
               <CommentCount id={contentId} comments={comment} />
             </div>

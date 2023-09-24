@@ -101,7 +101,7 @@ function CommunityNew() {
               placeholder="본문을 입력해주세요"
               name="content"
               ref={contentRef}
-              className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px]"
+              className="border w-[720px] p-3 outline-none border-[#A6A6A6] rounded-lg text-lg text-black focus:border focus:border-primary h-[510px] resize-none"
             ></textarea>
           </div>
           <div className="my-6 flex flex-row justify-start items-start">
