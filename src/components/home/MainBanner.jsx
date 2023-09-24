@@ -12,25 +12,45 @@ function MainBanner() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
+  console.log(prevRef);
+
   return (
     <div className="max-w-full min-w-[1120px] relative">
-      <Swiper
+      {/* <Swiper
         // {...setSwiperSetting}
 
         // install Swiper modules
         modules={[Autoplay, Navigation]}
-        spaceBetween={60}
-        centeredSlides={true}
+        // spaceBetween={60}
+        // centeredSlides={true}
         loop={true}
-        enabled={true}
+        // enabled={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         slidesPerView={1}
-        navigation={
-          {
-            prevEl: prevRef.current, // 이전 버튼
-            nextEl: nextRef.current,
-          } // 다음 버튼
-        }
+        navigation={{
+          prevEl: prevRef.current, // 이전 버튼
+          nextEl: nextRef.current, // 다음 버튼
+        }}
+        onInit={(swiper) => {
+          // 초기 설정
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.update();
+        }}
+        className="flex justify-center items-center"
+      > */}
+      <Swiper
+        modules={[Autoplay, Navigation]}
+        loop={true}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        slidesPerView={1}
+        navigation={{
+          prevEl: prevRef.current, // 이전 버튼
+          nextEl: nextRef.current, // 다음 버튼
+        }}
         onBeforeInit={(swiper) => {
           // 초기 설정
           swiper.params.navigation.prevEl = prevRef.current;
