@@ -18,9 +18,13 @@ function LikeButton(props) {
   useEffect(() => {
     const fetchLikeStatus = async () => {
       try {
+        const pocketbaseAuthData = getData('pocketbase_auth');
+        if (!pocketbaseAuthData) return;
+
+        // Fetch user information and update click state
         const user = await pb
           .collection('users')
-          .getOne(getData('pocketbase_auth').model.id);
+          .getOne(pocketbaseAuthData.model.id);
         setClick(user.contentsLike.includes(props.contentId));
       } catch (err) {
         console.error();
