@@ -9,7 +9,7 @@ function EditDelete({ item }) {
   const navigate = useNavigate();
 
   const handleDeleteRecord = async () => {
-    const deleteConfirm = confirm('정말 삭제하시겠나요?');
+    const deleteConfirm = confirm('정말 삭제하시겠어요?');
 
     try {
       if (deleteConfirm) {
@@ -25,7 +25,7 @@ function EditDelete({ item }) {
               await pb.collection('communityComment').delete(item.id)
           );
         }
-        navigate(-1);
+        navigate('/community');
       }
     } catch (err) {
       console.log(err);

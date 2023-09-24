@@ -12,34 +12,31 @@ function MainBanner() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  const setSwiperSetting = {
-    // install Swiper modules
-    modules: [Autoplay, Navigation],
-    spaceBetween: 60,
-    centeredSlides: true,
-    loop: true,
-    enabled: true,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    navigation: {
-      prevEl: prevRef.current, // 이전 버튼
-      nextEl: nextRef.current, // 다음 버튼
-    },
-    onBeforeInit: (swiper) => {
-      // 초기 설정
-      swiper.params.navigation.prevEl = prevRef.current;
-      swiper.params.navigation.nextEl = nextRef.current;
-      swiper.navigation.update();
-    },
-  };
-
   return (
     <div className="max-w-full min-w-[1120px] relative">
       <Swiper
-        {...setSwiperSetting}
+        // {...setSwiperSetting}
+
+        // install Swiper modules
+        modules={[Autoplay, Navigation]}
+        spaceBetween={60}
+        centeredSlides={true}
+        loop={true}
+        enabled={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        slidesPerView={1}
+        navigation={
+          {
+            prevEl: prevRef.current, // 이전 버튼
+            nextEl: nextRef.current,
+          } // 다음 버튼
+        }
+        onBeforeInit={(swiper) => {
+          // 초기 설정
+          swiper.params.navigation.prevEl = prevRef.current;
+          swiper.params.navigation.nextEl = nextRef.current;
+          swiper.navigation.update();
+        }}
         className="flex justify-center items-center"
       >
         <SwiperSlide>
@@ -59,7 +56,7 @@ function MainBanner() {
         </SwiperSlide>
       </Swiper>
 
-      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 w-[1250px] flex items-center justify-between">
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-30 w-[1250px] flex items-center justify-between">
         <button ref={prevRef} type="button">
           <img src={leftButton} />
         </button>

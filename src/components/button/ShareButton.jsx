@@ -15,7 +15,7 @@ function ShareButton(props) {
         type="button"
         aria-label="공유하기"
         onClick={toggleModal}
-        className={'bg-share w-8 h-8 bg-no-repeat mb-4 ' + `${props.className}`}
+        className={'bg-share bg-no-repeat ' + `${props.className}`}
       ></button>
       {showModal ? (
         <div className="absolute w-44 h-20 bg-primaryContainer arrow-up rounded-10">
