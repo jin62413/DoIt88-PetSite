@@ -24,16 +24,7 @@ export const uploadPngFile = () => {
     avatar7,
     avatar8,
     avatar9,
-    // '/src/assets/base_images/avatar0.png',
-    // '/src/assets/base_images/avatar1.png',
-    // '/src/assets/base_images/avatar2.png',
-    // '/src/assets/base_images/avatar3.png',
-    // '/src/assets/base_images/avatar4.png',
-    // '/src/assets/base_images/avatar5.png',
-    // '/src/assets/base_images/avatar6.png',
-    // '/src/assets/base_images/avatar7.png',
-    // '/src/assets/base_images/avatar8.png',
-    // '/src/assets/base_images/avatar9.png',
+    
   ];
 
   const baseImage = new Image();
