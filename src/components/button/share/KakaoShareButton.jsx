@@ -21,8 +21,8 @@ export default function KakaoShare(props) {
           title: `${props.title}`,
           imageUrl: `${props.image}`,
           link: {
-            mobileWebUrl: `https://geppetto88.netlify.app`,
-            webUrl: `https://geppetto88.netlify.app`,
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
           },
         },
       });
