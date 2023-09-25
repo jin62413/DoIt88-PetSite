@@ -316,6 +316,7 @@
 
 #### 메인 페이지
 
+
 <div align='center'>
 
   <img src="https://i.imgur.com/HQx77gU.gif" width=700 height=350>
