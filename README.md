@@ -309,16 +309,213 @@
 
 ### 📌 주요 페이지 및 기능
 
+<br><br>
+
+#### 메인 페이지
+
+#### 콘텐츠
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/8YVX7lR.gif" width=700 height=350>
+
+  <br>
+
+  <b>콘텐츠 - 댓글작성</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/tHyypDE.gif" width=700 height=350>
+
+  <br>
+
+  <b>콘텐츠 - 댓글 수정 및 삭제</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/n3B7Ghf.gif" width=700 height=350>
+
+  <br>
+
+  <b>콘텐츠 - 좋아요 기능</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/A3ofWlI.gif" width=700 height=350>
+
+  <br>
+
+  <b>콘텐츠 - 공유 기능</b>
+  
+</div>
+
+<br><br>
+
+#### 커뮤니티
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/pJ7b3GI.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 인기 순 정렬</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/qd1tbjq.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 글쓰기</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/mtg4N5w.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 글수정</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/MGHSFhO.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 글삭제</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/FRLjlwo.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 댓글작성</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/6OR2Ig7.gif" width=700 height=350>
+
+  <br>
+
+  <b>커뮤니티 - 댓글 수정 및 삭제</b>
+  
+</div>
+
+<br><br>
 
 #### 회원가입
 
-<img src="https://i.imgur.com/NglzuSF.gif" width=700 height=350>
-이메일, 비밀번호, 닉네임 Validation 검사
+<div align='center'>
 
-<br>
-<br>
+  <img src="https://i.imgur.com/NglzuSF.gif" width=700 height=350>
+
+  <br>
+
+  <b>이메일, 비밀번호, 닉네임 Validation 검사</b>
+  
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/rHY4TTK.gif" width=700 height=350>
+
+  <br>
+
+  <b>이메일, 닉네임 중복검사</b>
+
+</div>
+
+<br><br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/IHjfpdp.gif" width=700 height=350>
+
+  <br>
+
+  <b>이미지 업로드 및 생년월일</b>
+
+</div>
+
+<br><br><br>
 
 #### 로그인
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/uupBMTr.gif" width=700 height=350>
+
+  <br>
+
+  <b>로그인 - 일반</b>
+
+</div>
+
+<br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/gmQfChc.gif" width=700 height=350>
+
+  <br>
+
+  <b>로그인 - 카카오</b>
+
+</div>
+
+<br>
+
+<div align='center'>
+
+  <img src="https://i.imgur.com/hMXiQnz.gif" width=700 height=350>
+
+  <br>
+
+  <b>로그인 - 구글</b>
+
+</div>
+
+
+<br>
+<br>
+
+
 
 
 
