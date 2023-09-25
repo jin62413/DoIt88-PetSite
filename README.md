@@ -319,7 +319,7 @@
 
 <div align='center'>
 
-  <img src="https://i.imgur.com/HQx77gU.gif" width=700 height=350>
+  <img src="https://i.imgur.com/x9YEXpG.gif" width=700 height=350>
 
   <br>
 
@@ -327,11 +327,11 @@
   
 </div>
 
-<!-- <br><br>
+<br><br>
 
 <div align='center'>
 
-  <img src="https://i.imgur.com/ZXSHFh7.gif" width=700 height=350>
+  <img src="https://i.imgur.com/u3KL41l.gif" width=700 height=350>
 
   <br>
 
@@ -349,7 +349,7 @@
 
   <b>메인 페이지 - 커뮤니티 인기글</b>
   
-</div> -->
+</div>
 
 <br><br>
 
